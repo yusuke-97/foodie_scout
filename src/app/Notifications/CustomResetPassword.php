@@ -26,7 +26,7 @@ class CustomResetPassword extends ResetPassword
      *
      * @return array<int, string>
      */
-    public function via(object $notifiable): array
+    public function via($notifiable): array
     {
         return ['mail'];
     }
@@ -34,7 +34,7 @@ class CustomResetPassword extends ResetPassword
     /**
      * Get the mail representation of the notification.
      */
-    public function toMail(object $notifiable): MailMessage
+    public function toMail($notifiable): MailMessage
     {
         return (new MailMessage)
             ->line(__('Click button below and reset password.'))

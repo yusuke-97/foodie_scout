@@ -54,10 +54,10 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="phone" class="col-md-5 col-form-label text-md-left">電話番号<span class="ml-1 require-input-label"><span class="require-input-label-text">必須</span></span></label>
+                    <label for="phone_number" class="col-md-5 col-form-label text-md-left">電話番号<span class="ml-1 require-input-label"><span class="require-input-label-text">必須</span></span></label>
 
                     <div class="col-md-7">
-                        <input type="text" class="form-control @error('phone') is-invalid @enderror login-input" name="phone" required placeholder="03-0000-0000">
+                        <input type="text" class="form-control @error('phone_number') is-invalid @enderror login-input" name="phone_number" required placeholder="03-0000-0000">
                     </div>
                 </div>
 

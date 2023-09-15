@@ -25,7 +25,7 @@ class CustomVerifyEmail extends VerifyEmail
      *
      * @return array<int, string>
      */
-    public function via(object $notifiable): array
+    public function via($notifiable): array
     {
         return ['mail'];
     }
@@ -33,7 +33,7 @@ class CustomVerifyEmail extends VerifyEmail
     /**
      * Get the mail representation of the notification.
      */
-    public function toMail(object $notifiable): MailMessage
+    public function toMail($notifiable): MailMessage
     {
         return (new MailMessage)
             ->line(__('Verify Your Email Address'))
@@ -46,7 +46,7 @@ class CustomVerifyEmail extends VerifyEmail
      *
      * @return array<string, mixed>
      */
-    public function toArray(object $notifiable): array
+    public function toArray($notifiable): array
     {
         return [
             //
