@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RestaurantController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,8 @@ use App\Http\Controllers\UserController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('restaurants', RestaurantController::class);
 
 Route::controller(UserController::class)->group(function () {
     Route::get('users/mypage', 'mypage')->name('mypage');

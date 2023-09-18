@@ -12,7 +12,9 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        //
+        $restaurants = Restaurant::all();
+
+        return view('restaurants.index', compact('restaurants'));
     }
 
     /**
@@ -20,7 +22,7 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        //
+        return view('restaurants.create');
     }
 
     /**
@@ -28,7 +30,13 @@ class RestaurantController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $restaurant = new Restaurant();
+        $restaurant->name = $request->input('name');
+        $restaurant->description = $request->input('description');
+        $restaurant->price = $request->input('price');
+        $restaurant->save();
+
+        return to_route('restaurants.index');
     }
 
     /**
@@ -36,7 +44,7 @@ class RestaurantController extends Controller
      */
     public function show(Restaurant $restaurant)
     {
-        //
+        return view('restaurants.show', compact('restaurant'));
     }
 
     /**
@@ -44,7 +52,7 @@ class RestaurantController extends Controller
      */
     public function edit(Restaurant $restaurant)
     {
-        //
+        return view('restaurants.edit', compact('restaurant'));
     }
 
     /**
@@ -52,7 +60,12 @@ class RestaurantController extends Controller
      */
     public function update(Request $request, Restaurant $restaurant)
     {
-        //
+        $restaurant->name = $request->input('name');
+        $restaurant->description = $request->input('description');
+        $restaurant->price = $request->input('price');
+        $restaurant->update();
+
+        return to_route('restaurants.index');
     }
 
     /**
@@ -60,6 +73,8 @@ class RestaurantController extends Controller
      */
     public function destroy(Restaurant $restaurant)
     {
-        //
+        $restaurant->delete();
+
+        return to_route('restaurants.index');
     }
 }
