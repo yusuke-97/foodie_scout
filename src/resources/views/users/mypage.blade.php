@@ -59,9 +59,9 @@
                     <div class="col-2 d-flex align-items-center">
                         <i class="fas fa-lock fa-3x"></i>
                     </div>
-                    <div class="col-9 d-flex align-items-center ms-2 mt-3">
+                    <div class="col-9 d-flex align-items-center ms-3 mt-3">
                         <div class="d-flex flex-column">
-                            <label for="user-name">パスワード変更</label>
+                            <label style="font-weight: bold;" for="user-name">パスワード変更</label>
                             <p>パスワードを変更します</p>
                         </div>
                     </div>
