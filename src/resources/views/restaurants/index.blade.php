@@ -15,7 +15,7 @@
         <td>{{ $restaurant->price }}</td>
         <td>{{ $restaurant->category_id }}</td>
         <td>
-            <form action="{{ route('restaurants.destroy', restaurant->id) }}" method="POST">
+            <form action="{{ route('restaurants.destroy', $restaurant->id) }}" method="POST">
                 <a href="{{ route('restaurants.show', $restaurant->id) }}">Show</a>
                 <a href="{{ route('restaurants.edit', $restaurant->id) }}">Edit</a>
                 @csrf

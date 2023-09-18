@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Restaurant;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class RestaurantController extends Controller
@@ -22,7 +23,9 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        return view('restaurants.create');
+        $categories = Category::all();
+
+        return view('restaurants.create', compact('categories'));
     }
 
     /**
@@ -34,6 +37,11 @@ class RestaurantController extends Controller
         $restaurant->name = $request->input('name');
         $restaurant->description = $request->input('description');
         $restaurant->price = $request->input('price');
+        $restaurant->seat = $request->input('seat');
+        $restaurant->postcode = $request->input('postcode');
+        $restaurant->address = $request->input('address');
+        $restaurant->phone_number = $request->input('phone_number');
+        $restaurant->category_id = $request->input('category_id');
         $restaurant->save();
 
         return to_route('restaurants.index');
@@ -52,7 +60,9 @@ class RestaurantController extends Controller
      */
     public function edit(Restaurant $restaurant)
     {
-        return view('restaurants.edit', compact('restaurant'));
+        $categories = Category::all();
+
+        return view('restaurants.edit', compact('restaurant', 'categories'));
     }
 
     /**
@@ -63,6 +73,11 @@ class RestaurantController extends Controller
         $restaurant->name = $request->input('name');
         $restaurant->description = $request->input('description');
         $restaurant->price = $request->input('price');
+        $restaurant->seat = $request->input('seat');
+        $restaurant->postcode = $request->input('postcode');
+        $restaurant->address = $request->input('address');
+        $restaurant->phone_number = $request->input('phone_number');
+        $restaurant->category_id = $request->input('category_id');
         $restaurant->update();
 
         return to_route('restaurants.index');
