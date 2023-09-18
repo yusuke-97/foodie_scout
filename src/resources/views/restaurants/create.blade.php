@@ -1,51 +1,50 @@
-<div>
-    <h2>Add New Restaurant</h2>
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+    <h1>新しい店舗を追加</h1>
+
+    <form action="{{ route('restaurants.store') }}" method="POST">
+        @csrf
+        <div class="form-group">
+            <label for="restaurant-name">商品名</label>
+            <input type="text" name="name" id="restaurant-name" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="restaurant-description">商品説明</label>
+            <textarea name="description" id="restaurant-description" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="restaurant-price">1人当たりの価格</label>
+            <input type="number" name="price" id="restaurant-price" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="restaurant-seat">座席数</label>
+            <input type="number" name="seat" id="restaurant-seat" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="restaurant-postcode">郵便番号</label>
+            <input type="text" name="postcode" id="restaurant-postcode" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="restaurant-address">住所</label>
+            <input type="text" name="address" id="restaurant-address" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="restaurant-phone">電話番号</label>
+            <input type="text" name="phone_number" id="restaurant-phone" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="restaurant-category">ジャンル</label>
+            <select name="category_id" class="form-control" id="restaurant-category">
+                @foreach ($categories as $category)
+                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <button type="submit" class="btn btn-success">店舗を登録</button>
+    </form>
+
+    <a href="{{ route('restaurants.index') }}">店舗一覧に戻る</a>
 </div>
-<div>
-    <a href="{{ route('restaurants.index') }}"> Back</a>
-</div>
-
-<form action="{{ route('restaurants.store') }}" method="POST">
-    @csrf
-
-    <div>
-        <strong>店舗名</strong>
-        <input type="text" name="name" placeholder="Name">
-    </div>
-    <div>
-        <strong>説明</strong>
-        <textarea style="height:150px" name="description" placeholder="Description"></textarea>
-    </div>
-    <div>
-        <strong>1人当たりの価格</strong>
-        <input type="number" name="price" placeholder="Price">
-    </div>
-    <div>
-        <strong>座席数</strong>
-        <input type="number" name="seat" placeholder="Seat">
-    </div>
-    <div>
-        <strong>郵便番号</strong>
-        <input type="text" name="postcode" placeholder="Postcode">
-    </div>
-    <div>
-        <strong>住所</strong>
-        <input type="text" name="address" placeholder="Address">
-    </div>
-    <div>
-        <strong>電話番号</strong>
-        <input type="text" name="phone_number" placeholder="Phone Number">
-    </div>
-    <div>
-        <strong>ジャンル</strong>
-        <select name="category_id">
-            @foreach ($categories as $category)
-            <option value="{{ $category->id }}">{{ $category->name }}</option>
-            @endforeach
-        </select>
-    </div>
-    <div>
-        <button type="submit">Submit</button>
-    </div>
-
-</form>
+@endsection
