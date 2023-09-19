@@ -29,10 +29,10 @@
                 <input type="hidden" name="price" value="{{$restaurant->price}}">
                 <div class="row">
                     <div class="col-6">
-                        <favorite-button :initial-is-favorited="{{ $restaurant->isFavoritedBy(Auth::user()) ? 'true' : 'false' }}" :restaurant-id="{{ $restaurant->id }}"></favorite-button>
+                        <favorite-button></favorite-button>
                     </div>
                     <div class="col-6">
-                        <a href="/restaurants/{{ $restaurant->id }}/favorite" class="btn favorite-button text-dark w-100">
+                        <a href="/restaurants/{{ $restaurant->id }}/favorite" class="btn reservation-button text-dark w-100">
                             <i class="fas fa-utensils"></i>
                             予約
                         </a>
