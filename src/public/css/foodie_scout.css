@@ -182,4 +182,17 @@ label {
     letter-spacing: normal;
     color: #0fbe9f;
 }
-    
+ 
+
+/*--------------------------------
+ # 店舗詳細画面
+---------------------------------*/
+.favorite-button {
+    border-radius: 2px;
+    border: solid 1px #0fbe9f;
+    background-color: #ffffff;
+}
+
+.text-favorite {
+    color: #0fbe9f;
+}

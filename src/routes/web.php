@@ -19,6 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('restaurants/{restaurant}/favorite', [RestaurantController::class, 'favorite'])->name('restaurants.favorite');
 Route::resource('restaurants', RestaurantController::class);
 
 Route::controller(UserController::class)->group(function () {

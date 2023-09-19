@@ -29,10 +29,22 @@
                 <input type="hidden" name="price" value="{{$restaurant->price}}">
                 <div class="row">
                     <div class="col-6">
-                        <button type="submit" class="btn submit-button w-100">
+                        <!-- <button type="submit" class="btn submit-button w-100">
                             <i class="fas fa-bookmark"></i>
-                            保存
-                        </button>
+                            お気に入り
+                        </button> -->
+
+                        @if($restaurant->isFavoritedBy(Auth::user()))
+                        <a href="{{ route('restaurants.favorite', $restaurant) }}" class="btn favorite-button text-favorite w-100">
+                            <i class="fas fa-bookmark"></i>
+                            お気に入り解除
+                        </a>
+                        @else
+                        <a href="{{ route('restaurants.favorite', $restaurant) }}" class="btn favorite-button text-favorite w-100">
+                            <i class="fas fa-bookmark"></i>
+                            お気に入り
+                        </a>
+                        @endif
                     </div>
                     <div class="col-6">
                         <a href="/restaurants/{{ $restaurant->id }}/favorite" class="btn favorite-button text-dark w-100">
