@@ -93,11 +93,4 @@ class RestaurantController extends Controller
 
         return to_route('restaurants.index');
     }
-
-    public function favorite(Restaurant $restaurant)
-    {
-        Auth::user()->togglefavorite($restaurant);
-
-        return back();
-    }
 }

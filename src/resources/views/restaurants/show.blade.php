@@ -22,29 +22,14 @@
                 <hr>
             </div>
             @auth
-            <form method="POST" class="m-3 align-items-end">
+            <form class="m-3 align-items-end">
                 @csrf
                 <input type="hidden" name="id" value="{{$restaurant->id}}">
                 <input type="hidden" name="name" value="{{$restaurant->name}}">
                 <input type="hidden" name="price" value="{{$restaurant->price}}">
                 <div class="row">
                     <div class="col-6">
-                        <!-- <button type="submit" class="btn submit-button w-100">
-                            <i class="fas fa-bookmark"></i>
-                            お気に入り
-                        </button> -->
-
-                        @if($restaurant->isFavoritedBy(Auth::user()))
-                        <a href="{{ route('restaurants.favorite', $restaurant) }}" class="btn favorite-button text-favorite w-100">
-                            <i class="fas fa-bookmark"></i>
-                            お気に入り解除
-                        </a>
-                        @else
-                        <a href="{{ route('restaurants.favorite', $restaurant) }}" class="btn favorite-button text-favorite w-100">
-                            <i class="fas fa-bookmark"></i>
-                            お気に入り
-                        </a>
-                        @endif
+                        <favorite-button :initial-is-favorited="{{ $restaurant->isFavoritedBy(Auth::user()) ? 'true' : 'false' }}" :restaurant-id="{{ $restaurant->id }}"></favorite-button>
                     </div>
                     <div class="col-6">
                         <a href="/restaurants/{{ $restaurant->id }}/favorite" class="btn favorite-button text-dark w-100">
