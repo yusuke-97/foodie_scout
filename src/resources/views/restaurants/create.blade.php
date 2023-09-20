@@ -7,11 +7,11 @@
     <form action="{{ route('restaurants.store') }}" method="POST">
         @csrf
         <div class="form-group">
-            <label for="restaurant-name">商品名</label>
+            <label for="restaurant-name">店舗名</label>
             <input type="text" name="name" id="restaurant-name" class="form-control">
         </div>
         <div class="form-group">
-            <label for="restaurant-description">商品説明</label>
+            <label for="restaurant-description">説明</label>
             <textarea name="description" id="restaurant-description" class="form-control"></textarea>
         </div>
         <div class="form-group">
