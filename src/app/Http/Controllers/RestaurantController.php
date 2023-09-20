@@ -103,4 +103,30 @@ class RestaurantController extends Controller
 
         return to_route('restaurants.index');
     }
+
+    public function addFavorite(Restaurant $restaurant)
+    {
+        Auth::user()->favorite($restaurant);
+
+        // リクエストがAjaxの場合
+        if (request()->ajax()) {
+            return response()->json(['status' => 'added']);
+        }
+
+        // 通常のHTTPリクエストの場合
+        return redirect()->back()->with('success', 'お気に入りに追加しました。');
+    }
+
+    public function removeFavorite(Restaurant $restaurant)
+    {
+        Auth::user()->unfavorite($restaurant);
+
+        // リクエストがAjaxの場合
+        if (request()->ajax()) {
+            return response()->json(['status' => 'removed']);
+        }
+
+        // 通常のHTTPリクエストの場合
+        return redirect()->back()->with('success', 'お気に入りを解除しました。');
+    }
 }

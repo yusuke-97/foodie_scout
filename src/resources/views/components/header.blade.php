@@ -36,7 +36,9 @@
                     <a class="nav-link" href="{{ route('login') }}"><i class="far fa-heart"></i></a>
                 </li>
                 <li class="nav-item mr-5">
-                    <a class="nav-link" href="{{ route('login') }}"><i class="fas fa-bookmark"></i></a>
+                    <a class="nav-link" href="{{ route('mypage.favorite') }}">
+                        <i class="fas fa-bookmark"></i>
+                    </a>
                 </li>
                 <hr>
                 <li class="nav-item mr-5" style="display: flex; align-items: center;">
