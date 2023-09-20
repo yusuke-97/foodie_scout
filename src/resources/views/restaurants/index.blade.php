@@ -22,6 +22,7 @@
                 @endforeach
             </div>
         </div>
+        {{ $restaurants->links() }}
     </div>
 </div>
 @endsection
