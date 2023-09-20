@@ -1,4 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../sass/app.scss';
+
 
 /**
  * First we will load all of this project's JavaScript dependencies which

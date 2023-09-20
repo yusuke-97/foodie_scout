@@ -107,7 +107,7 @@ label {
     border: solid 1px #e5e5e5;
 }
 
-.header-search-button {
+.navbar .btn.header-search-button {
     background-color: #0fbe9f;
 }
 
@@ -160,7 +160,7 @@ label {
     color: #ffffff;
 }
 
-.submit-button {
+.btn.submit-button {
     font-family: YuGo;
     font-size: 14px;
     font-weight: bold;
@@ -187,12 +187,12 @@ label {
 /*--------------------------------
  # 店舗詳細画面
 ---------------------------------*/
-.favorite-button {
+.btn.favorite-button {
     border-radius: 2px;
     border: solid 1px #0fbe9f;
     background-color: #ffffff;
 }
 
-.text-favorite {
+.btn.text-favorite {
     color: #0fbe9f;
 }
