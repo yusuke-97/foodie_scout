@@ -12,11 +12,21 @@ class RestaurantController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $restaurants = Restaurant::paginate(2);
+        if ($request->category !== null) {
+            $restaurants = Restaurant::where('category_id', $request->category)->paginate(5);
+            $total_count = Restaurant::where('category_id', $request->category)->count();
+            $category = Category::find($request->category);
+        } else {
+            $restaurants = Restaurant::paginate(5);
+            $total_count = "";
+            $category = null;
+        }
+        $categories = Category::all();
+        $major_category_names = Category::pluck('major_category_name')->unique();
 
-        return view('restaurants.index', compact('restaurants'));
+        return view('restaurants.index', compact('restaurants', 'category', 'categories', 'major_category_names', 'total_count'));
     }
 
     /**
