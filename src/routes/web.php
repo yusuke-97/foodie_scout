@@ -35,6 +35,8 @@ Route::controller(UserController::class)->group(function () {
     Route::get('users/mypage/password/edit', 'edit_password')->name('mypage.edit_password');
     Route::put('users/mypage/password', 'update_password')->name('mypage.update_password');
     Route::get('users/mypage/favorite', 'favorite')->name('mypage.favorite');
+    Route::get('users/mypage/reservation_history', 'reservation_history_index')->name('mypage.reservation_history');
+    Route::get('users/mypage/reservation_history/{reservation}', 'reservation_history_show')->name('mypage.reservation_history_show');
 });
 
 Auth::routes(['verify' => true]);

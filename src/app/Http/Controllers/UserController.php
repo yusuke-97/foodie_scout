@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Restaurant;
+use App\Models\Reservation;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -74,5 +75,17 @@ class UserController extends Controller
         $favorites = $user->favorites(Restaurant::class)->get();
 
         return view('users.favorite', compact('favorites'));
+    }
+
+    public function reservation_history_index()
+    {
+        $user = Auth::user();
+        $reservations = $user->reservations;
+        return view('users.reservation_history_index', compact('reservations'));
+    }
+
+    public function reservation_history_show(Reservation $reservation)
+    {
+        return view('users.reservation_history_show', compact('reservation'));
     }
 }
