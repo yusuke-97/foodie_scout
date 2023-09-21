@@ -43,7 +43,7 @@
                         @endif -->
                     </div>
                     <div class="col-6">
-                        <a href="/restaurants/{{ $restaurant->id }}/favorite" class="btn reservation-button text-dark w-100">
+                        <a href="{{ route('restaurant.reservations', ['restaurant' => $restaurant->id]) }}" class="btn reservation-button text-dark w-100">
                             <i class="fas fa-utensils"></i>
                             予約
                         </a>

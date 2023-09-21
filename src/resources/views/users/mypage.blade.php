@@ -15,7 +15,7 @@
                     </div>
                     <div class="col-9 d-flex align-items-center ms-3 mt-3">
                         <div class="d-flex flex-column">
-                            <label style="font-weight: bold;" for="user-name">会員情報の編集</label>
+                            <label style="font-weight: bold;">会員情報の編集</label>
                             <p>アカウント情報の編集</p>
                         </div>
                     </div>
@@ -38,7 +38,7 @@
                     </div>
                     <div class="col-9 d-flex align-items-center ms-3 mt-3">
                         <div class="d-flex flex-column">
-                            <label style="font-weight: bold;" for="user-name">予約履歴</label>
+                            <label style="font-weight: bold;">予約履歴</label>
                             <p>予約履歴を確認できます</p>
                         </div>
                     </div>
@@ -61,7 +61,7 @@
                     </div>
                     <div class="col-9 d-flex align-items-center ms-3 mt-3">
                         <div class="d-flex flex-column">
-                            <label style="font-weight: bold;" for="user-name">パスワード変更</label>
+                            <label style="font-weight: bold;">パスワード変更</label>
                             <p>パスワードを変更します</p>
                         </div>
                     </div>
@@ -84,7 +84,7 @@
                     </div>
                     <div class="col-9 d-flex align-items-center ms-3 mt-3">
                         <div class="d-flex flex-column">
-                            <label style="font-weight: bold;" for="user-name">ログアウト</label>
+                            <label style="font-weight: bold;">ログアウト</label>
                             <p>ログアウトします</p>
                         </div>
                     </div>

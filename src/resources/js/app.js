@@ -44,4 +44,7 @@ app.component('example-component', ExampleComponent);
 import FavoriteButton from './components/FavoriteButton.vue';
 app.component('favorite-button', FavoriteButton);
 
+import Reservation from './components/Reservation.vue';
+app.component('reservation', Reservation);
+
 app.mount('#app');

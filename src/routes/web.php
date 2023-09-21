@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RestaurantController;
+use App\Http\Controllers\ReservationController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -23,6 +24,9 @@ Route::get('/', function () {
 Route::post('/restaurants/{restaurant}/favorite', [RestaurantController::class, 'addFavorite'])->name('restaurants.favorite');
 Route::delete('/restaurants/{restaurant}/favorite', [RestaurantController::class, 'removeFavorite'])->name('restaurants.unfavorite');
 Route::resource('restaurants', RestaurantController::class);
+
+Route::get('restaurants/{restaurant}/reservations', [ReservationController::class, 'restaurantReservation'])->name('restaurant.reservations');
+Route::resource('reservations', ReservationController::class);
 
 Route::controller(UserController::class)->group(function () {
     Route::get('users/mypage', 'mypage')->name('mypage');
