@@ -194,3 +194,51 @@ label {
     color: #ffffff;
     background-color: #0fbe9f;
 }
+
+
+/*--------------------------------
+ # プロフィール画面
+---------------------------------*/
+/* メダルカラー部分 */
+.medal-icon {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color:#212121; 
+    text-align: center;
+    line-height: 30px;
+    border: 1px solid #D0D0D0;
+}
+
+.medal-color-platinum {
+    background: linear-gradient(45deg, #A8A8A8 0%, #F1F1F1 40%, #FFFFFF 60%, #F1F1F1 80%, #A8A8A8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.medal-color-gold {
+    background: linear-gradient(45deg, #B67B03 0%, #DAAF08 45%, #FEE9A0 70%, #DAAF08 85%, #B67B03 90% 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.medal-color-silver {
+    background: linear-gradient(0deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%); 
+	-webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.medal-color-bronze {
+    background: linear-gradient(45deg, #a57e65 0%, #a57e65 45%, #f3cfb8 70%, #a57e65 85%, #a57e65 90% 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.medal-color-green {
+    color: green;
+}

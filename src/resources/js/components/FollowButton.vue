@@ -3,24 +3,24 @@ import { ref } from 'vue'
 import axios from 'axios'
 
 const props = defineProps({
-  isFollowed: Boolean,
-  userId: Number
+  isFollowing: Boolean,
+  followingId: Number
 })
 
-const localIsFollowed = ref(props.isFollowed);
+const localIsFollowing = ref(props.isFollowing);
 
 const toggleFollow = async () => {
   try {
     let response;
-    if (localIsFollowed.value) {
+    if (localIsFollowing.value) {
       // お気に入り済みの場合はお気に入りを解除する
-      response = await axios.delete(`/unfollow/${props.userId}`);
+      response = await axios.delete(`/unfollow/${props.followingId}`);
     } else {
       // まだお気に入りではない場合はお気に入りに追加する
-      response = await axios.post(`/follow/${props.userId}`);
+      response = await axios.post(`/follow/${props.followingId}`);
     }
     if (response.data.status === 'follow' || response.data.status === 'unfollow') {
-      localIsFollowed.value = !localIsFollowed.value;
+      localIsFollowing.value = !localIsFollowing.value;
     }
   } catch (error) {
     console.error("Error:", error);
@@ -33,6 +33,6 @@ const toggleFollow = async () => {
         @click.prevent="toggleFollow"
         class="btn follow-button text-follow w-100">
         <i class="fa fa-heart"></i>
-        {{ localIsFollowed ? 'フォロー解除' : 'フォロー' }}
+        {{ localIsFollowing ? 'フォロー解除' : 'フォロー' }}
     </a>
 </template>

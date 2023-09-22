@@ -50,4 +50,7 @@ app.component('reservation', Reservation);
 import FollowButton from './components/FollowButton.vue';
 app.component('follow-button', FollowButton);
 
+import MedalColor from './components/MedalColor.vue';
+app.component('medal-color', MedalColor);
+
 app.mount('#app');

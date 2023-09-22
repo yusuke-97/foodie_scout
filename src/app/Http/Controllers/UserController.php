@@ -109,4 +109,23 @@ class UserController extends Controller
 
         return response()->json(['status' => 'unfollow']);
     }
+
+    public function following()
+    {
+        $user = Auth::user();
+
+        $followings = $user->followings(User::class)->get();
+
+        return view('users.following', compact('followings'));
+    }
+
+    public function follower_show($followingId)
+    {
+        $following = \App\Models\User::find($followingId);
+        if (!$following) {
+            // ユーザーが見つからない場合の処理（エラーメッセージの表示やリダイレクトなど）
+            abort(404);
+        }
+        return view('users.following_show', compact('following'));
+    }
 }
