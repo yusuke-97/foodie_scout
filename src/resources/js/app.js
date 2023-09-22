@@ -47,4 +47,7 @@ app.component('favorite-button', FavoriteButton);
 import Reservation from './components/Reservation.vue';
 app.component('reservation', Reservation);
 
+import FollowButton from './components/FollowButton.vue';
+app.component('follow-button', FollowButton);
+
 app.mount('#app');

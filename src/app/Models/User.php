@@ -10,10 +10,12 @@ use Laravel\Sanctum\HasApiTokens;
 use App\Notifications\CustomVerifyEmail;
 use App\Notifications\CustomResetPassword;
 use Overtrue\LaravelFavorite\Traits\Favoriter;
+use Overtrue\LaravelFollow\Traits\Follower;
+use Overtrue\LaravelFollow\Traits\Followable;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable, Favoriter;
+    use HasApiTokens, HasFactory, Notifiable, Favoriter, Follower, Followable;
 
     public function sendEmailVerificationNotification()
     {

@@ -30,7 +30,7 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request)
     {
         $user = Auth::user();
 
@@ -87,5 +87,26 @@ class UserController extends Controller
     public function reservation_history_show(Reservation $reservation)
     {
         return view('users.reservation_history_show', compact('reservation'));
+    }
+
+    public function profile()
+    {
+        $user = Auth::user();
+
+        return view('users.profile', compact('user'));
+    }
+
+    public function follow(User $user)
+    {
+        Auth::user()->follow($user);
+
+        return response()->json(['status' => 'follow']);
+    }
+
+    public function unfollow(User $user)
+    {
+        Auth::user()->unfollow($user);
+
+        return response()->json(['status' => 'unfollow']);
     }
 }
