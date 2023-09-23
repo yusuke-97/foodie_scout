@@ -12,7 +12,7 @@
         </div>
         <div class="form-group">
             <label for="restaurant-description">説明</label>
-            <textarea name="description" id="restaurant-description" class="form-control"></textarea>
+            <textarea name="description" id="restaurant-description" class="form-control" style="resize: none;"></textarea>
         </div>
         <div class="form-group">
             <label for="restaurant-price">1人当たりの価格</label>

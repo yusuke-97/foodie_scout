@@ -46,7 +46,7 @@ async function submitReservation() {
             <input type="datetime-local" v-model="visit_datetime" class="form-control">
         </div>
         <div class="col-md-2">
-            <input type="number" v-model="number_of_guests" class="form-control">
+            <input type="number" v-model="number_of_guests" class="form-control" min="0">
         </div>
         <div class="col-md-2">
             <h3 class="w-100 mt-4">¥{{ totalPrice }}</h3>
