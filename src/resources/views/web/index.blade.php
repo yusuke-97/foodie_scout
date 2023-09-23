@@ -110,6 +110,11 @@
                 </div>
             </div>
         </div>
+
+        <h1>人気ユーザー</h1>
+        <div class="row">
+
+        </div>
     </div>
 </div>
 @endsection
