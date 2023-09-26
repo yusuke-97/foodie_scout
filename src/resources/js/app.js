@@ -63,4 +63,7 @@ app.component('medal-color', MedalColor);
 import ImageUpload from './components/ImageUpload.vue';
 app.component('image-upload', ImageUpload);
 
+import ImageEdit from './components/ImageEdit.vue';
+app.component('image-edit', ImageEdit);
+
 app.mount('#app');

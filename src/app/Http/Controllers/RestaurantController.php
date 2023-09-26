@@ -102,10 +102,27 @@ class RestaurantController extends Controller
         $restaurant->address = $request->input('address');
         $restaurant->phone_number = $request->input('phone_number');
         $restaurant->category_id = $request->input('category_id');
-        $restaurant->update();
 
-        return to_route('restaurants.index');
+        if ($request->hasFile('image')) {
+            $request->validate([
+                'image' => 'file|mimes:jpeg,png,jpg,gif,svg|max:4096',
+            ]);
+
+            // 古い画像の削除
+            if ($restaurant->image) {
+                Storage::delete($restaurant->image);
+            }
+
+            // 新しい画像の保存
+            $path = $request->file('image')->store('images', 'public');
+            $restaurant->image = Storage::url($path);
+        }
+
+        $restaurant->save();
+
+        return redirect()->route('restaurants.index');
     }
+
 
     /**
      * Remove the specified resource from storage.

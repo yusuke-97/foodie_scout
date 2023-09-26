@@ -4,40 +4,44 @@
 <div class="container">
     <h1>商品情報更新</h1>
 
-    <form action="{{ route('restaurants.update',$restaurant->id) }}" method="POST">
+    <form action="{{ route('restaurants.update', $restaurant->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="form-group">
-            <label for="restaurant-name">店舗名</label>
-            <input type="text" name="name" id="restaurant-name" class="form-control" value="{{ $restaurant->name }}">
+            <label>店舗名</label>
+            <input type="text" name="name" class="form-control" value="{{ $restaurant->name }}">
         </div>
         <div class="form-group">
-            <label for="restaurant-description">説明</label>
-            <textarea name="description" id="restaurant-description" class="form-control">{{ $restaurant->description }}</textarea>
+            <label>店舗画像</label>
+            <image-edit :initial-image="'{{ asset($restaurant->image) }}'"></image-edit>
         </div>
         <div class="form-group">
-            <label for="restaurant-price">1人当たりの価格</label>
-            <input type="number" name="price" id="restaurant-price" class="form-control" value="{{ $restaurant->price }}">
+            <label>説明</label>
+            <textarea name="description" class="form-control">{{ $restaurant->description }}</textarea>
         </div>
         <div class="form-group">
-            <label for="restaurant-seat">座席数</label>
-            <input type="number" name="seat" id="restaurant-seat" class="form-control" value="{{ $restaurant->seat }}">
+            <label>1人当たりの価格</label>
+            <input type="number" name="price" class="form-control" value="{{ $restaurant->price }}">
         </div>
         <div class="form-group">
-            <label for="restaurant-postcode">郵便番号</label>
-            <input type="text" name="postcode" id="restaurant-postcode" class="form-control" value="{{ $restaurant->postcode }}">
+            <label>座席数</label>
+            <input type="number" name="seat" class="form-control" value="{{ $restaurant->seat }}">
         </div>
         <div class="form-group">
-            <label for="restaurant-address">住所</label>
-            <input type="text" name="address" id="restaurant-address" class="form-control" value="{{ $restaurant->address }}">
+            <label>郵便番号</label>
+            <input type="text" name="postcode" class="form-control" value="{{ $restaurant->postcode }}">
         </div>
         <div class="form-group">
-            <label for="restaurant-phone">電話番号</label>
-            <input type="text" name="phone_number" id="restaurant-phone" class="form-control" value="{{ $restaurant->phone_number }}">
+            <label>住所</label>
+            <input type="text" name="address" class="form-control" value="{{ $restaurant->address }}">
         </div>
         <div class="form-group">
-            <label for="restaurant-category">ジャンル</label>
-            <select name="category_id" class="form-control" id="restaurant-category">
+            <label>電話番号</label>
+            <input type="text" name="phone_number" class="form-control" value="{{ $restaurant->phone_number }}">
+        </div>
+        <div class="form-group">
+            <label>ジャンル</label>
+            <select name="category_id" class="form-control">
                 @foreach ($categories as $category)
                 @if ($category->id == $restaurant->category_id)
                 <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
