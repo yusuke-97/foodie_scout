@@ -10,6 +10,11 @@
             <label for="restaurant-name">店舗名</label>
             <input type="text" name="name" id="restaurant-name" class="form-control">
         </div>
+
+        <div class="form-group">
+            <image-upload></image-upload>
+        </div>
+
         <div class="form-group">
             <label for="restaurant-description">説明</label>
             <textarea name="description" id="restaurant-description" class="form-control" style="resize: none;"></textarea>

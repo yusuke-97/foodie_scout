@@ -53,4 +53,7 @@ app.component('follow-button', FollowButton);
 import MedalColor from './components/MedalColor.vue';
 app.component('medal-color', MedalColor);
 
+import ImageUpload from './components/ImageUpload.vue';
+app.component('image-upload', ImageUpload);
+
 app.mount('#app');

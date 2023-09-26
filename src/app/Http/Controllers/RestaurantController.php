@@ -44,8 +44,16 @@ class RestaurantController extends Controller
      */
     public function store(Request $request)
     {
+        // バリデーション: 画像と内容のチェック
+        $request->validate([
+            'image' => 'required',
+            'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:4096',
+            'content' => 'required|max:255',
+        ]);
+
         $restaurant = new Restaurant();
         $restaurant->name = $request->input('name');
+        $restaurant->image = $request->input('image');
         $restaurant->description = $request->input('description');
         $restaurant->price = $request->input('price');
         $restaurant->seat = $request->input('seat');
