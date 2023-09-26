@@ -9,7 +9,15 @@ import '../sass/app.scss';
  */
 
 import './bootstrap';
-import { createApp } from 'vue';
+import { createApp, ref } from 'vue';
+
+const app = createApp({
+    setup() {
+        // `image` プロパティを定義して返す
+        const image = ref(null);
+        return { image };
+    },
+});
 
 
 /**
@@ -18,7 +26,6 @@ import { createApp } from 'vue';
  * to use in your application's views. An example is included for you.
  */
 
-const app = createApp({});
 
 import ExampleComponent from './components/ExampleComponent.vue';
 app.component('example-component', ExampleComponent);

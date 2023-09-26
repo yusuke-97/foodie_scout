@@ -6,6 +6,7 @@ use App\Models\Restaurant;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class RestaurantController extends Controller
 {
@@ -44,16 +45,14 @@ class RestaurantController extends Controller
      */
     public function store(Request $request)
     {
-        // バリデーション: 画像と内容のチェック
         $request->validate([
-            'image' => 'required',
-            'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:4096',
-            'content' => 'required|max:255',
+            'name' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:4096',
+            'description' => 'required|max:255',
         ]);
 
         $restaurant = new Restaurant();
         $restaurant->name = $request->input('name');
-        $restaurant->image = $request->input('image');
         $restaurant->description = $request->input('description');
         $restaurant->price = $request->input('price');
         $restaurant->seat = $request->input('seat');
@@ -61,6 +60,12 @@ class RestaurantController extends Controller
         $restaurant->address = $request->input('address');
         $restaurant->phone_number = $request->input('phone_number');
         $restaurant->category_id = $request->input('category_id');
+
+        if ($request->file('image')) {
+            $path = $request->file('image')->store('images', 'public');
+            $restaurant->image = Storage::url($path);
+        }
+
         $restaurant->save();
 
         return to_route('restaurants.index');

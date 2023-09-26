@@ -4,10 +4,17 @@ import { ref } from 'vue'
 const inputFileRef = ref(null);
 const imageUrl = ref(null);
 
+const props = defineProps(['modelValue'])
+const emit = defineEmits(['update:modelValue']);
+
+const modelValue = ref(props.modelValue)
+
 function onImageUpload(e) {
   const file = e.target.files[0];
   if (file) {
     imageUrl.value = URL.createObjectURL(file);
+    modelValue.value = file;
+    emit('update:modelValue', file);
   }
 }
 
@@ -17,12 +24,15 @@ function triggerFileInput() {
 
 function removeImage() {
   imageUrl.value = null;
+  modelValue.value = null;
+  emit('update:modelValue', null);
 }
 </script>
 
 <template>
   <input 
     type="file"
+    name="image"
     ref="inputFileRef" 
     @change="onImageUpload"
     style="display:none" />

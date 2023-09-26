@@ -4,7 +4,7 @@
 <div class="container">
     <h1>新しい店舗を追加</h1>
 
-    <form action="{{ route('restaurants.store') }}" method="POST">
+    <form action="{{ route('restaurants.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <label for="restaurant-name">店舗名</label>
@@ -12,7 +12,7 @@
         </div>
 
         <div class="form-group">
-            <image-upload></image-upload>
+            <image-upload v-model="image"></image-upload>
         </div>
 
         <div class="form-group">
