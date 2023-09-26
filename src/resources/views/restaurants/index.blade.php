@@ -23,7 +23,7 @@
                 @foreach($restaurants as $restaurant)
                 <div class="col-3">
                     <a href="{{route('restaurants.show', $restaurant)}}">
-                        <img src="{{ asset('img/foodie3.jpg')}}" class="img-thumbnail">
+                        <img src="{{ asset($restaurant->image) }}" class="img-thumbnail">
                     </a>
                     <div class="row">
                         <div class="col-12">
