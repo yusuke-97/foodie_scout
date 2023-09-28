@@ -5,7 +5,7 @@
 <div class="d-flex justify-content-center">
     <div class="row w-75">
         <div class="col-5 offset-1">
-            <img src="{{ asset('img/foodie3.jpg')}}" class="w-100 img-fluid">
+            <img src="{{ asset($restaurant->image) }}" class="img-thumbnail">
         </div>
         <div class="col">
             <div class="d-flex flex-column">
