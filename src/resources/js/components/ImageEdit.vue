@@ -1,17 +1,20 @@
 <script setup>
 import { ref } from 'vue';
 
+const props = defineProps(['initialImage', 'modelValue', 'name']);
+const emit = defineEmits(['update:modelValue']);
+
 const inputFileRef = ref(null);
 const imageUrl = ref(props.initialImage);
 
-const props = defineProps(['initialImage']);
-const emit = defineEmits(['update:image']);
+const modelValue = ref(props.modelValue);
 
 function onImageUpload(e) {
   const file = e.target.files[0];
   if (file) {
     imageUrl.value = URL.createObjectURL(file);
-    emit('update:image', file);
+    modelValue.value = file;
+    emit('update:modelValue', file);
   }
 }
 
@@ -20,15 +23,16 @@ function triggerFileInput() {
 }
 
 function removeImage() {
-  event.preventDefault();
   imageUrl.value = null;
-  emit('update:image', null);
+  modelValue.value = null;
+  emit('update:modelValue', null);
 }
 </script>
 
 <template>
   <input 
     type="file"
+    name="image"
     ref="inputFileRef" 
     @change="onImageUpload"
     style="display:none" />

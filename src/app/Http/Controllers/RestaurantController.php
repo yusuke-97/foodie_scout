@@ -7,6 +7,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 class RestaurantController extends Controller
 {
@@ -94,6 +95,8 @@ class RestaurantController extends Controller
      */
     public function update(Request $request, Restaurant $restaurant)
     {
+        Log::info($request->all());
+
         $restaurant->name = $request->input('name');
         $restaurant->description = $request->input('description');
         $restaurant->price = $request->input('price');
@@ -104,18 +107,21 @@ class RestaurantController extends Controller
         $restaurant->category_id = $request->input('category_id');
 
         if ($request->hasFile('image')) {
+            Log::info('File is uploaded.');
             $request->validate([
                 'image' => 'file|mimes:jpeg,png,jpg,gif,svg|max:4096',
             ]);
 
             // 古い画像の削除
             if ($restaurant->image) {
-                Storage::delete($restaurant->image);
+                Storage::delete('public/images/' . $restaurant->image);
             }
 
             // 新しい画像の保存
             $path = $request->file('image')->store('images', 'public');
             $restaurant->image = Storage::url($path);
+        } else {
+            Log::info('No file uploaded.');
         }
 
         $restaurant->save();

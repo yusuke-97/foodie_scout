@@ -13,7 +13,7 @@
         </div>
         <div class="form-group">
             <label>店舗画像</label>
-            <image-edit :initial-image="'{{ asset($restaurant->image) }}'"></image-edit>
+            <image-edit v-model="image" :initial-image="'{{ asset($restaurant->image) }}'"></image-edit>
         </div>
         <div class="form-group">
             <label>説明</label>
@@ -54,6 +54,6 @@
         <button type="submit" class="btn btn-danger">更新</button>
     </form>
 
-    <a href="{{ route('restaurants.index') }}">商品一覧に戻る</a>
+    <a href="{{ route('restaurants.index') }}">店舗一覧に戻る</a>
 </div>
 @endsection
