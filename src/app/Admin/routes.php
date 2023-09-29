@@ -20,4 +20,5 @@ Route::group([
     $router->resource('restaurants', RestaurantController::class);
     $router->resource('major-categories', MajorCategoryController::class);
     $router->resource('users', UserController::class);
+    $router->post('restaurants/import', [RestaurantController::class, 'csvImport']);
 });

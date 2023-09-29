@@ -9,6 +9,11 @@ use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use App\Admin\Extensions\Tools\CsvImport;
+use Goodby\CSV\Import\Standard\Lexer;
+use Goodby\CSV\Import\Standard\Interpreter;
+use Goodby\CSV\Import\Standard\LexerConfig;
+use Illuminate\Http\Request;
 
 class RestaurantController extends AdminController
 {
@@ -52,6 +57,10 @@ class RestaurantController extends AdminController
             $filter->between('price', '金額');
             $filter->in('category_id', 'カテゴリー')->multipleSelect(Category::all()->pluck('name', 'id'));
             $filter->equal('recommend_flag', 'おすすめフラグ')->select(['0' => 'false', '1' => 'true']);
+        });
+
+        $grid->tools(function ($tools) {
+            $tools->append(new CsvImport());
         });
 
         return $grid;
@@ -113,5 +122,50 @@ class RestaurantController extends AdminController
         $form->switch('recommend_flag', __('Recommend Flag'));
 
         return $form;
+    }
+
+    public function csvImport(Request $request)
+    {
+        $file = $request->file('file');
+        $lexer_config = new LexerConfig();
+        $lexer = new Lexer($lexer_config);
+
+        $interpreter = new Interpreter();
+        $interpreter->unstrict();
+
+        $rows = array();
+        $interpreter->addObserver(function (array $row) use (&$rows) {
+            $rows[] = $row;
+        });
+
+        $lexer->parse($file, $interpreter);
+        foreach ($rows as $key => $value) {
+
+            if (count($value) == 14) {
+                Restaurant::create([
+                    'name' => $value[0],
+                    'description' => $value[1],
+                    'price' => $value[2],
+                    'seat' => $value[3],
+                    'postcode' => $value[4],
+                    'address' => $value[5],
+                    'prefecture' => $value[6],
+                    'city' => $value[7],
+                    'street_address' => $value[8],
+                    'nearest_station' => $value[9],
+                    'phone_number' => $value[10],
+                    'category_id' => $value[11],
+                    'image' => $value[12],
+                    'recommend_flag' => $value[13],
+                ]);
+            }
+        }
+
+        return response()->json(
+            ['data' => '成功'],
+            200,
+            [],
+            JSON_UNESCAPED_UNICODE
+        );
     }
 }

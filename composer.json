@@ -1,6 +1,7 @@
 {
     "require": {
         "overtrue/laravel-favorite": "^5.1",
-        "intervention/image": "^2.7"
+        "intervention/image": "^2.7",
+        "goodby/csv": "=1.3"
     }
 }

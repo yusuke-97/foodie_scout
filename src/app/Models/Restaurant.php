@@ -11,6 +11,23 @@ class Restaurant extends Model
 {
     use HasFactory, Favoriteable, Sortable;
 
+    protected $fillable = [
+        'name',
+        'description',
+        'price',
+        'seat',
+        'postcode',
+        'address',
+        'prefecture',
+        'city',
+        'street_address',
+        'nearest_station',
+        'phone_number',
+        'category_id',
+        'image',
+        'recommend_flag',
+    ];
+
     public function category()
     {
         return $this->belongsTo('App\Models\Category');
