@@ -17,11 +17,11 @@ class RestaurantController extends Controller
     public function index(Request $request)
     {
         if ($request->category !== null) {
-            $restaurants = Restaurant::where('category_id', $request->category)->sortable()->paginate(5);
+            $restaurants = Restaurant::where('category_id', $request->category)->sortable()->paginate(1);
             $total_count = Restaurant::where('category_id', $request->category)->count();
             $category = Category::find($request->category);
         } else {
-            $restaurants = Restaurant::sortable()->paginate(5);
+            $restaurants = Restaurant::sortable()->paginate(1);
             $total_count = "";
             $category = null;
         }
