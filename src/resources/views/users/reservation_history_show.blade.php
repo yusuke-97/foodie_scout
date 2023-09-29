@@ -17,7 +17,7 @@
             <div class="row">
                 <div class="col-md-5 mt-2">
                     <a href="{{route('restaurants.show', $reservation->restaurant->id)}}" class="ml-4">
-                        <img src="{{ asset('img/foodie3.jpg')}}" class="img-fluid w-75">
+                        <img src="{{ asset($reservation->restaurant->image)}}" class="img-fluid w-75">
                     </a>
                 </div>
                 <div class="col-md-7 mt-2">
