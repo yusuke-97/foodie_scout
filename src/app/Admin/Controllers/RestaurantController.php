@@ -42,6 +42,7 @@ class RestaurantController extends AdminController
         $grid->column('phone_number', __('Phone number'));
         $grid->column('category.name', __('Category Name'));
         $grid->column('image', __('Image'))->image();
+        $grid->column('recommend_flag', __('Recommend Flag'));
         $grid->column('created_at', __('Created at'))->sortable();
         $grid->column('updated_at', __('Updated at'))->sortable();
 
@@ -50,6 +51,7 @@ class RestaurantController extends AdminController
             $filter->like('description', '店舗説明');
             $filter->between('price', '金額');
             $filter->in('category_id', 'カテゴリー')->multipleSelect(Category::all()->pluck('name', 'id'));
+            $filter->equal('recommend_flag', 'おすすめフラグ')->select(['0' => 'false', '1' => 'true']);
         });
 
         return $grid;
@@ -79,6 +81,7 @@ class RestaurantController extends AdminController
         $show->field('phone_number', __('Phone number'));
         $show->field('category.name', __('Category Name'));
         $show->field('image', __('Image'))->image();
+        $show->field('recommend_flag', __('Recommend Flag'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
 
@@ -107,6 +110,7 @@ class RestaurantController extends AdminController
         $form->text('city', __('City'));
         $form->text('street_address', __('Street address'));
         $form->text('nearest_station', __('Nearest station'));
+        $form->switch('recommend_flag', __('Recommend Flag'));
 
         return $form;
     }
