@@ -66,4 +66,7 @@ app.component('image-upload', ImageUpload);
 import ImageEdit from './components/ImageEdit.vue';
 app.component('image-edit', ImageEdit);
 
+import ImageSlider from './components/ImageSlider.vue';
+app.component('image-slider', ImageSlider);
+
 app.mount('#app');
