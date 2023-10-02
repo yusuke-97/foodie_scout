@@ -12,11 +12,11 @@
             <img class="profile-image" src="{{ asset('profile_images/' . $user->profile_image) }}" alt="プロフィール画像">
             @else
             <!-- プロフィール画像がない場合のアイコン表示 -->
-            <i class="fas fa-user"></i>
+            <i class="fas fa-user profile-icon"></i>
             @endif
 
             <!-- ユーザー名の表示 -->
-            <p class="user-name mt-3" style="font-weight: bold;">{{ $user->user_name }}</p>
+            <p class="user-name mt-3" style="font-weight: bold;">{{ "@" . $user->user_name }}</p>
         </div>
 
         <!-- 右側のカラム：ユーザーの詳細情報表示エリア -->

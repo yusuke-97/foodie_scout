@@ -38,6 +38,7 @@ big {
 }
   
 body {
+    font-family: "Inter", sans-serif;
     font-size: 14px;
     font-weight: 500;
     font-stretch: normal;
@@ -199,6 +200,21 @@ label {
 /*--------------------------------
  # プロフィール画面
 ---------------------------------*/
+/* プロフィール画像部分 */
+.profile-icon {
+    width: 90px;
+    height: 90px;
+    border: 2px solid #ddd;
+    border-radius: 50%;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    background-color: #aaaaaa;
+    font-size: 50px;
+}
+
 /* メダルカラー部分 */
 .medal-icon {
     display: inline-block;
