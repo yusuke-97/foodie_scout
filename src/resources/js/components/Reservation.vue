@@ -6,9 +6,8 @@ import 'v-calendar/style.css'
 
 const props = defineProps({
   restaurantId: Number,
-  restaurantName: String,
-  restaurantPrice: Number,
-  imgSrc: String
+  restaurantPhoneNumber: String,
+  restaurantPrice: Number
 })
 
 const today = new Date()
@@ -127,6 +126,15 @@ const visit_time = ref(timeOptions[0])
 
 
 <template>
+    <div class="p-3 mb-3">
+        <h4 style="font-weight: bold;">
+            <i class="fas fa-phone me-2"></i>
+            {{ props.restaurantPhoneNumber }}
+        </h4>
+    </div>
+    <div class="d-flex justify-content-center" style="background-color: #0fbe9f;" :style="{ width: selectBoxWidth }">
+        <h5 class="m-2" style="font-weight: bold; color: white;">ネット予約</h5>
+    </div>
     <div class="my-calendar">
         <DatePicker
             :min-date="new Date()"
