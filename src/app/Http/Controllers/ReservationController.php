@@ -6,6 +6,7 @@ use App\Models\Reservation;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class ReservationController extends Controller
 {
@@ -35,7 +36,13 @@ class ReservationController extends Controller
         $rawDate = $request->input('visit_date');
         $correctFormatDate = explode('T', $rawDate)[0];
         $reservation->visit_date = $correctFormatDate;
-        $reservation->visit_time = $request->input('visit_time');
+
+        $visitTime = $request->input('visit_time');
+        $reservation->visit_time = $visitTime;
+
+        $endTime = Carbon::createFromFormat('H:i', $visitTime)->addHours(2)->format('H:i');
+        $reservation->end_time = $endTime;
+
         $reservation->number_of_guests = $request->input('number_of_guests');
         $reservation->reservation_fee = $request->input('reservation_fee');
 
