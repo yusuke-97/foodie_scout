@@ -44,7 +44,7 @@
         <div class="col-8">
             <img src="{{ asset($restaurant->image) }}" style="width: 100%; height: auto;">
         </div>
-        <div class="col-4">
+        <div class="col-4" style="position: sticky; top: 0;">
             <reservation :restaurant-id="{{ $restaurant->id }}" :restaurant-name="'{{ $restaurant->name }}'" :restaurant-price="{{ $restaurant->price }}" :img-src="'{{ asset('img/foodie3.jpg') }}'">
             </reservation>
         </div>

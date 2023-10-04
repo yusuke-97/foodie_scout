@@ -15,6 +15,8 @@ const today = new Date()
 const yesterday = new Date(today)
 yesterday.setDate(yesterday.getDate() - 1)
 
+const selectedDate = ref(today)
+
 const number_of_guests = ref(1)
 
 const masks = ref({
@@ -119,9 +121,17 @@ const timeOptions = (() => {
 const visit_datetime = ref(timeOptions[0])
 </script>
 
+
+
 <template>
     <div class="my-calendar">
-        <Calendar :min-date="new Date()" :attributes="attributes" :masks="masks" />
+        <DatePicker
+            :min-date="new Date()"
+            :attributes="attributes"
+            :masks="masks"
+            :color="'green'"
+            v-model="selectedDate"
+            mode="date" />
     </div>
     <div class="select-wrapper pt-3" :style="{ width: selectBoxWidth }">
         <label class=" ms-3 me-5">人数</label>
@@ -153,6 +163,8 @@ const visit_datetime = ref(timeOptions[0])
         <button @click="submitReservation" class="btn submit-button" style="width: 100%">予約する</button> 
     </div>   
 </template>
+
+
 
 <style>
 /* カレンダーのスタイル */
