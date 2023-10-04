@@ -69,4 +69,7 @@ app.component('image-edit', ImageEdit);
 import ImageSlider from './components/ImageSlider.vue';
 app.component('image-slider', ImageSlider);
 
+import { setupCalendar } from 'v-calendar';
+app.use(setupCalendar, {});
+
 app.mount('#app');

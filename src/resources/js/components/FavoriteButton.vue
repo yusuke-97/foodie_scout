@@ -31,8 +31,9 @@ const toggleFavorite = async () => {
 <template>
     <a 
         @click.prevent="toggleFavorite"
-        class="btn favorite-button text-favorite w-100">
-        <i class="fa fa-heart"></i>
+        class="btn favorite-button text-favorite"
+        style="width: 160px;">
+        <i class="fas fa-bookmark"></i>
         {{ localIsFavorited ? 'お気に入り解除' : 'お気に入り' }}
     </a>
 </template>
