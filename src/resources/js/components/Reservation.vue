@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import axios from 'axios'
 import { Calendar, DatePicker } from 'v-calendar'
 import 'v-calendar/style.css'
@@ -15,8 +15,7 @@ const today = new Date()
 const yesterday = new Date(today)
 yesterday.setDate(yesterday.getDate() - 1)
 
-const visit_datetime = ref(null)
-const number_of_guests = ref(0)
+const number_of_guests = ref(1)
 
 const masks = ref({
     title: 'YYYY年 MMMM',
@@ -77,6 +76,11 @@ const totalPrice = computed(() => {
     return number_of_guests.value * props.restaurantPrice
 })
 
+const formattedTotalPrice = computed(() => {
+    const price = totalPrice.value * 0.5
+    return new Intl.NumberFormat('ja-JP').format(price)
+})
+
 async function submitReservation() {
     const data = {
         visit_datetime: visit_datetime.value,
@@ -93,47 +97,60 @@ async function submitReservation() {
         console.error("Error:", error)
     }
 }
+
+
+const selectBoxWidth = ref("")
+
+onMounted(() => {
+    const elementWidth = document.querySelector(".vc-container").offsetWidth
+    selectBoxWidth.value = `${elementWidth}px`
+})
+
+const timeOptions = (() => {
+  const times = []
+  for (let i = 18; i <= 24; i++) {
+    times.push(`${i.toString().padStart(2, '0')}:00`)
+    if (i !== 24) {
+      times.push(`${i.toString().padStart(2, '0')}:30`)
+    }
+  }
+  return times
+})()
+const visit_datetime = ref(timeOptions[0])
 </script>
 
 <template>
     <div class="my-calendar">
         <Calendar :min-date="new Date()" :attributes="attributes" :masks="masks" />
     </div>
-    <div class="row">
-        <div class="col-md-2 mt-2">
-            <img :src="props.imgSrc" class="img-fluid w-100">
-        </div>
-        <div class="col-md-4 mt-4">
-            <h3 class="mt-4">{{ props.restaurantName }}</h3>
-        </div>
-        <div class="col-md-2">
-            <input type="datetime-local" v-model="visit_datetime" class="form-control">
-        </div>
-        <div class="col-md-2">
-            <input type="number" v-model="number_of_guests" class="form-control" min="0">
-        </div>
-        <div class="col-md-2">
-            <h3 class="w-100 mt-4">¥{{ totalPrice }}</h3>
-        </div>
+    <div class="select-wrapper pt-3" :style="{ width: selectBoxWidth }">
+        <label class=" ms-3 me-5">人数</label>
+        <select v-model="number_of_guests" class="guest-select me-3">
+            <option v-for="n in 10" :key="n" :value="n">{{ n }}名</option>
+        </select>
+    </div>
+    <div class="select-wrapper pt-3" :style="{ width: selectBoxWidth }">
+        <label class="ms-3 me-5">時間</label>
+        <select v-model="visit_datetime" class="time-select me-3">
+            <option v-for="time in timeOptions" :key="time" :value="time">{{ time }}</option>
+        </select>
     </div>
 
-    <hr>
+    <hr :style="{ width: selectBoxWidth }">
 
-    <div class="offset-8 col-4">
-        <div class="row">
-            <div class="col-6">
-                <h2>予約料金</h2>
-            </div>
-            <div class="col-6">
-                <h2>￥{{ totalPrice * 0.5 }}</h2>
-            </div>
-            <div class="col-12 d-flex justify-content-end">     
-                50%の予約料金を頂いております。
-            </div>
-        </div>
+    <div class="d-flex justify-content-between align-items-center p-3" :style="{ width: selectBoxWidth }">
+        <label style="font-size: 18px">予約料金</label>
+        <span style="font-size: 24px">¥{{ formattedTotalPrice }}</span>
     </div>
-    <div class="d-flex justify-content-end mt-3">
-        <button @click="submitReservation" class="btn submit-button">予約を確定する</button> 
+
+    <hr :style="{ width: selectBoxWidth }">
+
+    <div class="p-3" :style="{ width: selectBoxWidth }">
+        ※ 1名様あたり、ご予算の50%を予約料金として頂いております。 
+    </div>
+
+    <div class="d-flex justify-content-center p-3" :style="{ width: selectBoxWidth }">
+        <button @click="submitReservation" class="btn submit-button" style="width: 100%">予約する</button> 
     </div>   
 </template>
 
@@ -193,5 +210,17 @@ async function submitReservation() {
   bottom: -8px;
   left: 50%;
   transform: translateX(-50%);
+}
+
+
+/* セレクトボックスのスタイル */
+.select-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.select-wrapper select {
+    flex-grow: 1;
+    max-width: calc(100% - 50px);
 }
 </style>

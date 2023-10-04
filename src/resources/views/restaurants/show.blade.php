@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="mt-5" style="width: 1141px; margin: 0 auto;">
+<div class="mt-5" style="width: 961px; margin: 0 auto;">
     <div class="row">
         <div class="col-9">
             <div class="mb-3">
@@ -39,13 +39,14 @@
 
 
 
-<div class="mt-5" style="width: 1141px; margin: 0 auto;">
+<div class="mt-5" style="width: 961px; margin: 0 auto;">
     <div class="row">
         <div class="col-8">
             <img src="{{ asset($restaurant->image) }}" style="width: 100%; height: auto;">
         </div>
-        <div>
-            予約機能、カレンダー
+        <div class="col-4">
+            <reservation :restaurant-id="{{ $restaurant->id }}" :restaurant-name="'{{ $restaurant->name }}'" :restaurant-price="{{ $restaurant->price }}" :img-src="'{{ asset('img/foodie3.jpg') }}'">
+            </reservation>
         </div>
         <div class="col-4">
             @auth
