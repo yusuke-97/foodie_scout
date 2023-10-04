@@ -163,7 +163,10 @@ const visit_time = ref(timeOptions[0])
     </div>
 
     <div class="d-flex justify-content-center p-3" :style="{ width: selectBoxWidth }">
-        <button @click="submitReservation" class="btn submit-button" style="width: 100%">予約する</button> 
+        <button @click="submitReservation" class="btn submit-button" style="width: 100%">
+          <i class="fas fa-utensils me-3"></i>
+          予約する
+        </button> 
     </div>   
 </template>
 
