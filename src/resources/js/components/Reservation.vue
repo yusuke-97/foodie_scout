@@ -7,12 +7,14 @@ import 'v-calendar/style.css'
 const props = defineProps({
   restaurantId: Number,
   restaurantPhoneNumber: String,
-  restaurantPrice: Number
+  restaurantPrice: Number,
+  restaurantStartTime: String,
+  restaurantEndTime: String
 })
 
 const today = new Date()
-const yesterday = new Date(today)
-yesterday.setDate(yesterday.getDate() - 1)
+const tomorrow = new Date(today)
+tomorrow.setDate(tomorrow.getDate() + 1)
 
 const number_of_guests = ref(1)
 
@@ -39,14 +41,14 @@ const attributes = ref([
     key: 'past-date',
     content: { class: 'past-date-symbol' },
     dates: {
-      end: yesterday,
+      end: today,
     }
   },
   {
     key: 'dot',
     content: { class: 'custom-dot' },
     dates: {
-      start: today,
+      start: tomorrow,
     },
   },
   {
@@ -108,23 +110,25 @@ onMounted(() => {
 
 const timeOptions = (() => {
   const times = []
-  for (let i = 18; i <= 24; i++) {
+  const startHour = parseInt(props.restaurantStartTime.split(":")[0])
+  const endHour = parseInt(props.restaurantEndTime.split(":")[0]) - 2
+
+  for (let i = startHour; i <= endHour; i++) {
     times.push(`${i.toString().padStart(2, '0')}:00`)
-    if (i !== 24) {
-      times.push(`${i.toString().padStart(2, '0')}:30`)
-    }
+    times.push(`${i.toString().padStart(2, '0')}:30`)
   }
-  return times
+
+  return times;
 })()
 
-const visit_date = ref(today)
+const visit_date = ref(tomorrow)
 const visit_time = ref(timeOptions[0])
 </script>
 
 
 
 <template>
-    <div class="p-3 mb-3">
+    <div class="p-3">
         <h4 style="font-weight: bold;">
             <i class="fas fa-phone me-2"></i>
             {{ props.restaurantPhoneNumber }}
@@ -135,7 +139,7 @@ const visit_time = ref(timeOptions[0])
     </div>
     <div class="my-calendar">
         <DatePicker
-            :min-date="new Date()"
+            :min-date="tomorrow"
             :attributes="attributes"
             :masks="masks"
             :color="'green'"

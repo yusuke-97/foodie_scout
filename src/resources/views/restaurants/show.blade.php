@@ -54,7 +54,7 @@
             </div>
         </div>
         <div class="col-4" style="position: sticky; top: 0;">
-            <reservation :restaurant-id="{{ $restaurant->id }}" :restaurant-price="{{ $restaurant->price }}" :restaurant-phone-number="'{{ $restaurant->phone_number }}'">
+            <reservation :restaurant-id="{{ $restaurant->id }}" :restaurant-price="{{ $restaurant->price }}" :restaurant-phone-number="'{{ $restaurant->phone_number }}'" :restaurant-start-time="'{{ $restaurant->start_time }}'" :restaurant-end-time="'{{ $restaurant->end_time }}'">
             </reservation>
         </div>
     </div>
