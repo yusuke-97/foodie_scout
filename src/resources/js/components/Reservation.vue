@@ -85,7 +85,8 @@ const formattedTotalPrice = computed(() => {
 
 async function submitReservation() {
     const data = {
-        visit_datetime: visit_datetime.value,
+        visit_date: visit_date.value,
+        visit_time: visit_time.value,
         number_of_guests: number_of_guests.value,
         reservation_fee: totalPrice.value * 0.5,
         restaurant_id: props.restaurantId
@@ -118,7 +119,9 @@ const timeOptions = (() => {
   }
   return times
 })()
-const visit_datetime = ref(timeOptions[0])
+
+const visit_date = ref(today)
+const visit_time = ref(timeOptions[0])
 </script>
 
 
@@ -130,7 +133,7 @@ const visit_datetime = ref(timeOptions[0])
             :attributes="attributes"
             :masks="masks"
             :color="'green'"
-            v-model="selectedDate"
+            v-model="visit_date"
             mode="date" />
     </div>
     <div class="select-wrapper pt-3" :style="{ width: selectBoxWidth }">
@@ -141,7 +144,7 @@ const visit_datetime = ref(timeOptions[0])
     </div>
     <div class="select-wrapper pt-3" :style="{ width: selectBoxWidth }">
         <label class="ms-3 me-5">時間</label>
-        <select v-model="visit_datetime" class="time-select me-3">
+        <select v-model="visit_time" class="time-select me-3">
             <option v-for="time in timeOptions" :key="time" :value="time">{{ time }}</option>
         </select>
     </div>

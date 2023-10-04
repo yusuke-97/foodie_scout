@@ -30,17 +30,12 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
-        // データの検証
-        $request->validate([
-            'visit_datetime' => 'required|date_format:"Y-m-d\TH:i"',
-            'number_of_guests' => 'required|integer|min:1',
-            'reservation_fee' => 'required|integer',
-            'restaurant_id' => 'required|integer',
-        ]);
-
         // データの保存
         $reservation = new Reservation();
-        $reservation->visit_datetime = $request->input('visit_datetime');
+        $rawDate = $request->input('visit_date');
+        $correctFormatDate = explode('T', $rawDate)[0];
+        $reservation->visit_date = $correctFormatDate;
+        $reservation->visit_time = $request->input('visit_time');
         $reservation->number_of_guests = $request->input('number_of_guests');
         $reservation->reservation_fee = $request->input('reservation_fee');
 
