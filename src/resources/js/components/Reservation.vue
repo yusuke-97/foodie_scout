@@ -14,8 +14,6 @@ const today = new Date()
 const yesterday = new Date(today)
 yesterday.setDate(yesterday.getDate() - 1)
 
-const selectedDate = ref(today)
-
 const number_of_guests = ref(1)
 
 const masks = ref({
