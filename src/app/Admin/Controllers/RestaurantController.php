@@ -45,6 +45,8 @@ class RestaurantController extends AdminController
         $grid->column('street_address', __('Street address'));
         $grid->column('nearest_station', __('Nearest station'));
         $grid->column('phone_number', __('Phone number'));
+        $grid->column('start_time', __('Start Time'));
+        $grid->column('end_time', __('End Time'));
         $grid->column('category.name', __('Category Name'));
         $grid->column('image', __('Image'))->image();
         $grid->column('recommend_flag', __('Recommend Flag'));
@@ -88,6 +90,8 @@ class RestaurantController extends AdminController
         $show->field('street_address', __('Street address'));
         $show->field('nearest_station', __('Nearest station'));
         $show->field('phone_number', __('Phone number'));
+        $show->field('start_time', __('Start Time'));
+        $show->field('end_time', __('End Time'));
         $show->field('category.name', __('Category Name'));
         $show->field('image', __('Image'))->image();
         $show->field('recommend_flag', __('Recommend Flag'));
@@ -114,6 +118,8 @@ class RestaurantController extends AdminController
         $form->text('postcode', __('Postcode'));
         $form->text('address', __('Address'));
         $form->text('phone_number', __('Phone number'));
+        $form->time('start_time', __('Start Time'));
+        $form->time('end_time', __('End Time'));
         $form->select('category_id', __('Category Name'))->options(Category::all()->pluck('name', 'id'));
         $form->text('prefecture', __('Prefecture'));
         $form->text('city', __('City'));
