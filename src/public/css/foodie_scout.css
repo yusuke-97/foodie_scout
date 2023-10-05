@@ -193,6 +193,50 @@ label {
     color: #0fbe9f;
 }
 
+/* テーブル */
+#restaurant-table {
+    width: 100%;
+}
+
+.tableheader {
+    text-align: left;
+    padding: 20px;
+    border-bottom-color: #0fbe9f;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    width: 100px;
+    background-color: #E5F4F1;
+}
+
+.tableheader-first {
+    text-align: left;
+    padding: 20px;
+    border-bottom-color: #0fbe9f;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-top-color: #0fbe9f;
+    border-top-width: 1px;
+    border-top-style: solid;
+    width: 100px;
+    background-color: #E5F4F1;
+}
+
+.cell {
+    padding: 30px;
+    border-bottom-color: #ececec;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+}
+.cell-first {
+    padding: 30px;
+    border-bottom-color: #ececec;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-top-color: #ececec;
+    border-top-width: 1px;
+    border-top-style: solid;
+}
+
 
 /*--------------------------------
  # お気に入りページ

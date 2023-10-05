@@ -18,15 +18,23 @@
             <p>
                 {{$restaurant->description}}
             </p>
+
             <div class="d-flex mb-2">
                 <p class="me-3">
                     <strong>最寄駅：</strong>{{$restaurant->nearest_station}}駅
                 </p>
                 <p class="me-3">
-                    <strong>ジャンル：</strong>{{$restaurant->category->name}}
+                    <strong>ジャンル：</strong>
+                    {{$restaurant->category->name}}、
+                    {{$restaurant->category->major_category->name}}
+                </p>
+                <p class="me-3">
+                    <strong>予算：</strong>￥{{ number_format($restaurant->price) }}
                 </p>
                 <p>
-                    <strong>予算：</strong>￥{{$restaurant->price}}
+                    <strong>営業時間：</strong>
+                    {{ \Carbon\Carbon::parse($restaurant->start_time)->format('H:i') }} 〜
+                    {{ \Carbon\Carbon::parse($restaurant->end_time)->format('H:i') }}
                 </p>
             </div>
         </div>
@@ -44,9 +52,53 @@
         <div class="col-8">
             <img src="{{ asset($restaurant->image) }}" style="width: 100%; height: auto;">
 
+            <hr>
+
+            <h4 class="mt-5 mb-4 sub-title" style="font-weight: bold;">店舗基本情報</h4>
+            <table id="restaurant-table">
+                <tr>
+                    <th class="tableheader-first col-4">店舗名</th>
+                    <td class="cell-first col-8">{{$restaurant->name}}</td>
+                </tr>
+                <tr>
+                    <th class="tableheader col-4">ジャンル</th>
+                    <td class="cell col-8">
+                        {{$restaurant->category->name}}、
+                        {{$restaurant->category->major_category->name}}
+                    </td>
+                </tr>
+                <tr>
+                    <th class="tableheader col-4">予約・お問い合わせ</th>
+                    <td class="cell col-8">{{$restaurant->phone_number}}</td>
+                </tr>
+                <tr>
+                    <th class="tableheader col-4">住所</th>
+                    <td class="cell col-8">{{$restaurant->address}}</td>
+                </tr>
+                <tr>
+                    <th class="tableheader col-4">最寄駅</th>
+                    <td class="cell col-8">{{$restaurant->nearest_station}}駅</td>
+                </tr>
+                <tr>
+                    <th class="tableheader col-4">営業時間</th>
+                    <td class="cell col-8">
+                        {{ \Carbon\Carbon::parse($restaurant->start_time)->format('H:i') }} 〜
+                        {{ \Carbon\Carbon::parse($restaurant->end_time)->format('H:i') }}
+                    </td>
+                </tr>
+                <tr>
+                    <th class="tableheader col-4">予算</th>
+                    <td class="cell col-8">￥{{ number_format($restaurant->price) }}</td>
+                </tr>
+                <tr>
+                    <th class="tableheader col-4">席数</th>
+                    <td class="cell col-8">{{$restaurant->seat}}席</td>
+                </tr>
+            </table>
+
             <div class="offset-1 col-11">
                 <hr class="w-100">
-                <h3 class="float-left">カスタマーレビュー</h3>
+                <h3 class="float-left">口コミ</h3>
             </div>
 
             <div class="offset-1 col-11">
