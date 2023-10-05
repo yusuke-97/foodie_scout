@@ -137,18 +137,13 @@ async function fetchAvailableTimes() {
             }
         })
 
-        // 予約の情報を取得した後のログ追加部分
-        console.log("Reserved seats data:", response.data.reserved_seats);
-        console.log("Number of guests value:", number_of_guests.value);
-        console.log("Restaurant total seats:", props.restaurantSeat);
-
         const reservedSeatsData = response.data.reserved_seats
 
         // fetchAvailableTimes 関数内の該当部分
         availableTimes.value = timeOptions.filter(time => {
             const reservedSeats = reservedSeatsData[time] || 0
             const availableSeats = props.restaurantSeat - reservedSeats - number_of_guests.value
-            return availableSeats >= 0;
+            return availableSeats >= 0
         })
 
     } catch (error) {
