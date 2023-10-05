@@ -6,6 +6,8 @@ use App\Models\Reservation;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+
 use Carbon\Carbon;
 
 class ReservationController extends Controller
@@ -40,7 +42,7 @@ class ReservationController extends Controller
         $visitTime = $request->input('visit_time');
         $reservation->visit_time = $visitTime;
 
-        $endTime = Carbon::createFromFormat('H:i', $visitTime)->addHours(2)->format('H:i');
+        $endTime = Carbon::createFromFormat('H:i', $visitTime)->addHour(1)->addMinutes(30)->format('H:i');
         $reservation->end_time = $endTime;
 
         $reservation->number_of_guests = $request->input('number_of_guests');
@@ -88,5 +90,39 @@ class ReservationController extends Controller
     public function destroy(Reservation $reservation)
     {
         //
+    }
+
+    public function availableSeatsForDay(Request $request)
+    {
+        $desiredDate = $request->input('visit_date');
+        $desiredDate = Carbon::parse($desiredDate)->format('Y-m-d');
+
+        $startHour = intval(substr($request->input('restaurantStartTime'), 0, 2));
+        $endHour = intval(substr($request->input('restaurantEndTime'), 0, 2));
+
+        $results = [];
+
+        for ($hour = $startHour; $hour < $endHour; $hour++) {
+            for ($minute = 0; $minute < 60; $minute += 30) {
+                $desiredStartTime = sprintf('%02d:%02d', $hour, $minute);
+                $desiredEndTime = Carbon::createFromFormat('H:i', $desiredStartTime)->addHour(1)->addMinutes(30)->format('H:i');
+
+                // availableSeatsForDay 関数内の該当部分
+                $alreadyReservedSeats = Reservation::where('visit_date', $desiredDate)
+                    ->where(function ($query) use ($desiredStartTime, $desiredEndTime) {
+                        $query->whereBetween('visit_time', [$desiredStartTime, $desiredEndTime])
+                            ->orWhereBetween('end_time', [$desiredStartTime, $desiredEndTime])
+                            ->orWhere(function ($subQuery) use ($desiredStartTime, $desiredEndTime) {
+                                $subQuery->where('visit_time', '<=', $desiredStartTime)
+                                    ->where('end_time', '>=', $desiredEndTime);
+                            });
+                    })
+                    ->sum('number_of_guests');
+
+                $results[$desiredStartTime] = $alreadyReservedSeats + $request->input('number_of_guests');
+            }
+        }
+
+        return response()->json(['reserved_seats' => $results]);
     }
 }

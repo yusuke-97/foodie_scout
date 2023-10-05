@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import axios from 'axios'
 import { Calendar, DatePicker } from 'v-calendar'
 import 'v-calendar/style.css'
@@ -8,6 +8,7 @@ const props = defineProps({
   restaurantId: Number,
   restaurantPhoneNumber: String,
   restaurantPrice: Number,
+  restaurantSeat: Number,
   restaurantStartTime: String,
   restaurantEndTime: String
 })
@@ -17,6 +18,7 @@ const tomorrow = new Date(today)
 tomorrow.setDate(tomorrow.getDate() + 1)
 
 const number_of_guests = ref(1)
+const visit_date = ref(tomorrow)
 
 const masks = ref({
     title: 'YYYY年 MMMM',
@@ -118,11 +120,45 @@ const timeOptions = (() => {
     times.push(`${i.toString().padStart(2, '0')}:30`)
   }
 
-  return times;
+  return times
 })()
 
-const visit_date = ref(tomorrow)
 const visit_time = ref(timeOptions[0])
+
+const availableTimes = ref(null)
+
+async function fetchAvailableTimes() {
+    try {
+        const response = await axios.get(`/available-seats`, {
+            params: {
+                visit_date: visit_date.value,
+                restaurantStartTime: props.restaurantStartTime,
+                restaurantEndTime: props.restaurantEndTime
+            }
+        })
+
+        // 予約の情報を取得した後のログ追加部分
+        console.log("Reserved seats data:", response.data.reserved_seats);
+        console.log("Number of guests value:", number_of_guests.value);
+        console.log("Restaurant total seats:", props.restaurantSeat);
+
+        const reservedSeatsData = response.data.reserved_seats
+
+        // fetchAvailableTimes 関数内の該当部分
+        availableTimes.value = timeOptions.filter(time => {
+            const reservedSeats = reservedSeatsData[time] || 0
+            const availableSeats = props.restaurantSeat - reservedSeats - number_of_guests.value
+            return availableSeats >= 0;
+        })
+
+    } catch (error) {
+        console.error("Error fetching available seats:", error)
+    }
+}
+
+onMounted(fetchAvailableTimes)
+
+watch([visit_date, visit_time, number_of_guests], fetchAvailableTimes)
 </script>
 
 
@@ -146,16 +182,24 @@ const visit_time = ref(timeOptions[0])
             v-model="visit_date"
             mode="date" />
     </div>
-    <div class="select-wrapper pt-3" :style="{ width: selectBoxWidth }">
+    <div class="select-wrapper pt-3" v-if="availableTimes" :style="{ width: selectBoxWidth }">
         <label class=" ms-3 me-5">人数</label>
-        <select v-model="number_of_guests" class="guest-select me-3">
+        <select v-model.number="number_of_guests" class="guest-select me-3">
             <option v-for="n in 10" :key="n" :value="n">{{ n }}名</option>
         </select>
     </div>
-    <div class="select-wrapper pt-3" :style="{ width: selectBoxWidth }">
-        <label class="ms-3 me-5">時間</label>
+    <div class="select-wrapper pt-3" v-if="availableTimes" :style="{ width: selectBoxWidth }">
+    <label class="ms-3 me-5">時間</label>
         <select v-model="visit_time" class="time-select me-3">
-            <option v-for="time in timeOptions" :key="time" :value="time">{{ time }}</option>
+            <option v-for="time in timeOptions" :key="time" :value="time" :disabled="!availableTimes.includes(time)">
+                <template v-if="availableTimes.includes(time)">
+                    <span>◯</span>
+                </template>
+                <template v-else>
+                    <span>×</span>
+                </template>
+                {{ time }}
+            </option>
         </select>
     </div>
 
