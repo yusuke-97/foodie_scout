@@ -84,6 +84,7 @@
                     <td class="cell col-8">
                         {{ \Carbon\Carbon::parse($restaurant->start_time)->format('H:i') }} 〜
                         {{ \Carbon\Carbon::parse($restaurant->end_time)->format('H:i') }}
+                        （料理L.O.{{ \Carbon\Carbon::parse($restaurant->end_time)->subHour(1)->format('H:i') }}、ドリンクL.O.{{ \Carbon\Carbon::parse($restaurant->end_time)->subMinutes(30)->format('H:i') }}）
                     </td>
                 </tr>
                 <tr>
