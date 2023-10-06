@@ -138,7 +138,7 @@ const timeOptions = (() => {
   let endHour = parseInt(props.restaurantEndTime.split(":")[0])
   const endMinutes = parseInt(props.restaurantEndTime.split(":")[1])
 
-  if (endHour >= 0 && (endHour < 6 || (endHour == 6 && endMinutes == 0))) {
+  if (endHour >= 0 && endHour <= 2) {
     endHour += 24
   }
   endHour -= 2
