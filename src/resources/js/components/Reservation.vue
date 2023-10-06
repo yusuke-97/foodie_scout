@@ -132,8 +132,9 @@ async function fetchAvailableTimes() {
         const response = await axios.get(`/available-seats`, {
             params: {
                 visit_date: visit_date.value,
-                restaurantStartTime: props.restaurantStartTime,
-                restaurantEndTime: props.restaurantEndTime
+                start_time: props.restaurantStartTime,
+                end_time: props.restaurantEndTime,
+                restaurant_id: props.restaurantId
             }
         })
 

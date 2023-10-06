@@ -97,8 +97,8 @@ class ReservationController extends Controller
         $desiredDate = $request->input('visit_date');
         $desiredDate = Carbon::parse($desiredDate)->format('Y-m-d');
 
-        $startHour = intval(substr($request->input('restaurantStartTime'), 0, 2));
-        $endHour = intval(substr($request->input('restaurantEndTime'), 0, 2));
+        $startHour = intval(substr($request->input('start_time'), 0, 2));
+        $endHour = intval(substr($request->input('end_time'), 0, 2));
 
         $results = [];
 
@@ -109,6 +109,7 @@ class ReservationController extends Controller
 
                 // availableSeatsForDay 関数内の該当部分
                 $alreadyReservedSeats = Reservation::where('visit_date', $desiredDate)
+                    ->where('restaurant_id', $request->input('restaurant_id'))
                     ->where(function ($query) use ($desiredStartTime, $desiredEndTime) {
                         $query->whereBetween('visit_time', [$desiredStartTime, $desiredEndTime])
                             ->orWhereBetween('end_time', [$desiredStartTime, $desiredEndTime])
