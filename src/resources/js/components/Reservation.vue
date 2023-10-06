@@ -16,12 +16,12 @@ const props = defineProps({
 const GOOGLE_API_KEY = 'AIzaSyB4nWI9Eagle-87B_5k0DCzxlu26C1r2Iw'
 
 async function fetchJapaneseHolidays(year) {
-  const url = `https://www.googleapis.com/calendar/v3/calendars/ja.japanese%23holiday%40group.v.calendar.google.com/events?key=${GOOGLE_API_KEY}`;
+  const url = `https://www.googleapis.com/calendar/v3/calendars/ja.japanese%23holiday%40group.v.calendar.google.com/events?key=${GOOGLE_API_KEY}`
   try {
-    const response = await axios.get(url);
-    return response.data.items.map(event => event.start.date);
+    const response = await axios.get(url)
+    return response.data.items.map(event => event.start.date)
   } catch (error) {
-    console.error("Error fetching Japanese holidays:", error);
+    console.error("Error fetching Japanese holidays:", error)
     return [];
   }
 }
@@ -135,11 +135,19 @@ onMounted(() => {
 const timeOptions = (() => {
   const times = []
   const startHour = parseInt(props.restaurantStartTime.split(":")[0])
-  const endHour = parseInt(props.restaurantEndTime.split(":")[0]) - 2
+  let endHour = parseInt(props.restaurantEndTime.split(":")[0])
+  const endMinutes = parseInt(props.restaurantEndTime.split(":")[1])
 
+  if (endHour >= 0 && (endHour < 6 || (endHour == 6 && endMinutes == 0))) {
+    endHour += 24
+  }
+  endHour -= 2
+  
   for (let i = startHour; i <= endHour; i++) {
     times.push(`${i.toString().padStart(2, '0')}:00`)
-    times.push(`${i.toString().padStart(2, '0')}:30`)
+    if (i !== endHour || (i === endHour && endMinutes > 0)) {
+      times.push(`${i.toString().padStart(2, '0')}:30`)
+    }
   }
 
   return times
