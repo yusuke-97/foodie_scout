@@ -180,7 +180,7 @@ watch([visit_date, visit_time, number_of_guests], fetchAvailableTimes)
     <div class="select-wrapper pt-3" v-if="availableTimes" :style="{ width: selectBoxWidth }">
         <label class=" ms-3 me-5">人数</label>
         <select v-model.number="number_of_guests" class="guest-select me-3">
-            <option v-for="n in 10" :key="n" :value="n">{{ n }}名</option>
+            <option v-for="n in props.restaurantSeat" :key="n" :value="n">{{ n }}名</option>
         </select>
     </div>
     <div class="select-wrapper pt-3" v-if="availableTimes" :style="{ width: selectBoxWidth }">
