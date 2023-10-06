@@ -13,6 +13,28 @@ const props = defineProps({
   restaurantEndTime: String
 })
 
+const GOOGLE_API_KEY = 'AIzaSyB4nWI9Eagle-87B_5k0DCzxlu26C1r2Iw'
+
+async function fetchJapaneseHolidays(year) {
+  const url = `https://www.googleapis.com/calendar/v3/calendars/ja.japanese%23holiday%40group.v.calendar.google.com/events?key=${GOOGLE_API_KEY}`;
+  try {
+    const response = await axios.get(url);
+    return response.data.items.map(event => event.start.date);
+  } catch (error) {
+    console.error("Error fetching Japanese holidays:", error);
+    return [];
+  }
+}
+
+onMounted(async () => {
+  const holidays = await fetchJapaneseHolidays(today.getFullYear())
+  attributes.value.push({
+    key: 'holiday',
+    content: { color: 'red', class: 'custom-dot' },
+    dates: holidays
+  })
+})
+
 const today = new Date()
 const tomorrow = new Date(today)
 tomorrow.setDate(tomorrow.getDate() + 1)
