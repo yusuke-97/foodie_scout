@@ -174,7 +174,6 @@ watch([visit_date, visit_time, number_of_guests], fetchAvailableTimes)
             :min-date="tomorrow"
             :attributes="attributes"
             :masks="masks"
-            :color="'green'"
             v-model="visit_date"
             mode="date" />
     </div>
@@ -253,6 +252,10 @@ watch([visit_date, visit_time, number_of_guests], fetchAvailableTimes)
 
 .my-calendar .vc-weekday-7 {
     color: #6366f1;
+}
+
+.my-calendar .vc-highlight-content-solid {
+    background-color: #0fbe9f;
 }
 
 .my-calendar .past-date-symbol.vc-day-content::after {
