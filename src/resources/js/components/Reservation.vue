@@ -124,6 +124,14 @@ async function submitReservation() {
     }
 }
 
+const isReservableTime = computed(() => {
+  if (!availableTimes.value) {
+    return false
+  } else {
+    return availableTimes.value.includes(visit_time.value)
+  }
+})
+
 
 const selectBoxWidth = ref("")
 
@@ -253,10 +261,10 @@ watch([visit_date, visit_time, number_of_guests], fetchAvailableTimes)
     </div>
 
     <div class="d-flex justify-content-center p-3" :style="{ width: selectBoxWidth }">
-        <button @click="submitReservation" class="btn submit-button" style="width: 100%">
-          <i class="fas fa-utensils me-3"></i>
-          予約する
-        </button> 
+      <button @click="submitReservation" class="btn submit-button" style="width: 100%" :disabled="!isReservableTime">
+        <i class="fas fa-utensils me-3"></i>
+        予約する
+      </button>
     </div>   
 </template>
 
