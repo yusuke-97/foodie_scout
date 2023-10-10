@@ -72,15 +72,8 @@ const attributes = ref([
     }
   },
   {
-    key: 'dot',
-    content: { class: 'custom-dot' },
-    dates: {
-      start: tomorrow,
-    },
-  },
-  {
     key: 'sunday',
-    content: { color: 'red', class: 'custom-dot' }, 
+    content: { color: 'red' }, 
     dates: {
       start: nextSunday,
       repeat: {
@@ -90,7 +83,7 @@ const attributes = ref([
   },
   {
     key: 'saturday',
-    content: { color: 'blue', class: 'custom-dot' }, 
+    content: { color: 'blue' }, 
     dates: {
       start: nextSaturday,
       repeat: {
@@ -190,7 +183,6 @@ async function fetchAvailableTimes() {
         })
 
         const reservedSeatsData = response.data.reserved_seats
-        console.log("Reserved Seats Data:", reservedSeatsData)
 
         // fetchAvailableTimes 関数内の該当部分
         availableTimes.value = timeOptions.filter(time => {
@@ -204,7 +196,57 @@ async function fetchAvailableTimes() {
     }
 }
 
-onMounted(fetchAvailableTimes)
+// 日付ごとの予約の可用性を格納するrefを追加
+const dailyAvailability = ref({})
+
+// 新しい関数を追加して日付の可用性をフェッチ
+async function fetchAvailableDays() {
+    try {
+        const response = await axios.get(`/available-days`, {
+            params: {
+                start_date: tomorrow,
+                end_date: new Date(tomorrow.getFullYear(), tomorrow.getMonth() + 1, 0),
+                start_time: props.restaurantStartTime,
+                end_time: props.restaurantEndTime,
+                restaurant_id: props.restaurantId,
+                restaurant_seat: props.restaurantSeat
+            }
+        })
+
+        dailyAvailability.value = response.data
+
+        for (let formattedDate in dailyAvailability.value) {
+          if (dailyAvailability.value[formattedDate] === true) {
+            attributes.value.push({
+              key: 'full',
+              content: { class: 'full-booked-symbol' },
+              dates: {
+                start: formattedDate,
+                end: formattedDate
+              }
+            })
+          } else if (dailyAvailability.value[formattedDate] === false) {
+            attributes.value.push({
+              key: 'available',
+              content: { class: 'available-symbol' },
+              dates: {
+                start: formattedDate,
+                end: formattedDate
+              }
+            })
+          }
+        }
+
+    } catch (error) {
+        console.error("Error fetching daily availability:", error);
+    }
+}
+
+onMounted(() => {
+  fetchAvailableDays()
+  fetchAvailableTimes()
+})
+
 
 watch([visit_date, visit_time, number_of_guests], fetchAvailableTimes)
 </script>
@@ -321,18 +363,32 @@ watch([visit_date, visit_time, number_of_guests], fetchAvailableTimes)
   color: #bbb;
 }
 
-.my-calendar .custom-dot.vc-day-content::after {
-  content: '';
+.my-calendar .full-booked-symbol.vc-day-content::after {
+  content: '×';
   display: block;
-  width: 16px;
-  height: 16px;
-  background-color: white;
-  border: 3px solid #0fbe9f;
-  border-radius: 50%;
   position: absolute;
-  bottom: -8px;
+  bottom: -13px;
   left: 50%;
   transform: translateX(-50%);
+  font-size: 24px;
+  color: #bbb;
+  font-weight: bold;
+}
+
+.my-calendar .available-symbol.vc-day-content::after {
+  content: '⚪︎';
+  display: block;
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 22px;
+  color: #0fbe9f;
+  text-shadow: 
+    -1px 0 #0fbe9f,
+    1px 0 #0fbe9f,
+    0 1px #0fbe9f,
+    0 -1px #0fbe9f;
 }
 
 

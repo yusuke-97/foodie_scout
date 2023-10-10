@@ -27,6 +27,7 @@ Route::resource('restaurants', RestaurantController::class);
 Route::get('restaurants/{restaurant}/reservations', [ReservationController::class, 'restaurantReservation'])->name('restaurant.reservations');
 Route::resource('reservations', ReservationController::class);
 Route::get('/available-seats', [ReservationController::class, 'availableSeatsForDay']);
+Route::get('/available-days', [ReservationController::class, 'availableDaysForMonth']);
 
 Route::controller(UserController::class)->group(function () {
     Route::get('users/mypage', 'mypage')->name('mypage');
