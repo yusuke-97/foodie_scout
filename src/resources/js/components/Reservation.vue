@@ -22,7 +22,7 @@ async function fetchJapaneseHolidays(year) {
     return response.data.items.map(event => event.start.date)
   } catch (error) {
     console.error("Error fetching Japanese holidays:", error)
-    return [];
+    return []
   }
 }
 
@@ -135,6 +135,7 @@ onMounted(() => {
 const timeOptions = (() => {
   const times = []
   const startHour = parseInt(props.restaurantStartTime.split(":")[0])
+  const startMinutes = parseInt(props.restaurantStartTime.split(":")[1])
   let endHour = parseInt(props.restaurantEndTime.split(":")[0])
   const endMinutes = parseInt(props.restaurantEndTime.split(":")[1])
 
@@ -143,11 +144,20 @@ const timeOptions = (() => {
   }
   endHour -= 2
   
+  let currentMinute = startMinutes
+  
   for (let i = startHour; i <= endHour; i++) {
-    times.push(`${i.toString().padStart(2, '0')}:00`)
-    if (i !== endHour || (i === endHour && endMinutes > 0)) {
-      times.push(`${i.toString().padStart(2, '0')}:30`)
+    if(currentMinute === 60) {
+      currentMinute = 0
     }
+    while(currentMinute < 60) {
+      times.push(`${i.toString().padStart(2, '0')}:${currentMinute.toString().padStart(2, '0')}`)
+      if (i === endHour && currentMinute >= endMinutes) {
+        break;
+      }
+      currentMinute += 30
+    }
+    currentMinute = 0
   }
 
   return times
@@ -169,6 +179,7 @@ async function fetchAvailableTimes() {
         })
 
         const reservedSeatsData = response.data.reserved_seats
+        console.log("Reserved Seats Data:", reservedSeatsData)
 
         // fetchAvailableTimes 関数内の該当部分
         availableTimes.value = timeOptions.filter(time => {

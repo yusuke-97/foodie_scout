@@ -97,31 +97,34 @@ class ReservationController extends Controller
         $desiredDate = $request->input('visit_date');
         $desiredDate = Carbon::parse($desiredDate)->format('Y-m-d');
 
-        $startHour = intval(substr($request->input('start_time'), 0, 2));
-        $endHour = intval(substr($request->input('end_time'), 0, 2));
+        $startBusinessHour = intval(substr($request->input('start_time'), 0, 2));
+        $startBusinessMinute = intval(substr($request->input('start_time'), 3, 2));  // こちらを追加
+
+        $endBusinessHour = intval(substr($request->input('end_time'), 0, 2));
+
+        if ($endBusinessHour >= 0 && $endBusinessHour <= 2) {
+            $endBusinessHour += 24;
+        }
+        $endBusinessHour -= 2;
 
         $results = [];
 
-        for ($hour = $startHour; $hour < $endHour; $hour++) {
-            for ($minute = 0; $minute < 60; $minute += 30) {
+        for ($hour = $startBusinessHour; $hour < $endBusinessHour; $hour++) {
+            for ($minute = $startBusinessMinute; $minute < 60; $minute += 30) {  // こちらを修正
                 $desiredStartTime = sprintf('%02d:%02d', $hour, $minute);
                 $desiredEndTime = Carbon::createFromFormat('H:i', $desiredStartTime)->addHour(1)->addMinutes(30)->format('H:i');
 
-                // availableSeatsForDay 関数内の該当部分
                 $alreadyReservedSeats = Reservation::where('visit_date', $desiredDate)
                     ->where('restaurant_id', $request->input('restaurant_id'))
                     ->where(function ($query) use ($desiredStartTime, $desiredEndTime) {
-                        $query->whereBetween('visit_time', [$desiredStartTime, $desiredEndTime])
-                            ->orWhereBetween('end_time', [$desiredStartTime, $desiredEndTime])
-                            ->orWhere(function ($subQuery) use ($desiredStartTime, $desiredEndTime) {
-                                $subQuery->where('visit_time', '<=', $desiredStartTime)
-                                    ->where('end_time', '>=', $desiredEndTime);
-                            });
+                        $query->WhereBetween('end_time', [$desiredStartTime, $desiredEndTime]);
                     })
                     ->sum('number_of_guests');
 
                 $results[$desiredStartTime] = $alreadyReservedSeats + $request->input('number_of_guests');
             }
+
+            $startBusinessMinute = 0;
         }
 
         return response()->json(['reserved_seats' => $results]);

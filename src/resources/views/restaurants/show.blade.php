@@ -47,7 +47,7 @@
 
 
 
-<div class="mt-5" style="width: 961px; margin: 0 auto;">
+<div class="mt-3" style="width: 961px; margin: 0 auto;">
     <div class="row">
         <div class="col-8">
             <img src="{{ asset($restaurant->image) }}" style="width: 100%; height: auto;">
