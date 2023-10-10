@@ -28,10 +28,14 @@ async function fetchJapaneseHolidays(year) {
 
 onMounted(async () => {
   const holidays = await fetchJapaneseHolidays(today.getFullYear())
+
+  // 経過した祝日を除外
+  const pastHolidays = holidays.filter(date => new Date(date) >= today)
+
   attributes.value.push({
     key: 'holiday',
     content: { color: 'red', class: 'custom-dot' },
-    dates: holidays
+    dates: pastHolidays
   })
 })
 
