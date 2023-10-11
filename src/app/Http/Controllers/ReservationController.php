@@ -95,7 +95,9 @@ class ReservationController extends Controller
     public function availableSeatsForDay(Request $request)
     {
         $desiredDate = $request->input('visit_date');
-        $desiredDate = Carbon::parse($desiredDate)->format('Y-m-d');
+
+
+        Log::info($desiredDate);
 
         $startBusinessHour = intval(substr($request->input('start_time'), 0, 2));
         $startBusinessMinute = intval(substr($request->input('start_time'), 3, 2));
@@ -171,7 +173,6 @@ class ReservationController extends Controller
                 }
                 $startBusinessMinute = 0;
             }
-            Log::info($date->format('Y-m-d'));
             $dailyAvailbleSeats = $availbleSeats;
             $availbleSeats = 0;
             $dates[$date->format('Y-m-d')] = $dailyAvailbleSeats === 0;

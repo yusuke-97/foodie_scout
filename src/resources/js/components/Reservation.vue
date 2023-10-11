@@ -157,7 +157,7 @@ const timeOptions = (() => {
     while(currentMinute < 60) {
       times.push(`${i.toString().padStart(2, '0')}:${currentMinute.toString().padStart(2, '0')}`)
       if (i === endHour && currentMinute >= endMinutes) {
-        break;
+        break
       }
       currentMinute += 30
     }
@@ -168,19 +168,28 @@ const timeOptions = (() => {
 })()
 
 const visit_time = ref(timeOptions[0])
-
 const availableTimes = ref(null)
+let cachedVisitDate = null
 
 async function fetchAvailableTimes() {
     try {
+        function getLocalDate(date) {
+            const year = date.getFullYear()
+            const month = (date.getMonth() + 1).toString().padStart(2, '0')
+            const day = date.getDate().toString().padStart(2, '0')
+            return `${year}-${month}-${day}`
+        }
+
+        const selectedDate = getLocalDate(new Date(visit_date.value ? visit_date.value : cachedVisitDate))
         const response = await axios.get(`/available-seats`, {
             params: {
-                visit_date: visit_date.value,
+                visit_date: selectedDate,
                 start_time: props.restaurantStartTime,
                 end_time: props.restaurantEndTime,
                 restaurant_id: props.restaurantId
             }
         })
+        cachedVisitDate = selectedDate
 
         const reservedSeatsData = response.data.reserved_seats
 
@@ -195,7 +204,6 @@ async function fetchAvailableTimes() {
         console.error("Error fetching available seats:", error)
     }
 }
-
 
 const dailyAvailability = ref({})
 
@@ -313,7 +321,6 @@ onMounted(() => {
   fetchAvailableDays()
   fetchAvailableTimes()
 })
-
 
 watch([visit_date, visit_time, number_of_guests], fetchAvailableTimes)
 </script>
