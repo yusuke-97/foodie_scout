@@ -171,6 +171,7 @@ class ReservationController extends Controller
                 }
                 $startBusinessMinute = 0;
             }
+            Log::info($date->format('Y-m-d'));
             $dailyAvailbleSeats = $availbleSeats;
             $availbleSeats = 0;
             $dates[$date->format('Y-m-d')] = $dailyAvailbleSeats === 0;

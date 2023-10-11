@@ -196,16 +196,27 @@ async function fetchAvailableTimes() {
     }
 }
 
-// 日付ごとの予約の可用性を格納するrefを追加
+
 const dailyAvailability = ref({})
 
-// 新しい関数を追加して日付の可用性をフェッチ
+let year = tomorrow.getFullYear()
+let month = tomorrow.getMonth()
+
+month += 2
+if (month > 11) {
+    month -= 12
+    year++
+}
+
+const endOfMonth = new Date(year, month + 1, 1)
+console.log(endOfMonth)
+
 async function fetchAvailableDays() {
     try {
         const response = await axios.get(`/available-days`, {
             params: {
                 start_date: tomorrow,
-                end_date: new Date(tomorrow.getFullYear(), tomorrow.getMonth() + 1, 0),
+                end_date: endOfMonth,
                 start_time: props.restaurantStartTime,
                 end_time: props.restaurantEndTime,
                 restaurant_id: props.restaurantId,
@@ -321,23 +332,13 @@ watch([visit_date, visit_time, number_of_guests], fetchAvailableTimes)
     font-size: 1.2em;
 }
 
-.my-calendar .vc-day {
-    padding: 0.5em;
-}
-
-.my-calendar .vc-weekday-header {
-    padding: 1em 0;
-}
-
 .my-calendar .vc-header {
     padding: 1.5em 0;
     font-size: 1.4em;
 }
 
-.my-calendar .custom-dot.vc-day-content::after {
-    width: 12px;
-    height: 12px;
-    bottom: -5px;
+.my-calendar .vc-weeks {
+    margin-bottom: 1rem;
 }
 
 .my-calendar .vc-weekday-1 {
@@ -346,6 +347,10 @@ watch([visit_date, visit_time, number_of_guests], fetchAvailableTimes)
 
 .my-calendar .vc-weekday-7 {
     color: #6366f1;
+}
+
+.my-calendar .vc-day {
+    padding: 0.5em;
 }
 
 .my-calendar .vc-highlight-content-solid {
