@@ -42,16 +42,17 @@ class RestaurantController extends AdminController
         $grid->column('address', __('Address'));
         $grid->column('prefecture', __('Prefecture'));
         $grid->column('city', __('City'));
-        $grid->column('street_address', __('Street address'));
-        $grid->column('nearest_station', __('Nearest station'));
-        $grid->column('phone_number', __('Phone number'));
+        $grid->column('street_address', __('Street Address'));
+        $grid->column('nearest_station', __('Nearest Station'));
+        $grid->column('phone_number', __('Phone Number'));
         $grid->column('start_time', __('Start Time'));
         $grid->column('end_time', __('End Time'));
+        $grid->column('closed_day', __('Closed Day'));
         $grid->column('category.name', __('Category Name'));
         $grid->column('image', __('Image'))->image();
         $grid->column('recommend_flag', __('Recommend Flag'));
-        $grid->column('created_at', __('Created at'))->sortable();
-        $grid->column('updated_at', __('Updated at'))->sortable();
+        $grid->column('created_at', __('Created At'))->sortable();
+        $grid->column('updated_at', __('Updated At'))->sortable();
 
         $grid->filter(function ($filter) {
             $filter->like('name', '店舗名');
@@ -87,16 +88,17 @@ class RestaurantController extends AdminController
         $show->field('address', __('Address'));
         $show->field('prefecture', __('Prefecture'));
         $show->field('city', __('City'));
-        $show->field('street_address', __('Street address'));
-        $show->field('nearest_station', __('Nearest station'));
-        $show->field('phone_number', __('Phone number'));
+        $show->field('street_address', __('Street Address'));
+        $show->field('nearest_station', __('Nearest Station'));
+        $show->field('phone_number', __('Phone Number'));
         $show->field('start_time', __('Start Time'));
         $show->field('end_time', __('End Time'));
+        $show->field('closed_time', __('Closed Day'));
         $show->field('category.name', __('Category Name'));
         $show->field('image', __('Image'))->image();
         $show->field('recommend_flag', __('Recommend Flag'));
-        $show->field('created_at', __('Created at'));
-        $show->field('updated_at', __('Updated at'));
+        $show->field('created_at', __('Created At'));
+        $show->field('updated_at', __('Updated At'));
 
         return $show;
     }
@@ -117,14 +119,15 @@ class RestaurantController extends AdminController
         $form->number('seat', __('Seat'));
         $form->text('postcode', __('Postcode'));
         $form->text('address', __('Address'));
-        $form->text('phone_number', __('Phone number'));
+        $form->text('phone_number', __('Phone Number'));
         $form->time('start_time', __('Start Time'));
         $form->time('end_time', __('End Time'));
+        $form->text('closed_day', __('Closed Day'));
         $form->select('category_id', __('Category Name'))->options(Category::all()->pluck('name', 'id'));
         $form->text('prefecture', __('Prefecture'));
         $form->text('city', __('City'));
-        $form->text('street_address', __('Street address'));
-        $form->text('nearest_station', __('Nearest station'));
+        $form->text('street_address', __('Street Address'));
+        $form->text('nearest_station', __('Nearest Station'));
         $form->switch('recommend_flag', __('Recommend Flag'));
 
         return $form;
