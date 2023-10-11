@@ -33,7 +33,7 @@ onMounted(async () => {
 
   attributes.value.push({
     key: 'holiday',
-    content: { color: 'red', class: 'custom-dot' },
+    content: { color: 'red' },
     dates: pastHolidays
   })
 })
@@ -209,7 +209,6 @@ if (month > 11) {
 }
 
 const endOfMonth = new Date(year, month + 1, 1)
-console.log(endOfMonth)
 
 async function fetchAvailableDays() {
     try {
@@ -226,18 +225,74 @@ async function fetchAvailableDays() {
 
         dailyAvailability.value = response.data
 
+        const holidays = await fetchJapaneseHolidays(today.getFullYear())
+
         for (let formattedDate in dailyAvailability.value) {
+          const date = new Date(formattedDate)
+          const dayOfWeek = date.getDay()
+          const isHoliday = holidays.includes(formattedDate)
           if (dailyAvailability.value[formattedDate] === true) {
-            attributes.value.push({
-              key: 'full',
-              content: { class: 'full-booked-symbol' },
-              dates: {
-                start: formattedDate,
-                end: formattedDate
-              }
-            })
+            if (dayOfWeek === 6) {
+              attributes.value.push({
+                key: 'fullsaterday',
+                content: {
+                  class: 'full-booked-symbol',
+                  color: 'blue'
+                },
+                dates: {
+                  start: formattedDate,
+                  end: formattedDate
+                }
+              })
+            } else if (dayOfWeek === 0  || isHoliday === true) {
+              attributes.value.push({
+                key: 'fullsundayholiday',
+                content: {
+                  class: 'full-booked-symbol',
+                  color: 'red'
+                },
+                dates: {
+                  start: formattedDate,
+                  end: formattedDate
+                }
+              })
+            } else {
+              attributes.value.push({
+                key: 'full',
+                content: { class: 'full-booked-symbol'},
+                dates: {
+                  start: formattedDate,
+                  end: formattedDate
+                }
+              })
+            }
           } else if (dailyAvailability.value[formattedDate] === false) {
-            attributes.value.push({
+            if (dayOfWeek === 6) {
+              attributes.value.push({
+                key: 'availablesaterday',
+                content: {
+                  class: 'available-symbol',
+                  color: 'blue'
+                },
+                dates: {
+                  start: formattedDate,
+                  end: formattedDate
+                }
+              })
+            } else if (dayOfWeek === 0 || isHoliday === true) {
+              attributes.value.push({
+                key: 'availablesundayholiday',
+                content: {
+                  class: 'available-symbol',
+                  color: 'red'
+                },
+                dates: {
+                  start: formattedDate,
+                  end: formattedDate
+                }
+              })
+            } else {
+              attributes.value.push({
               key: 'available',
               content: { class: 'available-symbol' },
               dates: {
@@ -245,6 +300,7 @@ async function fetchAvailableDays() {
                 end: formattedDate
               }
             })
+            }
           }
         }
 
