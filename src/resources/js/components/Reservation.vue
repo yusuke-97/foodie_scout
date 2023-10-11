@@ -10,8 +10,36 @@ const props = defineProps({
   restaurantPrice: Number,
   restaurantSeat: Number,
   restaurantStartTime: String,
-  restaurantEndTime: String
+  restaurantEndTime: String,
+  restaurantClosedDay: String
 })
+
+const today = new Date()
+const tomorrow = new Date(today)
+tomorrow.setDate(tomorrow.getDate() + 1)
+
+const number_of_guests = ref(1)
+const visit_date = ref(tomorrow)
+
+const masks = ref({
+    title: 'YYYY年 MMMM',
+})
+
+// 休業日の曜日を取得
+const closedDay = parseInt(props.restaurantClosedDay)
+const daysUntilClosedDay = (closedDay - today.getDay() + 7) % 7 || 7
+const nextClosedDay = new Date(today)
+nextClosedDay.setDate(today.getDate() + daysUntilClosedDay)
+
+// 次の土曜日の日付を取得
+const daysUntilSaturday = (6 - today.getDay() + 7) % 7 || 7
+const nextSaturday = new Date(today)
+nextSaturday.setDate(today.getDate() + daysUntilSaturday)
+
+// 次の日曜日の日付を取得
+const daysUntilSunday = (7 - today.getDay() + 7) % 7 || 7
+const nextSunday = new Date(today)
+nextSunday.setDate(today.getDate() + daysUntilSunday)
 
 const GOOGLE_API_KEY = 'AIzaSyB4nWI9Eagle-87B_5k0DCzxlu26C1r2Iw'
 
@@ -29,39 +57,25 @@ async function fetchJapaneseHolidays(year) {
 onMounted(async () => {
   const holidays = await fetchJapaneseHolidays(today.getFullYear())
 
-  const pastHolidays = holidays.filter(date => new Date(date) >= today)
-
-  attributes.value.push({
-    key: 'holiday',
-    content: { color: 'red' },
-    dates: pastHolidays
-  })
+  const futureHolidays = holidays.filter(date => new Date(date) >= today)
+  for (let futureHoliday in futureHolidays) {
+    const date = new Date(futureHoliday)
+    const dayOfWeek = date.getDay()
+    if (dayOfWeek === closedDay + 1) {
+      attributes.value.push({
+        key: 'holiday-closed-day',
+        content: { color: 'red', class: 'closed-day-symbol' },
+        dates: futureHolidays
+      })
+    } else {
+      attributes.value.push({
+        key: 'holiday',
+        content: { color: 'red' },
+        dates: futureHolidays
+      })
+    }
+  }
 })
-
-const today = new Date()
-const tomorrow = new Date(today)
-tomorrow.setDate(tomorrow.getDate() + 1)
-
-const number_of_guests = ref(1)
-const visit_date = ref(tomorrow)
-
-const masks = ref({
-    title: 'YYYY年 MMMM',
-})
-
-// 次の土曜日までの日数を計算
-const daysUntilSaturday = (6 - today.getDay() + 7) % 7 || 7
-
-// 次の日曜日までの日数を計算
-const daysUntilSunday = (7 - today.getDay() + 7) % 7 || 7
-
-// 次の土曜日の日付を取得
-const nextSaturday = new Date(today)
-nextSaturday.setDate(today.getDate() + daysUntilSaturday)
-
-// 次の日曜日の日付を取得
-const nextSunday = new Date(today)
-nextSunday.setDate(today.getDate() + daysUntilSunday)
 
 const attributes = ref([
   {
@@ -88,6 +102,16 @@ const attributes = ref([
       start: nextSaturday,
       repeat: {
         weekdays: 7,
+      },
+    },
+  },
+  {
+    key: 'closed-day',
+    content: { class: 'closed-day-symbol'}, 
+    dates: {
+      start: nextClosedDay,
+      repeat: {
+        weekdays: closedDay + 1,
       },
     },
   },
@@ -217,6 +241,8 @@ if (month > 11) {
 }
 
 const endOfMonth = new Date(year, month + 1, 1)
+const maxMonth = new Date(year, month + 1, 0)
+
 
 async function fetchAvailableDays() {
     try {
@@ -239,10 +265,19 @@ async function fetchAvailableDays() {
           const date = new Date(formattedDate)
           const dayOfWeek = date.getDay()
           const isHoliday = holidays.includes(formattedDate)
-          if (dailyAvailability.value[formattedDate] === true) {
+          if (dayOfWeek === closedDay) {
+            attributes.value.push({
+              key: 'closed-day',
+              content: { class: 'closed-day-symbol'},
+              dates: {
+                start: formattedDate,
+                end: formattedDate
+              }
+            })
+          } else if (dailyAvailability.value[formattedDate] === true) {
             if (dayOfWeek === 6) {
               attributes.value.push({
-                key: 'fullsaterday',
+                key: 'full-saterday',
                 content: {
                   class: 'full-booked-symbol',
                   color: 'blue'
@@ -254,7 +289,7 @@ async function fetchAvailableDays() {
               })
             } else if (dayOfWeek === 0  || isHoliday === true) {
               attributes.value.push({
-                key: 'fullsundayholiday',
+                key: 'full-sunday-holiday',
                 content: {
                   class: 'full-booked-symbol',
                   color: 'red'
@@ -277,7 +312,7 @@ async function fetchAvailableDays() {
           } else if (dailyAvailability.value[formattedDate] === false) {
             if (dayOfWeek === 6) {
               attributes.value.push({
-                key: 'availablesaterday',
+                key: 'available-saterday',
                 content: {
                   class: 'available-symbol',
                   color: 'blue'
@@ -289,7 +324,7 @@ async function fetchAvailableDays() {
               })
             } else if (dayOfWeek === 0 || isHoliday === true) {
               attributes.value.push({
-                key: 'availablesundayholiday',
+                key: 'available-sunday-holiday',
                 content: {
                   class: 'available-symbol',
                   color: 'red'
@@ -340,6 +375,7 @@ watch([visit_date, visit_time, number_of_guests], fetchAvailableTimes)
     <div class="my-calendar">
         <DatePicker
             :min-date="tomorrow"
+            :max-date="maxMonth"
             :attributes="attributes"
             :masks="masks"
             v-model="visit_date"
@@ -457,6 +493,18 @@ watch([visit_date, visit_time, number_of_guests], fetchAvailableTimes)
     1px 0 #0fbe9f,
     0 1px #0fbe9f,
     0 -1px #0fbe9f;
+}
+
+.my-calendar .closed-day-symbol.vc-day-content::after {
+  content: '休';
+  display: block;
+  position: absolute;
+  bottom: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 16px;
+  color: #bbb;
+  font-weight: bold;
 }
 
 
