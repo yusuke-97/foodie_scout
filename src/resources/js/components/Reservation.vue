@@ -21,8 +21,8 @@ const tomorrow = new Date(today)
 tomorrow.setDate(tomorrow.getDate() + 1)
 
 // 初期値の設定
-const number_of_guests = ref(1)
-const visit_date = ref(tomorrow)
+const NumberOfGuests = ref(1)
+const visitDate = ref(tomorrow)
 const masks = ref({
     title: 'YYYY年 MMMM',
 })
@@ -82,7 +82,7 @@ const isReservableTime = computed(() => {
   if (!availableTimes.value) {
     return false
   } else {
-    return availableTimes.value.includes(visit_time.value)
+    return availableTimes.value.includes(visitTime.value)
   }
 })
 
@@ -125,7 +125,7 @@ const timeOptions = (() => {
 })()
 
 
-const visit_time = ref(timeOptions[0])
+const visitTime = ref(timeOptions[0])
 const availableTimes = ref(null)
 let cachedVisitDate = null
 let lastFetched = 0
@@ -154,8 +154,8 @@ async function fetchAvailableTimes() {
       return `${year}-${month}-${day}`
     }
 
-    const selectedDate = getLocalDate(new Date(visit_date.value ? visit_date.value : cachedVisitDate))
-    const originalSelectedDate = new Date(visit_date.value ? visit_date.value : cachedVisitDate).getDay()
+    const selectedDate = getLocalDate(new Date(visitDate.value ? visitDate.value : cachedVisitDate))
+    const originalSelectedDate = new Date(visitDate.value ? visitDate.value : cachedVisitDate).getDay()
 
     const response = await axios.get(`/available-seats`, {
       cancelToken: new CancelToken(function executor(c) {
@@ -179,7 +179,7 @@ async function fetchAvailableTimes() {
 
     availableTimes.value = timeOptions.filter(time => {
       const reservedSeats = reservedSeatsData[time] || 0
-      const availableSeats = props.restaurantSeat - reservedSeats - number_of_guests.value
+      const availableSeats = props.restaurantSeat - reservedSeats - NumberOfGuests.value
       return availableSeats >= 0
     })
 
@@ -322,11 +322,11 @@ onMounted(() => {
 })
 
 // 予約日、時間、人数が変更された時に利用可能時間帯を更新
-watch([visit_date, visit_time, number_of_guests], fetchAvailableTimes)
+watch([visitDate, visitTime, NumberOfGuests], fetchAvailableTimes)
 
 // 合計価格を計算
 const totalPrice = computed(() => {
-    return number_of_guests.value * props.restaurantPrice
+    return NumberOfGuests.value * props.restaurantPrice
 })
 
 const formattedTotalPrice = computed(() => {
@@ -337,9 +337,9 @@ const formattedTotalPrice = computed(() => {
 // 予約処理
 async function submitReservation() {
     const data = {
-        visit_date: visit_date.value,
-        visit_time: visit_time.value,
-        number_of_guests: number_of_guests.value,
+        visit_date: visitDate.value,
+        visit_time: visitTime.value,
+        number_of_guests: NumberOfGuests.value,
         reservation_fee: totalPrice.value * 0.5,
         restaurant_id: props.restaurantId
     }
@@ -372,18 +372,18 @@ async function submitReservation() {
             :max-date="maxMonth"
             :attributes="attributes"
             :masks="masks"
-            v-model="visit_date"
+            v-model="visitDate"
             mode="date" />
     </div>
     <div class="select-wrapper pt-3" v-if="availableTimes" :style="{ width: selectBoxWidth }">
         <label class=" ms-3 me-5">人数</label>
-        <select v-model.number="number_of_guests" class="guest-select me-3">
+        <select v-model.number="NumberOfGuests" class="guest-select me-3">
             <option v-for="n in props.restaurantSeat" :key="n" :value="n">{{ n }}名</option>
         </select>
     </div>
     <div class="select-wrapper pt-3" v-if="availableTimes" :style="{ width: selectBoxWidth }">
     <label class="ms-3 me-5">時間</label>
-        <select v-model="visit_time" class="time-select me-3">
+        <select v-model="visitTime" class="time-select me-3">
             <option v-for="time in timeOptions" :key="time" :value="time" :disabled="!availableTimes.includes(time)">
                 <template v-if="availableTimes.includes(time)">
                     <span>◯</span>
