@@ -88,6 +88,20 @@
                     </td>
                 </tr>
                 <tr>
+                    <th class="tableheader col-4">休業日</th>
+                    <td class="cell col-8">
+                        @php
+                        $weekdays = ["日曜日", "月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日"];
+                        @endphp
+
+                        @if(is_null($restaurant->closed_day))
+                        なし
+                        @else
+                        毎週{{ $weekdays[$restaurant->closed_day] }}
+                        @endif
+                    </td>
+                </tr>
+                <tr>
                     <th class="tableheader col-4">予算</th>
                     <td class="cell col-8">￥{{ number_format($restaurant->price) }}</td>
                 </tr>
