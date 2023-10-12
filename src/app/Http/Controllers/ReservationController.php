@@ -48,6 +48,10 @@ class ReservationController extends Controller
         $reservation->number_of_guests = $request->input('number_of_guests');
         $reservation->reservation_fee = $request->input('reservation_fee');
 
+        $user = Auth::user();
+        $user->point = $user->point - $reservation->reservation_fee;
+        $user->save();
+
         // その他のデータ
         $reservation->user_id = Auth::user()->id;
         $reservation->restaurant_id = $request->input('restaurant_id');
