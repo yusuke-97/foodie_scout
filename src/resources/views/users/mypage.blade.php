@@ -3,6 +3,12 @@
 @section('content')
 <div class="container d-flex justify-content-center mt-3">
     <div class="w-50">
+        @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+        @endif
+
         <h1>マイページ</h1>
 
         <hr>
@@ -67,7 +73,7 @@
                     </div>
                 </div>
                 <div class="d-flex align-items-center">
-                    <a href="{{route('mypage.reservation_history')}}">
+                    <a href="{{route('charge.page')}}">
                         <i class="fas fa-chevron-right fa-2x"></i>
                     </a>
                 </div>

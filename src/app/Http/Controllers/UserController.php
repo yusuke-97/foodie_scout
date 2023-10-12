@@ -89,6 +89,21 @@ class UserController extends Controller
         return view('users.reservation_history_show', compact('reservation'));
     }
 
+    public function charge_page()
+    {
+        return view('users.charge');
+    }
+
+    public function charge_point(Request $request)
+    {
+        $charge_point = $request->input('point');
+        $user = Auth::user();
+        $user->point += $charge_point;
+        $user->save();
+
+        return redirect()->route('mypage')->with('success', $charge_point . 'ポイントをチャージしました！');
+    }
+
     public function profile()
     {
         $user = Auth::user();
