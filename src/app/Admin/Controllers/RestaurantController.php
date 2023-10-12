@@ -35,6 +35,7 @@ class RestaurantController extends AdminController
 
         $grid->column('id', __('Id'))->sortable();
         $grid->column('name', __('Name'));
+        $grid->column('catchphrase', __('Catchphrase'));
         $grid->column('description', __('Description'));
         $grid->column('price', __('Price'))->sortable();
         $grid->column('seat', __('Seat'));
@@ -81,6 +82,7 @@ class RestaurantController extends AdminController
 
         $show->field('id', __('Id'));
         $show->field('name', __('Name'));
+        $show->field('catchphrase', __('Catchphrase'));
         $show->field('description', __('Description'));
         $show->field('price', __('Price'));
         $show->field('seat', __('Seat'));
@@ -114,6 +116,7 @@ class RestaurantController extends AdminController
 
         $form->text('name', __('Name'));
         $form->image('image', __('Image'));
+        $form->text('catchphrase', __('Catchphrase'));
         $form->textarea('description', __('Description'));
         $form->number('price', __('Price'));
         $form->number('seat', __('Seat'));
