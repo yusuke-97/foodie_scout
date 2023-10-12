@@ -12,7 +12,8 @@ const props = defineProps({
   restaurantSeat: Number,
   restaurantStartTime: String,
   restaurantEndTime: String,
-  restaurantClosedDay: String
+  restaurantClosedDay: String,
+  userPointBalance: Number
 })
 
 // 今日と明日の日付
@@ -334,6 +335,10 @@ const formattedTotalPrice = computed(() => {
     return new Intl.NumberFormat('ja-JP').format(price)
 })
 
+const isPointBalanceLow = computed(() => {
+  return props.userPointBalance < totalPrice.value * 0.5
+})
+
 // 予約処理
 async function submitReservation() {
     const data = {
@@ -400,7 +405,19 @@ async function submitReservation() {
 
     <div class="d-flex justify-content-between align-items-center p-3" :style="{ width: selectBoxWidth }">
         <label style="font-size: 18px">予約料金</label>
-        <span style="font-size: 24px">¥{{ formattedTotalPrice }}</span>
+        <span style="font-size: 24px">{{ formattedTotalPrice }}P</span>
+    </div>
+    <div class="d-flex justify-content-between align-items-center p-3" :style="{ width: selectBoxWidth }">
+        <label style="font-size: 14px">
+          <i class="fas fa-coins"></i>
+          ポイント残高
+        </label>
+        <span style="font-size: 20px">{{ new Intl.NumberFormat('ja-JP').format(userPointBalance) }}P</span>
+    </div>
+    <div v-if="isPointBalanceLow" class="text-danger p-3" :style="{ width: selectBoxWidth }">
+      ポイントが足りません
+      <br>
+      <a href="/users/mypage/charge" style="color: #0fbe9f;">ポイントをチャージする</a>
     </div>
 
     <hr :style="{ width: selectBoxWidth }">
@@ -410,7 +427,7 @@ async function submitReservation() {
     </div>
 
     <div class="d-flex justify-content-center p-3" :style="{ width: selectBoxWidth }">
-      <button @click="submitReservation" class="btn submit-button" style="width: 100%" :disabled="!isReservableTime">
+      <button @click="submitReservation" class="btn submit-button" style="width: 100%" :disabled="!isReservableTime || isPointBalanceLow">
         <i class="fas fa-utensils me-3"></i>
         予約する
       </button>
