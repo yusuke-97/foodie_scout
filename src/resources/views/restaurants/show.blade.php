@@ -15,10 +15,6 @@
                 <h3 style="color: #FFA500;" class="me-3">★★★★★</h3>
                 <h3 style="color: red; font-weight: bold;">5.00</h3>
             </div>
-            <p>
-                {{$restaurant->description}}
-            </p>
-
             <div class="d-flex mb-2">
                 <p class="me-3">
                     <strong>最寄駅：</strong>{{$restaurant->nearest_station}}駅
@@ -51,6 +47,12 @@
     <div class="row">
         <div class="col-8">
             <img src="{{ asset($restaurant->image) }}" style="width: 100%; height: auto;">
+            <h4 class="mt-4 mb-4 sub-title" style="font-weight: bold;">
+                {{$restaurant->catchphrase}}
+            </h4>
+            <p>
+                {{$restaurant->description}}
+            </p>
 
             <hr>
 
