@@ -128,10 +128,25 @@ const timeOptions = (() => {
 const visit_time = ref(timeOptions[0])
 const availableTimes = ref(null)
 let cachedVisitDate = null
+let lastFetched = 0
+const CancelToken = axios.CancelToken
+let cancel
 
 // 利用可能な時間帯をAPIから取得
 async function fetchAvailableTimes() {
+  // 既存のリクエストがあればキャンセル
+  if (cancel) {
+    cancel()
+  }
+
   try {
+    const now = Date.now()
+    const delay = 500
+    if (now - lastFetched < delay) {
+      return
+    }
+    lastFetched = now
+
     function getLocalDate(date) {
       const year = date.getFullYear()
       const month = (date.getMonth() + 1).toString().padStart(2, '0')
@@ -140,7 +155,12 @@ async function fetchAvailableTimes() {
     }
 
     const selectedDate = getLocalDate(new Date(visit_date.value ? visit_date.value : cachedVisitDate))
+    const originalSelectedDate = new Date(visit_date.value ? visit_date.value : cachedVisitDate).getDay()
+
     const response = await axios.get(`/available-seats`, {
+      cancelToken: new CancelToken(function executor(c) {
+        cancel = c
+      }),
       params: {
         visit_date: selectedDate,
         start_time: props.restaurantStartTime,
@@ -151,6 +171,12 @@ async function fetchAvailableTimes() {
     cachedVisitDate = selectedDate
     const reservedSeatsData = response.data.reserved_seats
 
+    if (originalSelectedDate === closedDay) {
+      cachedVisitDate = selectedDate
+      availableTimes.value = []
+      return
+    }
+
     availableTimes.value = timeOptions.filter(time => {
       const reservedSeats = reservedSeatsData[time] || 0
       const availableSeats = props.restaurantSeat - reservedSeats - number_of_guests.value
@@ -158,7 +184,11 @@ async function fetchAvailableTimes() {
     })
 
   } catch (error) {
-    console.error("Error fetching available seats:", error)
+    if (axios.isCancel(error)) {
+      console.log('Request canceled')
+    } else {
+      console.error("Error fetching available seats:", error)
+    }
   }
 }
 
