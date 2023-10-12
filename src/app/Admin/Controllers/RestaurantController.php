@@ -93,7 +93,7 @@ class RestaurantController extends AdminController
         $show->field('phone_number', __('Phone Number'));
         $show->field('start_time', __('Start Time'));
         $show->field('end_time', __('End Time'));
-        $show->field('closed_time', __('Closed Day'));
+        $show->field('closed_day', __('Closed Day'));
         $show->field('category.name', __('Category Name'));
         $show->field('image', __('Image'))->image();
         $show->field('recommend_flag', __('Recommend Flag'));
