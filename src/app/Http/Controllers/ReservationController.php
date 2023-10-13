@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Reservation;
-use App\Models\Restaurant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -12,17 +11,6 @@ use Carbon\Carbon;
 
 class ReservationController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
     public function prepareConfirmation(Request $request)
     {
         $reservation_data = $request->all();
@@ -30,6 +18,7 @@ class ReservationController extends Controller
 
         return response()->json(['redirect_to' => route('reservation.confirm', ['restaurant_id' => $reservation_data['restaurant_id']])]);
     }
+
 
     public function confirmReservation($restaurant_id)
     {
@@ -42,22 +31,20 @@ class ReservationController extends Controller
         return view('reservations.confirm', compact('reservation_data'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
         // データの保存
         $reservation = new Reservation();
-        $rawDate = $request->input('visit_date');
-        $correctFormatDate = explode('T', $rawDate)[0];
-        $reservation->visit_date = $correctFormatDate;
+        $raw_date = $request->input('visit_date');
+        $correct_format_date = explode('T', $raw_date)[0];
+        $reservation->visit_date = $correct_format_date;
 
-        $visitTime = $request->input('visit_time');
-        $reservation->visit_time = $visitTime;
+        $visit_time = $request->input('visit_time');
+        $reservation->visit_time = $visit_time;
 
-        $endTime = Carbon::createFromFormat('H:i', $visitTime)->addHour(1)->addMinutes(30)->format('H:i');
-        $reservation->end_time = $endTime;
+        $end_time = Carbon::createFromFormat('H:i', $visit_time)->addHour(1)->addMinutes(30)->format('H:i');
+        $reservation->end_time = $end_time;
 
         $reservation->number_of_guests = $request->input('number_of_guests');
         $reservation->reservation_fee = $request->input('reservation_fee');
@@ -78,122 +65,92 @@ class ReservationController extends Controller
         ]);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Reservation $reservation)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Reservation $reservation)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Reservation $reservation)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Reservation $reservation)
-    {
-        //
-    }
 
     public function availableSeatsForDay(Request $request)
     {
-        $desiredDate = $request->input('visit_date');
+        $desired_date = $request->input('visit_date');
 
 
-        Log::info($desiredDate);
+        Log::info($desired_date);
 
-        $startBusinessHour = intval(substr($request->input('start_time'), 0, 2));
-        $startBusinessMinute = intval(substr($request->input('start_time'), 3, 2));
+        $start_business_hour = intval(substr($request->input('start_time'), 0, 2));
+        $start_business_minute = intval(substr($request->input('start_time'), 3, 2));
 
-        $endBusinessHour = intval(substr($request->input('end_time'), 0, 2));
+        $end_business_hour = intval(substr($request->input('end_time'), 0, 2));
 
         $results = [];
 
-        for ($hour = $startBusinessHour; $hour < $endBusinessHour; $hour++) {
-            for ($minute = $startBusinessMinute; $minute < 60; $minute += 30) {
-                $desiredStartTime = sprintf('%02d:%02d', $hour, $minute);
-                $desiredEndTime = Carbon::createFromFormat('H:i', $desiredStartTime)->addHour(1)->addMinutes(30)->format('H:i');
+        for ($hour = $start_business_hour; $hour < $end_business_hour; $hour++) {
+            for ($minute = $start_business_minute; $minute < 60; $minute += 30) {
+                $desired_start_time = sprintf('%02d:%02d', $hour, $minute);
+                $desired_end_time = Carbon::createFromFormat('H:i', $desired_start_time)->addHour(1)->addMinutes(30)->format('H:i');
 
-                $alreadyReservedSeats = Reservation::where('visit_date', $desiredDate)
+                $already_reserved_seats = Reservation::where('visit_date', $desired_date)
                     ->where('restaurant_id', $request->input('restaurant_id'))
-                    ->where(function ($query) use ($desiredStartTime, $desiredEndTime) {
-                        $query->WhereBetween('end_time', [$desiredStartTime, $desiredEndTime]);
+                    ->where(function ($query) use ($desired_start_time, $desired_end_time) {
+                        $query->WhereBetween('end_time', [$desired_start_time, $desired_end_time]);
                     })
                     ->sum('number_of_guests');
 
-                $results[$desiredStartTime] = $alreadyReservedSeats + $request->input('number_of_guests');
+                $results[$desired_start_time] = $already_reserved_seats + $request->input('number_of_guests');
             }
 
-            $startBusinessMinute = 0;
+            $start_business_minute = 0;
         }
 
         return response()->json(['reserved_seats' => $results]);
     }
 
+
     public function availableDaysForMonth(Request $request)
     {
-        $restaurantId = $request->input('restaurant_id');
+        $restaurant_id = $request->input('restaurant_id');
         $restaurant_seat = $request->input('restaurant_seat');
-        $startDate = Carbon::parse($request->input('start_date'));
-        $endDate = Carbon::parse($request->input('end_date'));
+        $start_date = Carbon::parse($request->input('start_date'));
+        $end_date = Carbon::parse($request->input('end_date'));
 
         $dates = [];
 
-        $startBusinessHour = intval(substr($request->input('start_time'), 0, 2));
-        $startBusinessMinute = intval(substr($request->input('start_time'), 3, 2));
+        $start_business_hour = intval(substr($request->input('start_time'), 0, 2));
+        $start_business_minute = intval(substr($request->input('start_time'), 3, 2));
 
-        $endBusinessHour = intval(substr($request->input('end_time'), 0, 2));
-        $endBusinessMinute = intval(substr($request->input('end_time'), 3, 2));
+        $end_business_hour = intval(substr($request->input('end_time'), 0, 2));
+        $end_business_minute = intval(substr($request->input('end_time'), 3, 2));
 
-        $availbleSeats = 0;
-        $dailyAvailbleSeats = 0;
+        $available_seats = 0;
+        $daily_availble_seats = 0;
 
-        if ($endBusinessHour >= 0 && $endBusinessHour <= 2) {
-            $endBusinessHour += 24;
+        if ($end_business_hour >= 0 && $end_business_hour <= 2) {
+            $end_business_hour += 24;
         }
-        $endBusinessHour -= 2;
+        $end_business_hour -= 2;
 
-        for ($date = $startDate; $date->lte($endDate); $date->addDay()) {
-            $startBusinessMinute = intval(substr($request->input('start_time'), 3, 2));
+        for ($date = $start_date; $date->lte($end_date); $date->addDay()) {
+            $start_business_minute = intval(substr($request->input('start_time'), 3, 2));
 
-            for ($hour = $startBusinessHour; $hour <= $endBusinessHour; $hour++) {
-                for ($minute = $startBusinessMinute; $minute < 60; $minute += 30) {
-                    if ($hour === $endBusinessHour && $minute > $endBusinessMinute) {
+            for ($hour = $start_business_hour; $hour <= $end_business_hour; $hour++) {
+                for ($minute = $start_business_minute; $minute < 60; $minute += 30) {
+                    if ($hour === $end_business_hour && $minute > $end_business_minute) {
                         break;
                     }
-                    $desiredStartTime = sprintf('%02d:%02d', $hour, $minute);
-                    $desiredEndTime = Carbon::createFromFormat('H:i', $desiredStartTime)->addHour(1)->addMinutes(30)->format('H:i');
-                    $desiredDate = Carbon::parse($date)->format('Y-m-d');
+                    $desired_start_time = sprintf('%02d:%02d', $hour, $minute);
+                    $desired_end_time = Carbon::createFromFormat('H:i', $desired_start_time)->addHour(1)->addMinutes(30)->format('H:i');
+                    $desired_date = Carbon::parse($date)->format('Y-m-d');
 
-                    $alreadyReservedSeats = Reservation::where('visit_date', $desiredDate)
-                        ->where('restaurant_id', $restaurantId)
-                        ->where(function ($query) use ($desiredStartTime, $desiredEndTime) {
-                            $query->WhereBetween('end_time', [$desiredStartTime, $desiredEndTime]);
+                    $already_reserved_seats = Reservation::where('visit_date', $desired_date)
+                        ->where('restaurant_id', $restaurant_id)
+                        ->where(function ($query) use ($desired_start_time, $desired_end_time) {
+                            $query->WhereBetween('end_time', [$desired_start_time, $desired_end_time]);
                         })
                         ->sum('number_of_guests');
 
-                    $availbleSeats = $availbleSeats + $restaurant_seat - $alreadyReservedSeats;
+                    $available_seats = $available_seats + $restaurant_seat - $already_reserved_seats;
                 }
-                $startBusinessMinute = 0;
+                $start_business_minute = 0;
             }
-            $dailyAvailbleSeats = $availbleSeats;
-            $availbleSeats = 0;
-            $dates[$date->format('Y-m-d')] = $dailyAvailbleSeats === 0;
+            $daily_availble_seats = $available_seats;
+            $available_seats = 0;
+            $dates[$date->format('Y-m-d')] = $daily_availble_seats === 0;
         }
 
         return response()->json($dates);
