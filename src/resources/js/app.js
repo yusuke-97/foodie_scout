@@ -57,6 +57,9 @@ app.component('reservation-display', ReservationDisplay);
 import ReservationConfirmation from './components/ReservationConfirmation.vue';
 app.component('reservation-confirmation', ReservationConfirmation);
 
+import PointCharge from './components/PointCharge.vue';
+app.component('point-charge', PointCharge);
+
 import FollowButton from './components/FollowButton.vue';
 app.component('follow-button', FollowButton);
 

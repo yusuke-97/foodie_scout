@@ -37,26 +37,26 @@ const showModal = ref(false)
 
 <template>
     <div class="d-flex justify-content-center">
-      <button id="show-modal" @click="showModal = true" class="btn submit-button" style="width: 50%">
-        <i class="fas fa-utensils me-3"></i>
-        予約する
-      </button>
-  
-      <Teleport to="body">
-        <Modal :show="showModal" @close="showModal = false">
-          <template #header>
-            <h3>予約内容の確認</h3>
-          </template>
-          <template #body>
-            予約を確定してもいいですか？
-          </template>
-          <template #footer>
-            <div class="d-flex justify-content-between" style="width: 100%;">
-                <button @click="submitReservationConfirmation" class="btn submit-button">予約確定</button>
-                <button @click="showModal = false" class="btn submit-button" style="background-color: #f16363;">キャンセル</button>
-            </div>
-          </template>
-        </Modal>
-      </Teleport>
+        <button id="show-modal" @click="showModal = true" class="btn submit-button" style="width: 50%">
+            <i class="fas fa-utensils me-3"></i>
+            予約する
+        </button>
+    
+        <Teleport to="body">
+            <Modal :show="showModal" @close="showModal = false">
+                <template #header>
+                    <h3>予約内容の確認</h3>
+                </template>
+                <template #body>
+                    予約を確定してもいいですか？
+                </template>
+                <template #footer>
+                    <div class="d-flex justify-content-between" style="width: 100%;">
+                        <button @click="submitReservationConfirmation" class="btn submit-button">予約確定</button>
+                        <button @click="showModal = false" class="btn submit-button" style="background-color: #f16363;">キャンセル</button>
+                    </div>
+                </template>
+            </Modal>
+        </Teleport>
     </div>
-  </template>  
+</template>

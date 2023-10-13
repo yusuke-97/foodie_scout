@@ -101,7 +101,9 @@ class UserController extends Controller
         $user->point += $charge_point;
         $user->save();
 
-        return redirect()->route('mypage')->with('success', $charge_point . 'ポイントをチャージしました！');
+        return response()->json([
+            'redirect_to' => route('mypage')
+        ]);
     }
 
     public function profile()

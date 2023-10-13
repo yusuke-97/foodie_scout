@@ -5,7 +5,7 @@
     <div class="w-50">
         @if(session('success'))
         <div class="alert alert-success">
-            {{ session('success') }}
+            {{ session('message') }}
         </div>
         @endif
 
@@ -69,7 +69,7 @@
                         <div class="d-flex flex-column">
                             <label style="font-weight: bold;">ポイント</label>
                             <p>ポイントをチャージできます</p>
-                            <p>ポイント残高：{{ number_format(Auth::user()->point) }}</p>
+                            <p>ポイント残高：{{ number_format(Auth::user()->point) }}P</p>
                         </div>
                     </div>
                 </div>
