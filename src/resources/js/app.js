@@ -51,8 +51,8 @@ app.component('example-component', ExampleComponent);
 import FavoriteButton from './components/FavoriteButton.vue';
 app.component('favorite-button', FavoriteButton);
 
-import Reservation from './components/Reservation.vue';
-app.component('reservation', Reservation);
+import ReservationDisplay from './components/ReservationDisplay.vue';
+app.component('reservation-display', ReservationDisplay);
 
 import FollowButton from './components/FollowButton.vue';
 app.component('follow-button', FollowButton);

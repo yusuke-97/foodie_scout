@@ -340,7 +340,7 @@ const isPointBalanceLow = computed(() => {
 })
 
 // 予約情報送信処理
-async function submitReservation() {
+async function submitReservationDisplay() {
   const data = {
     visit_date: visitDate.value,
     visit_time: visitTime.value,
@@ -427,7 +427,7 @@ async function submitReservation() {
     </div>
 
     <div class="d-flex justify-content-center p-3" :style="{ width: selectBoxWidth }">
-      <button @click="submitReservation" class="btn submit-button" style="width: 100%" :disabled="!isReservableTime || isPointBalanceLow">
+      <button @click="submitReservationDisplay" class="btn submit-button" style="width: 100%" :disabled="!isReservableTime || isPointBalanceLow">
         <i class="fas fa-utensils me-3"></i>
         予約する
       </button>
