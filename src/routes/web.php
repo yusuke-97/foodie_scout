@@ -24,8 +24,9 @@ Route::post('/restaurants/{restaurant}/favorite', [RestaurantController::class, 
 Route::delete('/restaurants/{restaurant}/favorite', [RestaurantController::class, 'removeFavorite'])->name('restaurants.unfavorite');
 Route::resource('restaurants', RestaurantController::class);
 
-Route::get('restaurants/{restaurant}/reservations', [ReservationController::class, 'restaurantReservation'])->name('restaurant.reservations');
 Route::resource('reservations', ReservationController::class);
+Route::post('/reservation/prepare', [ReservationController::class, 'prepareConfirmation']);
+Route::get('/reservation/confirm', [ReservationController::class, 'confirmReservation'])->name('reservation.confirm');
 Route::get('/available-seats', [ReservationController::class, 'availableSeatsForDay']);
 Route::get('/available-days', [ReservationController::class, 'availableDaysForMonth']);
 

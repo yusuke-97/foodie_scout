@@ -23,9 +23,23 @@ class ReservationController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function restaurantReservation(Restaurant $restaurant)
+    public function prepareConfirmation(Request $request)
     {
-        return view('reservations.create', compact('restaurant'));
+        $reservationData = $request->all();
+        session(['reservation_data' => $reservationData]);
+
+        return response()->json(['redirect_to' => route('reservation.confirm')]);
+    }
+
+    public function confirmReservation()
+    {
+        $reservation_data = session('reservation_data', []);
+
+        if (empty($reservation_data)) {
+            return redirect()->back()->with('error', '予約データが見つかりませんでした。再度お試しください。');
+        }
+
+        return view('reservations.confirm', compact('reservation_data'));
     }
 
     /**

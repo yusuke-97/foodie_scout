@@ -339,23 +339,23 @@ const isPointBalanceLow = computed(() => {
   return props.userPointBalance < totalPrice.value * 0.5
 })
 
-// 予約処理
+// 予約情報送信処理
 async function submitReservation() {
-    const data = {
-        visit_date: visitDate.value,
-        visit_time: visitTime.value,
-        number_of_guests: NumberOfGuests.value,
-        reservation_fee: totalPrice.value * 0.5,
-        restaurant_id: props.restaurantId
+  const data = {
+    visit_date: visitDate.value,
+    visit_time: visitTime.value,
+    number_of_guests: NumberOfGuests.value,
+    reservation_fee: totalPrice.value * 0.5,
+    restaurant_id: props.restaurantId
+  }
+  try {
+    const response = await axios.post(`/reservation/prepare`, data)
+    if (response.data.redirect_to) {
+      window.location.href = response.data.redirect_to
     }
-    try {
-        const response = await axios.post(`/reservations`, data)
-        if (response.data.redirect_to) {
-            window.location.href = response.data.redirect_to
-        }
-    } catch (error) {
-        console.error("Error:", error)
-    }
+  } catch (error) {
+    console.error("Error:", error)
+  }
 }
 </script>
 
