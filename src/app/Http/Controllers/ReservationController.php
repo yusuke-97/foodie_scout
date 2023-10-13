@@ -25,13 +25,13 @@ class ReservationController extends Controller
      */
     public function prepareConfirmation(Request $request)
     {
-        $reservationData = $request->all();
-        session(['reservation_data' => $reservationData]);
+        $reservation_data = $request->all();
+        session(['reservation_data' => $reservation_data]);
 
-        return response()->json(['redirect_to' => route('reservation.confirm')]);
+        return response()->json(['redirect_to' => route('reservation.confirm', ['restaurant_id' => $reservation_data['restaurant_id']])]);
     }
 
-    public function confirmReservation()
+    public function confirmReservation($restaurant_id)
     {
         $reservation_data = session('reservation_data', []);
 
@@ -74,7 +74,7 @@ class ReservationController extends Controller
 
         return response()->json([
             'message' => 'Reservation successful',
-            'redirect_to' => '/users/mypage'
+            'redirect_to' => route('mypage.reservation_history')
         ]);
     }
 

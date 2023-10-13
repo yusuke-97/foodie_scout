@@ -1,53 +1,74 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="container d-flex justify-content-center">
+    <div class="col-9">
 
-<style>
-    .reservation-container {
-        max-width: 600px;
-        margin: 0 auto;
-        background-color: #f9f9f9;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
+        <div class="main-header">
+            {{ $reservation_data['restaurant_name'] }}
+        </div>
 
-    .reservation-header {
-        font-size: 24px;
-        border-bottom: 2px solid #333;
-        padding-bottom: 10px;
-        margin-bottom: 20px;
-    }
+        <!-- 予約者情報 -->
+        <div class="reservation-card">
+            <div class="reservation-header">予約者情報</div>
+            <table class="reservation-table">
+                <tbody>
+                    <tr>
+                        <td class="reservation-label">お名前</td>
+                        <td class="reservation-value">{{ Auth::user()->name }}</td>
+                    </tr>
+                    <tr>
+                        <td class="reservation-label">電話番号</td>
+                        <td class="reservation-value">{{ Auth::user()->phone_number }}</td>
+                    </tr>
+                    <tr>
+                        <td class="reservation-label">メールアドレス</td>
+                        <td class="reservation-value">{{ Auth::user()->email }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-    .reservation-section {
-        margin-bottom: 20px;
-    }
+        <!-- 予約内容確認 -->
+        <div class="reservation-card">
+            <div class="reservation-header">予約内容確認</div>
+            <table class="reservation-table">
+                <tbody>
+                    <tr>
+                        <td class="reservation-label">来店日時</td>
+                        <td class="reservation-value">
+                            {{ \Carbon\Carbon::parse($reservation_data['visit_date'])->locale('ja')->isoFormat('Y年M月D日 (ddd)') }}
+                            {{ $reservation_data['visit_time'] }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="reservation-label">来店人数</td>
+                        <td class="reservation-value">{{ $reservation_data['number_of_guests'] }}名</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-    .reservation-label {
-        font-weight: bold;
-        margin-bottom: 5px;
-    }
+        <!-- 予約料金 -->
+        <div class="reservation-card">
+            <div class="reservation-header">予約料金</div>
+            <table class="reservation-table">
+                <tbody>
+                    <tr>
+                        <td class="reservation-label">予約料金</td>
+                        <td class="reservation-value">{{ number_format($reservation_data['reservation_fee']) }}P</td>
+                    </tr>
+                    <tr>
+                        <td class="reservation-label">ポイント残高</td>
+                        <td class="reservation-value">{{ number_format(Auth::user()->point) }}P</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-    .reservation-value {
-        font-size: 18px;
-    }
-</style>
+        <reservation-confirmation :visit-date="'{{ $reservation_data['visit_date'] }}'" :visit-time="'{{ $reservation_data['visit_time'] }}'" :number-of-guests="{{ $reservation_data['number_of_guests'] }}" :reservation-fee="{{ $reservation_data['reservation_fee'] }}" :restaurant-id="{{ $reservation_data['restaurant_id'] }}">
+        </reservation-confirmation>
 
-<div class="reservation-container">
-    <div class="reservation-header">
-        {{ $reservationData['restaurant_name'] ?? '店舗名' }}
-    </div>
-    <div class="reservation-section">
-        <div class="reservation-label">予約者情報</div>
-        <div class="reservation-value">{{ $reservationData['name'] ?? '名前' }}</div>
-        <div class="reservation-value">{{ $reservationData['phone_number'] ?? '電話番号' }}</div>
-        <div class="reservation-value">{{ $reservationData['email'] ?? 'メールアドレス' }}</div>
-    </div>
-    <div class="reservation-section">
-        <div class="reservation-label">予約確認</div>
-        <div class="reservation-value">来店日時: {{ $reservationData['visit_date'] ?? '日付' }} {{ $reservationData['visit_time'] ?? '時間' }}</div>
-        <div class="reservation-value">来店人数: {{ $reservationData['number_of_guests'] ?? '人数' }} 人</div>
     </div>
 </div>
-
 @endsection

@@ -54,6 +54,9 @@ app.component('favorite-button', FavoriteButton);
 import ReservationDisplay from './components/ReservationDisplay.vue';
 app.component('reservation-display', ReservationDisplay);
 
+import ReservationConfirmation from './components/ReservationConfirmation.vue';
+app.component('reservation-confirmation', ReservationConfirmation);
+
 import FollowButton from './components/FollowButton.vue';
 app.component('follow-button', FollowButton);
 

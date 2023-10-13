@@ -7,6 +7,7 @@ import 'v-calendar/style.css'
 // 定義したプロパティ
 const props = defineProps({
   restaurantId: Number,
+  restaurantName: String,
   restaurantPhoneNumber: String,
   restaurantPrice: Number,
   restaurantSeat: Number,
@@ -22,7 +23,7 @@ const tomorrow = new Date(today)
 tomorrow.setDate(tomorrow.getDate() + 1)
 
 // 初期値の設定
-const NumberOfGuests = ref(1)
+const numberOfGuests = ref(1)
 const visitDate = ref(tomorrow)
 const masks = ref({
     title: 'YYYY年 MMMM',
@@ -180,7 +181,7 @@ async function fetchAvailableTimes() {
 
     availableTimes.value = timeOptions.filter(time => {
       const reservedSeats = reservedSeatsData[time] || 0
-      const availableSeats = props.restaurantSeat - reservedSeats - NumberOfGuests.value
+      const availableSeats = props.restaurantSeat - reservedSeats - numberOfGuests.value
       return availableSeats >= 0
     })
 
@@ -323,11 +324,11 @@ onMounted(() => {
 })
 
 // 予約日、時間、人数が変更された時に利用可能時間帯を更新
-watch([visitDate, visitTime, NumberOfGuests], fetchAvailableTimes)
+watch([visitDate, visitTime, numberOfGuests], fetchAvailableTimes)
 
 // 合計価格を計算
 const totalPrice = computed(() => {
-    return NumberOfGuests.value * props.restaurantPrice
+    return numberOfGuests.value * props.restaurantPrice
 })
 
 const formattedTotalPrice = computed(() => {
@@ -344,9 +345,10 @@ async function submitReservationDisplay() {
   const data = {
     visit_date: visitDate.value,
     visit_time: visitTime.value,
-    number_of_guests: NumberOfGuests.value,
+    number_of_guests: numberOfGuests.value,
     reservation_fee: totalPrice.value * 0.5,
-    restaurant_id: props.restaurantId
+    restaurant_id: props.restaurantId,
+    restaurant_name: props.restaurantName
   }
   try {
     const response = await axios.post(`/reservation/prepare`, data)
@@ -382,7 +384,7 @@ async function submitReservationDisplay() {
     </div>
     <div class="select-wrapper pt-3" v-if="availableTimes" :style="{ width: selectBoxWidth }">
         <label class=" ms-3 me-5">人数</label>
-        <select v-model.number="NumberOfGuests" class="guest-select me-3">
+        <select v-model.number="numberOfGuests" class="guest-select me-3">
             <option v-for="n in props.restaurantSeat" :key="n" :value="n">{{ n }}名</option>
         </select>
     </div>

@@ -123,7 +123,7 @@
             </div>
         </div>
         <div class="col-4" style="position: sticky; top: 0;">
-            <reservation-display :restaurant-id="{{ $restaurant->id }}" :restaurant-price="{{ $restaurant->price }}" :restaurant-seat="{{ $restaurant->seat }}" :restaurant-phone-number="'{{ $restaurant->phone_number }}'" :restaurant-start-time="'{{ $restaurant->start_time }}'" :restaurant-end-time="'{{ $restaurant->end_time }}'" :restaurant-closed-day="'{{ $restaurant->closed_day }}'" :user-point-balance="{{ Auth::user()->point }}">
+            <reservation-display :restaurant-id="{{ $restaurant->id }}" :restaurant-name="'{{ $restaurant->name }}'" :restaurant-price="{{ $restaurant->price }}" :restaurant-seat="{{ $restaurant->seat }}" :restaurant-phone-number="'{{ $restaurant->phone_number }}'" :restaurant-start-time="'{{ $restaurant->start_time }}'" :restaurant-end-time="'{{ $restaurant->end_time }}'" :restaurant-closed-day="'{{ $restaurant->closed_day }}'" :user-point-balance="{{ Auth::user()->point }}">
             </reservation-display>
         </div>
     </div>

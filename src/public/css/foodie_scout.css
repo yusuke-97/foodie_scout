@@ -239,6 +239,50 @@ label {
 
 
 /*--------------------------------
+ # 予約確認画面
+---------------------------------*/
+.main-header {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.reservation-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 50px;
+    overflow: hidden;
+}
+
+.reservation-header {
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #f9f9f9;
+    padding: 10px 20px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.reservation-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.reservation-label {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px;
+    width: 40%
+}
+
+.reservation-value {
+    font-size: 16px;
+    padding: 10px 20px;
+}
+
+
+/*--------------------------------
  # お気に入りページ
 ---------------------------------*/
 .favorite-add-cart {
