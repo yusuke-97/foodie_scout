@@ -91,8 +91,10 @@
                     <div class="col-9 d-flex align-items-center ms-3 mt-3">
                         <div class="d-flex flex-column">
                             <label style="font-weight: bold;">ポイント</label>
-                            <p>ポイントをチャージできます</p>
-                            <p>ポイント残高：<span style="font-weight: bold; color: #0fbe9f">{{ number_format(Auth::user()->point) }}</span>P</p>
+                            <p>
+                                ポイントをチャージできます<br>
+                                ポイント残高：<span style="font-weight: bold; color: #0fbe9f">{{ number_format(Auth::user()->point) }}</span>P
+                            </p>
                         </div>
                     </div>
                 </div>
