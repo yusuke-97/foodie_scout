@@ -1,26 +1,19 @@
 <script setup>
 import Modal from './Modal.vue'
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
 import axios from 'axios'
+
+const props = defineProps({
+  isRegistered: String
+})
 
 const selectedPoint = ref(null)
 const showModal = ref(false)
-const message = ref('')
-const errorMessage = ref('')
-
-watch(selectedPoint, (newValue) => {
-  if (newValue) {
-    errorMessage.value = ''
-  }
-})
+const message = ref(null)
+const errorMessage = ref(null)
 
 function handleChargeClick() {
-  if (!selectedPoint.value) {
-    errorMessage.value = 'ポイントを選択してください。'
-    return
-  }
-
-  message.value = `${new Intl.NumberFormat('ja-JP').format(selectedPoint.value)} ポイントをチャージしてもいいですか？`
+  message.value = `${new Intl.NumberFormat('ja-JP').format(selectedPoint.value)} ポイントをチャージしてもいいですか？ チャージ後の返金は承りません。`
   showModal.value = true
 }
 
@@ -54,7 +47,13 @@ async function chargePoints() {
     <input type="radio" name="point" value="10000" v-model="selectedPoint" class="mb-3"><strong> 10,000</strong> ポイント<br>
     <input type="radio" name="point" value="30000" v-model="selectedPoint" class="mb-3"><strong> 30,000</strong> ポイント<br>
 
-    <button id="show-modal" @click="handleChargeClick" class="btn submit-button mt-3" style="width: 50%">チャージする</button>
+    <button id="show-modal" @click="handleChargeClick" class="btn submit-button mt-3" style="width: 50%" :disabled="!isRegistered || !selectedPoint">チャージする</button>
+
+    <div v-if="!isRegistered" class="mt-4">
+      <p class="m-0" style="color: red; font-weight: bold;">カードが登録されていません</p>
+      <a href="/users/mypage/register_card" style="color: #0fbe9f; font-weight: bold;">カードを登録する</a>
+    </div>
+    
     <p class="mt-2" style="color: red; font-weight: bold;">{{ errorMessage }}</p>
     
     <Teleport to="body">
