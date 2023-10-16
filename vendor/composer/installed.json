@@ -2193,6 +2193,67 @@
             "install-path": "../overtrue/laravel-favorite"
         },
         {
+            "name": "payjp/payjp-php",
+            "version": "1.4.0",
+            "version_normalized": "1.4.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/payjp/payjp-php.git",
+                "reference": "93879b1f2f027e20aa59d09635f082a79f42eae8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/payjp/payjp-php/zipball/93879b1f2f027e20aa59d09635f082a79f42eae8",
+                "reference": "93879b1f2f027e20aa59d09635f082a79f42eae8",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~5.7 || ~9.5",
+                "squizlabs/php_codesniffer": "~3.6"
+            },
+            "time": "2023-06-21T14:47:56+00:00",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.1.*-dev"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Payjp\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Payjp and contributors",
+                    "homepage": "https://github.com/payjp/payjp-php/graphs/contributors"
+                }
+            ],
+            "description": "Payjp PHP Library",
+            "homepage": "https://pay.jp/",
+            "keywords": [
+                "api",
+                "payjp",
+                "payment processing"
+            ],
+            "support": {
+                "issues": "https://github.com/payjp/payjp-php/issues",
+                "source": "https://github.com/payjp/payjp-php/tree/1.4.0"
+            },
+            "install-path": "../payjp/payjp-php"
+        },
+        {
             "name": "phpoption/phpoption",
             "version": "1.9.1",
             "version_normalized": "1.9.1.0",

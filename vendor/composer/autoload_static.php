@@ -88,6 +88,7 @@ class ComposerStaticInit5ec1720ec6499b03f9345c86bd7925c0
             'Psr\\Container\\' => 14,
             'Psr\\Clock\\' => 10,
             'PhpOption\\' => 10,
+            'Payjp\\' => 6,
         ),
         'O' => 
         array (
@@ -306,6 +307,10 @@ class ComposerStaticInit5ec1720ec6499b03f9345c86bd7925c0
         'PhpOption\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpoption/phpoption/src/PhpOption',
+        ),
+        'Payjp\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/payjp/payjp-php/lib',
         ),
         'Overtrue\\LaravelFavorite\\' => 
         array (

@@ -41,12 +41,13 @@ Route::controller(UserController::class)->group(function () {
     Route::get('users/mypage/reservation_history/{reservation}', 'reservation_history_show')->name('mypage.reservation_history_show');
     Route::get('users/mypage/charge', 'charge_page')->name('charge.page');
     Route::post('users/mypage/charge/point', 'charge_point')->name('charge.point');
-
     Route::get('users/mypage/profile', 'profile')->name('mypage.profile');
     Route::post('/follow/{user}', 'follow')->name('follow');
     Route::delete('/unfollow/{user}', 'unfollow')->name('unfollow');
     Route::get('users/mypage/following', 'following')->name('mypage.following');
     Route::get('users/mypage/following/{following}', 'follower_show')->name('following.show');
+    Route::get('users/mypage/register_card', 'register_card')->name('mypage.register_card');
+    Route::post('users/mypage/token', 'token')->name('mypage.token');
 });
 
 Auth::routes(['verify' => true]);

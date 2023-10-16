@@ -75,6 +75,9 @@ app.component('image-edit', ImageEdit);
 import ImageSlider from './components/ImageSlider.vue';
 app.component('image-slider', ImageSlider);
 
+import PayjpButton from './components/PayjpButton.vue';
+app.component('payjp-button', PayjpButton);
+
 import { setupCalendar } from 'v-calendar';
 app.use(setupCalendar, {});
 
