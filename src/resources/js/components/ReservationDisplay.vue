@@ -6,6 +6,7 @@ import 'v-calendar/style.css'
 
 // 定義したプロパティ
 const props = defineProps({
+  googleApiKey: String,
   restaurantId: Number,
   restaurantName: String,
   restaurantPhoneNumber: String,
@@ -31,7 +32,7 @@ const masks = ref({
 
 // 休業日の曜日を取得
 const closedDay = parseInt(props.restaurantClosedDay)
-const GOOGLE_API_KEY = 'AIzaSyB4nWI9Eagle-87B_5k0DCzxlu26C1r2Iw'
+const GOOGLE_API_KEY = props.googleApiKey
 
 // 日本の祝日を取得
 async function fetchJapaneseHolidays(year) {
