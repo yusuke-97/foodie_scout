@@ -32,6 +32,7 @@ class UserController extends AdminController
         $grid->column('email_verified_at', __('Email verified at'));
         $grid->column('user_name', __('User name'));
         $grid->column('phone_number', __('Phone number'));
+        $grid->column('token', __('Token'));
         $grid->column('created_at', __('Created at'))->sortable();
         $grid->column('updated_at', __('Updated at'))->sortable();
 
@@ -62,6 +63,7 @@ class UserController extends AdminController
         $show->field('email_verified_at', __('Email verified at'));
         $show->field('user_name', __('User name'));
         $show->field('phone_number', __('Phone number'));
+        $show->field('token', __('Token'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
 
@@ -83,6 +85,7 @@ class UserController extends AdminController
         $form->password('password', __('Password'));
         $form->text('user_name', __('User name'));
         $form->text('phone_number', __('Phone number'));
+        $form->text('token', __('Token'));
 
         $form->saving(function (Form $form) {
             if ($form->password && $form->model()->password != $form->password) {
