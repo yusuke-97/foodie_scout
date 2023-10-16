@@ -44,7 +44,7 @@
                     </div>
                     <div class="col-9 d-flex align-items-center ms-3 mt-3">
                         <div class="d-flex flex-column">
-                            <label for="user-name">クレジットカードの登録</label>
+                            <label style="font-weight: bold;">クレジットカードの登録</label>
                             <p>クレジットカードの登録</p>
                         </div>
                     </div>

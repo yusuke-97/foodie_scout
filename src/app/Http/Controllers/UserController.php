@@ -101,6 +101,17 @@ class UserController extends Controller
         $user->point += $charge_point;
         $user->save();
 
+        $pay_jp_secret = env('PAYJP_SECRET_KEY');
+        \Payjp\Payjp::setApiKey($pay_jp_secret);
+
+        $res = \Payjp\Charge::create(
+            [
+                "customer" => $user->token,
+                "amount" => $charge_point,
+                "currency" => 'jpy'
+            ]
+        );
+
         return response()->json([
             'redirect_to' => route('mypage')
         ]);
