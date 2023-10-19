@@ -13,12 +13,11 @@
         @foreach($reservations as $reservation)
         <div class="card mb-4">
             <div class="card-header">
-                @if(strtotime($reservation->visit_date . ' ' . $reservation->visit_time) < strtotime(now()))
-                    <span style="background-color: #0fbe9f; padding: 4px 24px; color: #ffffff; border-radius: 4px; font-size: 12px;" class="me-4">来店済み</span>
+                @if(strtotime($reservation->visit_date . ' ' . $reservation->visit_time) < strtotime(now())) <span style="background-color: #0fbe9f; padding: 4px 24px; color: #ffffff; border-radius: 4px; font-size: 12px;" class="me-4">来店済み</span>
                     <span style="font-size: 12px;">ご来店ありがとうございました。</span>
-                @else
+                    @else
                     <span style="background-color: #1E90FF; padding: 4px 24px; color: #ffffff; border-radius: 4px; font-size: 12px;" class="me-4">来店予定</span>
-                @endif
+                    @endif
             </div>
             <div class="card-body">
                 <div class="row">
@@ -57,7 +56,7 @@
                         </div>
                     </div>
                     <div class="col-md-3 mt-2">
-                        <a>口コミを投稿</a>
+                        <a href="{{ route('reviews.create', ['restaurant' => $reservation->restaurant]) }}">口コミを投稿</a>
                         <br>
                         <a href="{{ route('restaurants.show', $reservation->restaurant) }}">もう一度予約</a>
                         <br>

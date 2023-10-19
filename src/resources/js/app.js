@@ -63,6 +63,9 @@ app.component('user-edit', UserEdit);
 import PointCharge from './components/PointCharge.vue';
 app.component('point-charge', PointCharge);
 
+import ReviewCreate from './components/ReviewCreate.vue';
+app.component('review-create', ReviewCreate);
+
 import FollowButton from './components/FollowButton.vue';
 app.component('follow-button', FollowButton);
 
