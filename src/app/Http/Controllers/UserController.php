@@ -6,6 +6,8 @@ use App\Models\User;
 use App\Models\Restaurant;
 use App\Models\Reservation;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -34,13 +36,25 @@ class UserController extends Controller
     {
         $user = Auth::user();
 
-        $user->name = $request->input('name') ? $request->input('name') : $user->name;
-        $user->user_name = $request->input('user_name') ? $request->input('user_name') : $user->user_name;
-        $user->email = $request->input('email') ? $request->input('email') : $user->email;
-        $user->phone_number = $request->input('phone_number') ? $request->input('phone_number') : $user->phone_number;
+        if ($request->input('imageRemoved') === "true") {
+            $user->image = null;
+        } elseif ($request->hasFile('profileImage')) {
+            $file = $request->file('profileImage');
+            Log::info($file);
+            $path = Storage::disk('public')->put('profile_images', $file);
+            $imagePath = "/storage/" . $path;
+            Log::info($imagePath);
+            $user->image = basename($imagePath);
+        }
+
+        $user->name = $request->input('name');
+        $user->user_name = $request->input('userName');
+        $user->email = $request->input('email');
+        $user->phone_number = $request->input('phone');
+
         $user->update();
 
-        return to_route('mypage');
+        return redirect()->route('mypage');
     }
 
     // パスワード変更画面

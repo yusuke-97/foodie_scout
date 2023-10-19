@@ -57,6 +57,9 @@ app.component('reservation-display', ReservationDisplay);
 import ReservationConfirmation from './components/ReservationConfirmation.vue';
 app.component('reservation-confirmation', ReservationConfirmation);
 
+import UserEdit from './components/UserEdit.vue';
+app.component('user-edit', UserEdit);
+
 import PointCharge from './components/PointCharge.vue';
 app.component('point-charge', PointCharge);
 
