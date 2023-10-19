@@ -94,7 +94,12 @@ class UserController extends Controller
     public function reservation_history_index()
     {
         $user = Auth::user();
-        $reservations = $user->reservations;
+
+        // 予約を日付と時間で降順に並び替え
+        $reservations = $user->reservations()->orderBy('visit_date', 'desc')
+        ->orderBy('visit_time', 'desc')
+        ->get();
+
         return view('users.reservation_history_index', compact('reservations'));
     }
 
