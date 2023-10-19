@@ -8,6 +8,8 @@
                 <a href="{{ route('mypage') }}">マイページ</a> > 予約履歴
             </span>
 
+            <h4 class="mt-3" style="font-weight: bold;">予約一覧</h4>
+
             <div class="container mt-4">
                 <table class="table">
                     <thead>
