@@ -18,9 +18,7 @@ const { errors, submitForm, defineInputBinds } = useForm({
   }),
 })
 
-
 const content = defineInputBinds('content')
-
 </script>
 
 
