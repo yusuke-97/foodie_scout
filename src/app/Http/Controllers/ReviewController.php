@@ -6,6 +6,7 @@ use App\Models\Review;
 use App\Models\Reservation;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class ReviewController extends Controller
 {
@@ -32,6 +33,27 @@ class ReviewController extends Controller
         $review->save();
 
         return redirect()->route('mypage');
+    }
+
+    public function restaurantRanking()
+    {
+        $user_id = Auth::user()->id;
+
+        $now = Carbon::now(); // 現在の日時を取得
+
+        $categories = Reservation::where('user_id', $user_id)
+            ->where('visit_date', '<', $now)
+            ->orWhere(function ($query) use ($now) {
+                $query->where('visit_date', '=', $now->toDateString())
+                    ->where('end_time', '<', $now->toTimeString());
+            })
+            ->with('restaurant.category')
+            ->get()
+            ->pluck('restaurant.category')
+            ->unique('id')
+            ->values();
+
+        return view('reviews.ranking', compact('categories'));
     }
 
     /**

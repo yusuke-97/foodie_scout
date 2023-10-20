@@ -72,6 +72,9 @@ app.component('follow-button', FollowButton);
 import MedalColor from './components/MedalColor.vue';
 app.component('medal-color', MedalColor);
 
+import RestaurantRanking from './components/RestaurantRanking.vue';
+app.component('restaurant-ranking', RestaurantRanking);
+
 import ImageUpload from './components/ImageUpload.vue';
 app.component('image-upload', ImageUpload);
 

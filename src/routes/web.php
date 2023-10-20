@@ -23,6 +23,7 @@ Route::get('/',  [WebController::class, 'index']);
 
 Route::get('/reviews/create/{reservation}', [ReviewController::class, 'create'])->name('reviews.create');
 Route::post('reviews', [ReviewController::class, 'store'])->name('reviews.store');
+Route::get('/reviews/ranking', [ReviewController::class, 'restaurantRanking'])->name('reviews.ranking');
 
 Route::post('/restaurants/{restaurant}/favorite', [RestaurantController::class, 'addFavorite'])->name('restaurants.favorite');
 Route::delete('/restaurants/{restaurant}/favorite', [RestaurantController::class, 'removeFavorite'])->name('restaurants.unfavorite');

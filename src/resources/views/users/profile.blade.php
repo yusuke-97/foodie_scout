@@ -33,16 +33,21 @@
                         <!-- 行ったお店 -->
                         <div class="text-center">
                             <div>行ったお店</div>
-                            <div><strong>{{ $user->reservations->count() }}</strong></div>
+                            <div><strong>{{ $user->reservations->pluck('restaurant_id')->unique()->count() }}</strong></div>
                         </div>
 
-                        <!-- 予約数 -->
+                        <!-- 口コミ数 -->
                         <div class="text-center">
-                            <div>予約数</div>
-                            <div><strong>{{ $user->reservations->count() }}</strong></div>
+                            <div>口コミ</div>
+                            <div><strong>{{ $user->reviews->count() }}</strong></div>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="justify-content-center">
+                <a href="{{ route('reviews.ranking') }}" class="btn submit-button mb-2" style="font-size: 12px;">
+                    <i class="fa-solid fa-ranking-star"></i> ランキング作成
+                </a>
             </div>
         </div>
     </div>
