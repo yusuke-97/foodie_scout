@@ -342,7 +342,7 @@ const isPointBalanceLow = computed(() => {
 })
 
 // 予約情報送信処理
-async function cardRegisterUpdate() {
+async function submitReservationDisplay() {
   const data = {
     visit_date: visitDate.value,
     visit_time: visitTime.value,
