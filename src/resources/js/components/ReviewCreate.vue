@@ -6,11 +6,13 @@ import { ref, computed } from 'vue'
 const props = defineProps({
   csrf: String,
   restaurantName: String,
-  restaurantId: Number
+  restaurantId: Number,
+  reservationId: Number,
 })
 
 const restaurantName = ref(props.restaurantName)
 const restaurantId = ref(props.restaurantId)
+const reservationId = ref(props.reservationId)
 
 const { errors, submitForm, defineInputBinds } = useForm({
   validationSchema: yup.object({
@@ -34,6 +36,7 @@ const content = defineInputBinds('content')
         </div>
 
         <input type="hidden" name="restaurant_id" :value="restaurantId" />
+        <input type="hidden" name="reservation_id" :value="reservationId" />
 
         <input type="hidden" name="_token" :value="csrf" />
 

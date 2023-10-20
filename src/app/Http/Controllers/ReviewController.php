@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Review;
-use App\Models\Restaurant;
+use App\Models\Reservation;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -14,9 +14,9 @@ class ReviewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Restaurant $restaurant)
+    public function create(Reservation $reservation)
     {
-        return view('reviews.create', compact('restaurant'));
+        return view('reviews.create', compact('reservation'));
     }
  
     /**
@@ -27,6 +27,7 @@ class ReviewController extends Controller
         $review = new Review();
         $review->content = $request->input('content');
         $review->restaurant_id = $request->input('restaurant_id');
+        $review->reservation_id = $request->input('reservation_id');
         $review->user_id = Auth::user()->id;
         $review->save();
 

@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/',  [WebController::class, 'index']);
 
-Route::get('/reviews/create/{restaurant}', [ReviewController::class, 'create'])->name('reviews.create');
+Route::get('/reviews/create/{reservation}', [ReviewController::class, 'create'])->name('reviews.create');
 Route::post('reviews', [ReviewController::class, 'store'])->name('reviews.store');
 
 Route::post('/restaurants/{restaurant}/favorite', [RestaurantController::class, 'addFavorite'])->name('restaurants.favorite');
