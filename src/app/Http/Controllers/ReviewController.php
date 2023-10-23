@@ -25,23 +25,31 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
-        $review = new Review();
-        $review->content = $request->input('content');
-        $review->restaurant_id = $request->input('restaurant_id');
-        $review->reservation_id = $request->input('reservation_id');
-        $review->user_id = Auth::user()->id;
-        $review->save();
+        $rankings = $request->input('rankings');
 
-        return redirect()->route('mypage');
+        foreach ($rankings as $ranking) {
+            $review = new Review();
+            $review->content = $ranking['review'];
+            $review->restaurant_id = $ranking['restaurantId'];
+            $review->reservation_id = $ranking['reservationId'];
+            $review->category_id = $ranking['categoryId'];
+            $review->score = $ranking['score'];
+            $review->user_id = Auth::user()->id;
+            $review->save();
+        }
+
+        return response()->json([
+            'redirect_to' => route('mypage.profile')
+        ]);
     }
 
     public function restaurantRanking()
     {
         $user_id = Auth::user()->id;
 
-        $now = Carbon::now(); // 現在の日時を取得
+        $now = Carbon::now();
 
-        $categories = Reservation::where('user_id', $user_id)
+        $reservations = Reservation::where('user_id', $user_id)
             ->where('visit_date', '<', $now)
             ->orWhere(function ($query) use ($now) {
                 $query->where('visit_date', '=', $now->toDateString())
@@ -49,11 +57,27 @@ class ReviewController extends Controller
             })
             ->with('restaurant.category')
             ->get()
-            ->pluck('restaurant.category')
-            ->unique('id')
-            ->values();
+            ->unique('restaurant_id');
+            
+        $reservationsArray = array_values($reservations->toArray());
 
-        return view('reviews.ranking', compact('categories'));
+        $categoriesCounts = $reservations
+        ->pluck('restaurant.category')
+        ->countBy('id');
+
+        $reviewedCategoryIds = Review::where('user_id', $user_id)->pluck('category_id');
+
+        $filteredCategoryIds = $categoriesCounts->filter(function ($count) {
+            return $count >= 3;
+        })->keys()->diff($reviewedCategoryIds);
+
+        $categories = $reservations
+        ->pluck('restaurant.category')
+        ->unique('id')
+        ->whereIn('id', $filteredCategoryIds)
+        ->values();
+
+        return view('reviews.ranking', compact('categories', 'reservationsArray'));
     }
 
     /**
