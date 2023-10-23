@@ -23,4 +23,14 @@ class Review extends Model
     {
         return $this->belongsTo('App\Models\Reservation');
     }
+
+    public function restaurant()
+    {
+        return $this->belongsTo('App\Models\Restaurant');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo('App\Models\Category');
+    }
 }

@@ -140,7 +140,15 @@ class UserController extends Controller
     {
         $user = Auth::user();
 
-        return view('users.profile', compact('user'));
+        $reviews = $user->reviews()
+            ->with('category', 'restaurant')
+            ->get()
+            ->groupBy('category_id')
+            ->transform(function ($reviews) {
+                return $reviews->sortByDesc('score')->take(3);
+            });
+
+        return view('users.profile', compact('user', 'reviews'));
     }
 
     public function follow(User $user)

@@ -18,4 +18,9 @@ class Category extends Model
     {
         return $this->belongsTo('App\Models\MajorCategory');
     }
+
+    public function reviews()
+    {
+        return $this->hasMany('App\Models\Review');
+    }
 }

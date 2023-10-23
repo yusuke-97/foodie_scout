@@ -44,11 +44,44 @@
                     </div>
                 </div>
             </div>
-            <div class="justify-content-center">
+            <div class="justify-content-center mb-4">
                 <a href="{{ route('reviews.ranking') }}" class="btn submit-button mb-2" style="font-size: 12px;">
                     <i class="fa-solid fa-ranking-star"></i> ランキング作成
                 </a>
             </div>
+
+            <div class="row mb-2">
+                <div class="col-1 text-center p-0"></div>
+                <div class="col-11 row">
+                    <div class="col-4 text-center p-0 first-ranked">1位</div>
+                    <div class="col-4 text-center p-0 second-ranked">2位</div>
+                    <div class="col-4 text-center p-0 third-ranked">3位</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <hr class="mb-0">
+            </div>
+
+            @foreach ($reviews as $category_id => $review_group)
+            <div class="row">
+                <div class="col-1 p-0 vertical-container">
+                    <div class="vertical-text">
+                        <span style="font-size: 12px; font-weight: bold;">{{ $review_group->first()->category->name }}</span>
+                    </div>
+                </div>
+
+                <div class="col-11 row">
+                    @foreach ($review_group as $review)
+                    <div class="col-4" style="padding: 4px;">
+                        <div class="image-container">
+                            <img src="{{ asset($review->restaurant->image) }}">
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+            @endforeach
         </div>
     </div>
 </div>
