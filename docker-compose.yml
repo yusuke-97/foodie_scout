@@ -3,6 +3,7 @@ version: '3.8'
 volumes:
   mysql-volume:
   maildir: {}
+  esdata: {}
 
 #コンテナ詳細
 services:
@@ -63,3 +64,13 @@ services:
       MH_MAILDIR_PATH: /tmp
     volumes:
       - maildir:/tmp
+  
+  # 検索機能
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.10.4
+    environment:
+      - discovery.type=single-node
+    ports:
+      - "9200:9200"
+    volumes:
+      - esdata:/usr/share/elasticsearch/data

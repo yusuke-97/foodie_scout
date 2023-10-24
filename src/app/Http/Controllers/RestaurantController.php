@@ -169,4 +169,8 @@ class RestaurantController extends Controller
         // 通常のHTTPリクエストの場合
         return redirect()->back()->with('success', 'お気に入りを解除しました。');
     }
+
+    public function search(Request $request) {
+        
+    }
 }

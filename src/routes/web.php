@@ -27,6 +27,7 @@ Route::get('/reviews/ranking', [ReviewController::class, 'restaurantRanking'])->
 
 Route::post('/restaurants/{restaurant}/favorite', [RestaurantController::class, 'addFavorite'])->name('restaurants.favorite');
 Route::delete('/restaurants/{restaurant}/favorite', [RestaurantController::class, 'removeFavorite'])->name('restaurants.unfavorite');
+Route::get('/restaurants/search', [RestaurantController::class, 'search'])->name('restaurants.search');
 Route::resource('restaurants', RestaurantController::class);
 
 Route::resource('reservations', ReservationController::class);
