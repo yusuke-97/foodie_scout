@@ -162,6 +162,34 @@ label {
     opacity: 0.6;
 }
 
+.search-container {
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    display: flex;
+    background-color: #ffffff;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.search-input, .search-select {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+}
+
+.search-button {
+    background-color: #0fbe9f;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: 1px solid #e0e0e0;
+    cursor: pointer;
+}
+
 
 /*--------------------------------
  # 店舗一覧画面
