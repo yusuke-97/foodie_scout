@@ -11,10 +11,19 @@
             <h2 style="font-weight: bold; margin-bottom: 8px;">
                 {{$restaurant->name}}
             </h2>
-            <div class="d-flex mb-2">
-                <h3 style="color: #FFA500;" class="me-3">★★★★★</h3>
-                <h3 style="color: red; font-weight: bold;">5.00</h3>
+            <div class="d-flex mb-2 align-items-center">
+                <div class="me-3">
+                    @for ($i = 1; $i <= 5; $i++)
+                        @if ($i <=round($restaurant->average_rating))
+                            <span style="color: #FFA500; font-size: 24px;">★</span>
+                        @else
+                            <span style="color: #DDDDDD; font-size: 24px;">★</span>
+                        @endif
+                    @endfor
+                </div>
+                <h3 class="m-0" style="color: red; font-weight: bold; vertical-align: middle;">{{ number_format($restaurant->average_rating, 2) }}</h3>
             </div>
+
             <div class="d-flex mb-2">
                 <p class="me-3">
                     <strong>最寄駅：</strong>{{$restaurant->nearest_station}}駅

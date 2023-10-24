@@ -26,6 +26,7 @@ class Restaurant extends Model
         'category_id',
         'image',
         'recommend_flag',
+        'average_rating',
     ];
 
     public function category()
