@@ -6,13 +6,13 @@
     <div class="row">
 
         <!-- 左側のカラム：プロフィール画像とユーザー名表示エリア -->
-        <div class="col-4 text-center">
-            @if($following->profile_image)
+        <div class="col-4 text-center" id="profile-image-container">
+            @if($following->image)
             <!-- プロフィール画像の表示 -->
             <img class="profile-image" src="{{ asset('profile_images/' . $following->profile_image) }}" alt="プロフィール画像">
             @else
             <!-- プロフィール画像がない場合のアイコン表示 -->
-            <i class="fas fa-user"></i>
+            <i class="fas fa-user profile-icon"></i>
             @endif
 
             <!-- ユーザー名の表示 -->
