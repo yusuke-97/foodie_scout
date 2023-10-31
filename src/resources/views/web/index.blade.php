@@ -28,7 +28,7 @@ $times[] = '24:00';
             <input type="text" name="area" class="search-input" placeholder="エリア・駅 [例:渋谷]">
 
             <!-- ジャンル -->
-            <input type="text" name="cateogry" class="search-input" placeholder="ジャンル [例:寿司]">
+            <input type="text" name="category" class="search-input" placeholder="ジャンル [例:寿司]">
 
             <!-- 日付 -->
             <input type="date" name="visit_date" class="search-input" value="{{ $date }}" min="{{ $date }}" max="{{ $lastDayOfTwoMonthsLater }}" style="width: 250px;">

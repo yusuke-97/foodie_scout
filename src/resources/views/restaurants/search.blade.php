@@ -1,39 +1,47 @@
 @extends('layouts.app')
 
 @section('content')
-
-<form action="{{ route('search') }}" method="get">
-    <div>
-        <label for="area">エリア・駅:</label>
-        <input type="text" id="area" name="area">
+<div class="row justify-content-center">
+    <div class="col-8">
+        @if (isset($results))
+        <h3 style="font-weight: bold; font-size: 24px;">{{ $area }}の{{ $category }}のお店</h3>
+        <ul>
+            @foreach ($results as $restaurant)
+            <hr>
+            <div style="margin-bottom: 20px;">
+                <div class="row">
+                    <div class="col-4">
+                        <img src="{{ $restaurant['_source']['image'] }}" alt="{{ $restaurant['_source']['name'] }}" style="width: 200px; height: 200px; object-fit: cover;">
+                    </div>
+                    <div class="col-8">
+                        <p style="color: #1E90FF; font-weight: bold; font-size: 24px;">{{ $restaurant['_source']['name'] }}</p>
+                        <p>
+                            <span>{{ $restaurant['_source']['nearest_station'] }}駅</span>
+                            /
+                            <span style="font-weight: bold;">{{ $category }}</span>
+                        </p>
+                        <hr>
+                        <p class="mb-0">{{ $restaurant['_source']['catchphrase'] }}</p>
+                        <div class="d-flex align-items-center">
+                            <div class="me-3">
+                                @for ($i = 1; $i <= 5; $i++)
+                                    @if ($i <=round($restaurant['_source']['average_rating']))
+                                        <span style="color: #FFA500; font-size: 24px;">★</span>
+                                    @else
+                                        <span style="color: #DDDDDD; font-size: 24px;">★</span>
+                                    @endif
+                                @endfor
+                            </div>
+                            <h3 class="mb-0" style="color: red; font-weight: bold; vertical-align: middle;">{{number_format($restaurant['_source']['average_rating'], 2) }}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </ul>
+        @else
+        <h3>結果が見つかりませんでした</h3>
+        @endif
     </div>
-    <div>
-        <label for="category">ジャンル:</label>
-        <input type="text" id="category" name="category">
-    </div>
-    <div>
-        <label for="visit_date">訪問日:</label>
-        <input type="date" id="visit_date" name="visit_date">
-    </div>
-    <div>
-        <label for="visit_time">訪問時刻:</label>
-        <input type="time" id="visit_time" name="visit_time">
-    </div>
-    <div>
-        <label for="number_of_guests">人数:</label>
-        <input type="number" id="number_of_guests" name="number_of_guests" min="1">
-    </div>
-    <div>
-        <button type="submit">検索</button>
-    </div>
-</form>
-
-@if (isset($results))
-<h3>検索結果</h3>
-<ul>
-    @foreach ($results as $restaurant)
-    <li>{{ $restaurant['_source']['address'] }} - {{ $restaurant['_source']['nearest_station'] }} - {{ $restaurant['_source']['name'] }} - {{ $restaurant['_source']['category'] }}</li>
-    @endforeach
-</ul>
-@endif
+</div>
 @endsection

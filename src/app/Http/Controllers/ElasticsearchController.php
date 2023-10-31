@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use DB;
 
 class ElasticsearchController extends Controller
@@ -60,8 +59,10 @@ class ElasticsearchController extends Controller
             return $restaurant['_source']['seat'] - $already_reserved_guests >= $number_of_guests;
         });
 
-        Log::info(json_encode($response));
-
-        return view('restaurants.search', ['results' => $available_restaurants]);
+        return view('restaurants.search', [
+            'results' => $available_restaurants,
+            'area' => $area,
+            'category' => $category
+        ]);
     }
 }
