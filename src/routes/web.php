@@ -7,6 +7,7 @@ use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\WebController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\ElasticsearchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,8 @@ use Illuminate\Support\Facades\Auth;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/search', [ElasticsearchController::class, 'search'])->name('search');
 
 Route::get('/',  [WebController::class, 'index']);
 

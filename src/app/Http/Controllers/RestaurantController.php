@@ -171,6 +171,7 @@ class RestaurantController extends Controller
     }
 
     public function search(Request $request) {
+        $client = app('elasticsearch');
         
     }
 }

@@ -1,7 +1,8 @@
 <?php
 
 return [
-    'hosts' => [
-        env('ELASTICSEARCH_HOST', 'localhost') . ':' . env('ELASTICSEARCH_PORT', 9200)
-    ]
+    'host' => env('ELASTICSEARCH_HOST', 'localhost'),
+    'port' => env('ELASTICSEARCH_PORT', 9200),
+    'username' => env('ELASTICSEARCH_USERNAME'),
+    'password' => env('ELASTICSEARCH_PASSWORD')
 ];

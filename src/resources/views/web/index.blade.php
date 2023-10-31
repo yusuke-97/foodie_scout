@@ -23,7 +23,7 @@ $times[] = '24:00';
 
 <div class="row">
     <div class="col-12 mb-5 position-relative">
-        <form action="{{ route('restaurants.search') }}" method="GET" class="position-absolute search-container">
+        <form action="{{ route('search') }}" method="get" class="position-absolute search-container">
             <!-- エリア -->
             <input type="text" name="area" class="search-input" placeholder="エリア・駅 [例:渋谷]">
 
@@ -31,17 +31,17 @@ $times[] = '24:00';
             <input type="text" name="cateogry" class="search-input" placeholder="ジャンル [例:寿司]">
 
             <!-- 日付 -->
-            <input type="date" name="date" class="search-input" value="{{ $date }}" min="{{ $date }}" max="{{ $lastDayOfTwoMonthsLater }}" style="width: 250px;">
+            <input type="date" name="visit_date" class="search-input" value="{{ $date }}" min="{{ $date }}" max="{{ $lastDayOfTwoMonthsLater }}" style="width: 250px;">
 
             <!-- 時間 -->
-            <select name="time" class="search-input">
+            <select name="visit_time" class="search-input">
                 @foreach($times as $t)
                 <option value="{{ $t }}" @if($t=='17:00' ) selected @endif>{{ $t }}</option>
                 @endforeach
             </select>
 
             <!-- 人数 -->
-            <select name="people" class="search-select">
+            <select name="number_of_guests" class="search-select">
                 @for($i = 1; $i <= 50; $i++) <option value="{{ $i }}" @if($i==2) selected @endif>{{ $i }}名</option>
                     @endfor
             </select>

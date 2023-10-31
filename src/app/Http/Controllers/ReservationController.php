@@ -70,9 +70,6 @@ class ReservationController extends Controller
     {
         $desired_date = $request->input('visit_date');
 
-
-        Log::info($desired_date);
-
         $start_business_hour = intval(substr($request->input('start_time'), 0, 2));
         $start_business_minute = intval(substr($request->input('start_time'), 3, 2));
 
