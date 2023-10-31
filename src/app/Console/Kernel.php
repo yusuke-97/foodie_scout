@@ -13,6 +13,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('app:calculate-average-score')->everyFiveMinutes();
+        $schedule->command('app:index-restaurants')->everyFiveMinutes();
     }
 
     /**
