@@ -13,13 +13,12 @@
             </h2>
             <div class="d-flex mb-2 align-items-center">
                 <div class="me-3">
-                    @for ($i = 1; $i <= 5; $i++)
-                        @if ($i <=round($restaurant->average_rating))
-                            <span style="color: #FFA500; font-size: 24px;">★</span>
+                    @for ($i = 1; $i <= 5; $i++) @if ($i <=round($restaurant->average_rating))
+                        <span style="color: #FFA500; font-size: 24px;">★</span>
                         @else
-                            <span style="color: #DDDDDD; font-size: 24px;">★</span>
+                        <span style="color: #DDDDDD; font-size: 24px;">★</span>
                         @endif
-                    @endfor
+                        @endfor
                 </div>
                 <h3 class="m-0" style="color: red; font-weight: bold; vertical-align: middle;">{{ number_format($restaurant->average_rating, 2) }}</h3>
             </div>
@@ -122,14 +121,54 @@
                 </tr>
             </table>
 
-            <div class="offset-1 col-11">
-                <hr class="w-100">
-                <h3 class="float-left">口コミ</h3>
-            </div>
+            <hr class="mt-5 mb-0">
 
-            <div class="offset-1 col-11">
-                <!-- レビューを実装する箇所になります -->
+            <h4 class="mt-4 mb-4 sub-title" style="font-weight: bold;">口コミ</h4>
+            @foreach($reviews as $review)
+            <div class="card mb-3">
+                <div class="card-header">
+                    <div class="row align-items-center">
+                        <div class="col-2">
+                            <a href="{{ route('mypage.profile', $review->user->id) }}" id="small-profile-image-container" style="text-decoration: none;">
+                                @if($review->user->image)
+                                <img class="small-profile-image" src="{{ asset('/storage/profile_images/' . $review->user->image) }}" alt="プロフィール画像">
+                                @else
+                                <i class="fas fa-user small-profile-icon" style="color: #000000;"></i>
+                                @endif
+                            </a>
+                        </div>
+                        <div class="col-6">
+                            <a href="{{ route('mypage.profile', $review->user->id) }}" class="d-inline-block " style="text-decoration: none;">
+                                <span style="font-weight: bold; color: #000000;" class="me-3">{{ $review->user->name }}</span>
+                            </a>
+                            <medal-color :user-followed="{{ $review->user->followers->count() }}" class="d-inline-block"></medal-color>
+                            <p class="mb-0" style="color: gray;">
+                                <span>
+                                    口コミ {{ $review->user->reviews->count() }}件
+                                </span>
+                                |
+                                <span>
+                                    フォロワー {{ $review->user->followers->count() }}人
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    @if($review->score === 5)
+                        <div class="p-0 mb-2 first-ranked" style="text-align: left;">1位</div>
+                    @elseif($review->score === 4)
+                        <div class="p-0 mb-2 second-ranked" style="text-align: left;">2位</div>
+                    @elseif($review->score === 3)
+                        <div class="p-0 mb-2 third-ranked" style="text-align: left;">3位</div>
+                    @endif
+                    <p class="card-text">{{ $review->content }}</p>
+                </div>
+                <div class="card-footer text-muted">
+                    {{ $review->created_at->diffForHumans() }}
+                </div>
             </div>
+            @endforeach
         </div>
         <div class="col-4" style="position: sticky; top: 0;">
             <reservation-display google-api-key="{{ ENV('GOOGLE_API_KEY') }}" :restaurant-id=" {{ $restaurant->id }}" :restaurant-name="'{{ $restaurant->name }}'" :restaurant-price="{{ $restaurant->price }}" :restaurant-seat="{{ $restaurant->seat }}" :restaurant-phone-number="'{{ $restaurant->phone_number }}'" :restaurant-start-time="'{{ $restaurant->start_time }}'" :restaurant-end-time="'{{ $restaurant->end_time }}'" :restaurant-closed-day="'{{ $restaurant->closed_day }}'" :user-point-balance="{{ Auth::user()->point }}">

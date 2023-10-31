@@ -81,7 +81,15 @@ class RestaurantController extends Controller
      */
     public function show(Restaurant $restaurant)
     {
-        return view('restaurants.show', compact('restaurant'));
+        $reviews = Review::where('restaurant_id', $restaurant->id)
+            ->with('user')
+            ->get()
+            ->sortByDesc(function ($review) {
+                return $review->user->followers_count;
+            })
+            ->take(3);
+
+        return view('restaurants.show', compact('restaurant', 'reviews'));
     }
 
     /**

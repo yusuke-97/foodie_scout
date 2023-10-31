@@ -181,12 +181,13 @@ $times[] = '24:00';
                                 </p>
                                 <div class="d-flex align-items-center">
                                     <div class="me-3">
-                                        @for ($i = 1; $i <= 5; $i++) @if ($i <=round($review->restaurant->average_rating))
-                                            <span style="color: #FFA500; font-size: 14px;">★</span>
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            @if ($i <=round($review->restaurant->average_rating))
+                                                <span style="color: #FFA500; font-size: 14px;">★</span>
                                             @else
-                                            <span style="color: #DDDDDD; font-size: 14px;">★</span>
+                                                <span style="color: #DDDDDD; font-size: 14px;">★</span>
                                             @endif
-                                            @endfor
+                                        @endfor
                                     </div>
                                     <h3 class="mb-0" style="color: red; font-weight: bold; vertical-align: middle; font-size: 14px;">{{number_format($review->restaurant->average_rating, 2) }}</h3>
                                 </div>
