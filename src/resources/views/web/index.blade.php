@@ -136,24 +136,28 @@ $times[] = '24:00';
                     <div class="card-header">
                         <div class="row">
                             <div class="col-3">
-                                <div>
-                                    <a href="{{ route('mypage.profile', $user->id) }}" id="small-profile-image-container" style="text-decoration: none;">
-                                        @if($user->image)
-                                        <img class="small-profile-image" src="{{ asset('/storage/profile_images/' . $user->image) }}" alt="プロフィール画像">
-                                        @else
-                                        <i class="fas fa-user small-profile-icon" style="color: #000000;"></i>
-                                        @endif
-                                    </a>
-                                </div>
+                                <a href="{{ route('mypage.profile', $user->id) }}" id="small-profile-image-container" style="text-decoration: none;">
+                                    @if($user->image)
+                                    <img class="small-profile-image" src="{{ asset('/storage/profile_images/' . $user->image) }}" alt="プロフィール画像">
+                                    @else
+                                    <i class="fas fa-user small-profile-icon" style="color: #000000;"></i>
+                                    @endif
+                                </a>
                             </div>
-                            <div class="col-9 row">
-                                <div class="col-10">
-                                    <span style="font-weight: bold;">{{ $user->name }}</span>
-                                    <p>{{ $user->followers_count }} フォロワー</p>
-                                </div>
-                                <div class="col-2">
-                                    <medal-color :user-followed="{{ $user->followers->count() }}"></medal-color>
-                                </div>
+                            <div class="col-9">
+                                <a href="{{ route('mypage.profile', $user->id) }}" class="d-inline-block " style="text-decoration: none;">
+                                    <span style="font-weight: bold; color: #000000;" class="me-3">{{ $user->name }}</span>
+                                </a>
+                                <medal-color :user-followed="{{ $user->followers->count() }}" class="d-inline-block"></medal-color>
+                                <p class="mb-0" style="color: gray;">
+                                    <span>
+                                        口コミ {{ $user->reviews->count() }}件
+                                    </span>
+                                    |
+                                    <span>
+                                        フォロワー {{ $user->followers->count() }}人
+                                    </span>
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -181,13 +185,12 @@ $times[] = '24:00';
                                 </p>
                                 <div class="d-flex align-items-center">
                                     <div class="me-3">
-                                        @for ($i = 1; $i <= 5; $i++)
-                                            @if ($i <=round($review->restaurant->average_rating))
-                                                <span style="color: #FFA500; font-size: 14px;">★</span>
+                                        @for ($i = 1; $i <= 5; $i++) @if ($i <=round($review->restaurant->average_rating))
+                                            <span style="color: #FFA500; font-size: 14px;">★</span>
                                             @else
-                                                <span style="color: #DDDDDD; font-size: 14px;">★</span>
+                                            <span style="color: #DDDDDD; font-size: 14px;">★</span>
                                             @endif
-                                        @endfor
+                                            @endfor
                                     </div>
                                     <h3 class="mb-0" style="color: red; font-weight: bold; vertical-align: middle; font-size: 14px;">{{number_format($review->restaurant->average_rating, 2) }}</h3>
                                 </div>
