@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container" style="margin-top: 30px;">
     <div class="row justify-content-center">
         <div class="col-8">
             <div class="row">
@@ -44,11 +44,13 @@
                     </div>
                 </div>
             </div>
+            @if(Auth::user()->id === $user->id)
             <div class="justify-content-center mb-4">
                 <a href="{{ route('reviews.ranking') }}" class="btn submit-button mb-2" style="font-size: 12px;">
                     <i class="fa-solid fa-ranking-star"></i> ランキング作成
                 </a>
             </div>
+            @endif
 
             <div class="row mb-2">
                 <div class="col-1 text-center p-0"></div>

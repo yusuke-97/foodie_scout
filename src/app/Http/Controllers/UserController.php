@@ -136,10 +136,8 @@ class UserController extends Controller
         ]);
     }
 
-    public function profile()
+    public function profile(User $user)
     {
-        $user = Auth::user();
-
         $reviews = $user->reviews()
             ->with('category', 'restaurant')
             ->get()

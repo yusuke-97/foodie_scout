@@ -50,7 +50,7 @@ Route::controller(UserController::class)->group(function () {
     Route::get('users/mypage/reservation_history/{reservation}', 'reservation_history_show')->name('mypage.reservation_history_show');
     Route::get('users/mypage/charge', 'charge_page')->name('charge.page');
     Route::post('users/mypage/charge/point', 'charge_point')->name('charge.point');
-    Route::get('users/mypage/profile', 'profile')->name('mypage.profile');
+    Route::get('users/{user}/mypage/profile', 'profile')->name('mypage.profile');
     Route::post('/follow/{user}', 'follow')->name('follow');
     Route::delete('/unfollow/{user}', 'unfollow')->name('unfollow');
     Route::get('users/mypage/following', 'following')->name('mypage.following');
