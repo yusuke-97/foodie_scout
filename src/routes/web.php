@@ -27,6 +27,8 @@ Route::get('/',  [WebController::class, 'index']);
 Route::get('/reviews/create/{reservation}', [ReviewController::class, 'create'])->name('reviews.create');
 Route::post('/reviews/store', [ReviewController::class, 'store'])->name('reviews.store');
 Route::get('/reviews/ranking', [ReviewController::class, 'restaurantRanking'])->name('reviews.ranking');
+Route::get('/reviews/edit_ranking/{category}', [ReviewController::class, 'restaurantEditRanking'])->name('reviews.edit_ranking');
+Route::post('/reviews/update', [ReviewController::class, 'update'])->name('reviews.update');
 
 Route::post('/restaurants/{restaurant}/favorite', [RestaurantController::class, 'addFavorite'])->name('restaurants.favorite');
 Route::delete('/restaurants/{restaurant}/favorite', [RestaurantController::class, 'removeFavorite'])->name('restaurants.unfavorite');

@@ -1,25 +1,44 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import axios from 'axios'
 
 const props = defineProps({
-    categories: Array,
-    reservations: Array
-})
-
-console.log(props.categories)
-
-const selectedCategory = ref([])
-
-const filteredReservations = computed(() => {
-    return props.reservations.filter(reservation => 
-        selectedCategory.value.includes(reservation.restaurant.category_id)
-    )
+    categoryName: String,
+    reservations: Array,
+    reviews: Object
 })
 
 const selectedRanking1 = ref(null)
 const selectedRanking2 = ref(null)
 const selectedRanking3 = ref(null)
+
+onMounted(() => {
+    // 1位のレビュー
+    const review1 = props.reviews.find(review => review.score === 5)
+    if (review1) {
+        selectedRanking1.value = review1.reservation_id
+        reviews.value[review1.reservation_id] = review1.content
+    }
+
+    // 2位のレビュー
+    const review2 = props.reviews.find(review => review.score === 4)
+    if (review2) {
+        selectedRanking2.value = review2.reservation_id
+        reviews.value[review2.reservation_id] = review2.content
+    }
+
+    // 3位のレビュー
+    const review3 = props.reviews.find(review => review.score === 3)
+    if (review3) {
+        selectedRanking3.value = review3.reservation_id
+        reviews.value[review3.reservation_id] = review3.content
+    }
+
+    // 4位以降のレビュー
+    props.reviews.filter(review => review.score < 3).forEach(review => {
+            reviews.value[review.reservation_id] = review.content
+    });
+})
 
 function updateSelectedRanking(event, rankingNumber, reservationId) {
     const isChecked = event.target.checked
@@ -70,7 +89,7 @@ async function saveRankingAndReviews() {
     ]
     
     try {
-        const response = await axios.post('/reviews/store', { rankings })
+        const response = await axios.post('/reviews/update', { rankings })
         if (response.data.redirect_to) {
             window.location.href = response.data.redirect_to
         }
@@ -93,23 +112,10 @@ function getCategoryId(reservationId) {
 
 
 <template>
-    <h2 class="mt-3 mb-4" style="font-weight: bold;">ランキングの作成</h2>
-    <div class="categories-container">
-        <div v-if="categories.length > 0" class="category" v-for="category in categories" :key="category.id">
-            <input type="checkbox" 
-                v-model="selectedCategory" 
-                :value="category.id" 
-                class="me-2" 
-                :disabled="selectedCategory.length > 0 && !selectedCategory.includes(category.id)">
-            <label>{{ category.name }}</label>
-        </div>
-        <div v-else>
-            <p class="m-0">ランキング作成できるカテゴリーが存在しません</p>
-        </div>
-    </div>
-    <h3 v-if="selectedCategory.length > 0" style="font-weight: bold;" class="mt-3">店舗一覧</h3>
+    <h2 class="mt-3 mb-4" style="font-weight: bold;">{{ props.categoryName }}ジャンルのランキングの修正</h2>
+    <h3 style="font-weight: bold;" class="mt-3">店舗一覧</h3>
     <table class="table table-bordered mt-4">
-        <thead v-if="selectedCategory.length > 0">
+        <thead>
             <tr>
                 <th class="align-middle text-center" scope="col"><span class="first-ranked">1</span></th>
                 <th class="align-middle text-center" scope="col"><span class="second-ranked">2</span></th>
@@ -120,20 +126,23 @@ function getCategoryId(reservationId) {
             </tr>
         </thead>
         <tbody>
-            <tr v-for="reservation in filteredReservations" :key="reservation.id">
+            <tr v-for="reservation in props.reservations" :key="reservation.id">
                 <td class="align-middle text-center">
                     <input type="checkbox" 
                         :disabled="selectedRanking1 !== null && selectedRanking1 !== reservation.id || (selectedRanking2 === reservation.id || selectedRanking3 === reservation.id)"
+                        :checked="selectedRanking1 === reservation.id"
                         @change="updateSelectedRanking($event, 1, reservation.id)">
                 </td>
                 <td class="align-middle text-center">
                     <input type="checkbox" 
                         :disabled="selectedRanking2 !== null && selectedRanking2 !== reservation.id || (selectedRanking1 === reservation.id || selectedRanking3 === reservation.id)"
+                        :checked="selectedRanking2 === reservation.id"
                         @change="updateSelectedRanking($event, 2, reservation.id)">
                 </td>
                 <td class="align-middle text-center">
                     <input type="checkbox" 
                         :disabled="selectedRanking3 !== null && selectedRanking3 !== reservation.id || (selectedRanking1 === reservation.id || selectedRanking2 === reservation.id)"
+                        :checked="selectedRanking3 === reservation.id"
                         @change="updateSelectedRanking($event, 3, reservation.id)">
                 </td>
                 <td class="align-middle text-center"><img class="square-image" :src="`/${reservation.restaurant.image}`" alt="店舗画像"></td>
@@ -150,7 +159,7 @@ function getCategoryId(reservationId) {
             </tr>
         </tbody>
     </table>
-    <div v-if="selectedCategory.length > 0" class="row justify-content-center">
+    <div class="row justify-content-center">
         <button :disabled="isButtonDisabled" 
                 @click="saveRankingAndReviews" 
                 class="btn submit-button mt-3 w-25">
@@ -162,18 +171,31 @@ function getCategoryId(reservationId) {
 
 
 <style>
-.categories-container {
-    display: flex;
-    flex-wrap: wrap;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 16px;
-    margin-bottom: 16px;
+.first-ranked {
+    font-size:1.5em;
+	text-align:center;
+	font-weight:bold;
+	color: transparent;
+	background: repeating-linear-gradient(0deg, #B67B03 0%, #DAAF08 45%, #FEE9A0 70%, #DAAF08 85%, #B67B03 90% 100%);
+	-webkit-background-clip: text;
 }
 
-.category {
-    margin-right: 48px;
-    margin-bottom: 16px;
+.second-ranked {
+    font-size:1.5em;
+	text-align:center;
+	font-weight:bold;
+	color: transparent;
+	background: repeating-linear-gradient(0deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%); 
+	-webkit-background-clip: text;
+}
+
+.third-ranked {
+    font-size:1.5em;
+	text-align:center;
+	font-weight:bold;
+	color: transparent;
+	background: repeating-linear-gradient(0deg, #a57e65 0%, #a57e65 45%, #f3cfb8 70%, #a57e65 85%, #a57e65 90% 100%);
+	-webkit-background-clip: text;
 }
 
 .text-center {

@@ -69,15 +69,24 @@
             <div class="row">
                 <div class="col-1 p-0 vertical-container">
                     <div class="vertical-text">
-                        <span style="font-size: 12px; font-weight: bold;">{{ $review_group->first()->category->name }}</span>
+                        <a href="{{ route('reviews.edit_ranking', $review_group->first()->category->id) }}" style="text-decoration: none; color: #000000;">
+                            <span style="font-size: 14px; font-weight: bold;" class="mb-2">{{ $review_group->first()->category->name }}</span>
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
                     </div>
                 </div>
 
                 <div class="col-11 row">
                     @foreach ($review_group as $review)
                     <div class="col-4" style="padding: 4px;">
-                        <div class="image-container">
+                        <div class="image-container" style="position: relative;">
                             <img src="{{ asset($review->restaurant->image) }}">
+                            <div style="position: absolute; top: 20%; left: 0; width: 100%; text-align: center; color: #ffffff; background-color: rgba(0, 0, 0, 0.5); font-size: 18px; font-weight: bold;">
+                                {{ $review->restaurant->name }}
+                            </div>
+                            <div style="position: absolute; top: 70%; left: 0; width: 100%; text-align: center; color: #ffffff; font-size: 12px; font-weight: bold;">
+                                {{ $review->restaurant->prefecture }} {{ $review->restaurant->city }}
+                            </div>
                         </div>
                     </div>
                     @endforeach

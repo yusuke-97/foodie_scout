@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Review;
 use App\Models\Reservation;
 use Illuminate\Support\Facades\Auth;
@@ -39,7 +40,7 @@ class ReviewController extends Controller
         }
 
         return response()->json([
-            'redirect_to' => route('mypage.profile')
+            'redirect_to' => route('mypage.profile', ['user' => Auth::user()->id])
         ]);
     }
 
@@ -80,6 +81,29 @@ class ReviewController extends Controller
         return view('reviews.ranking', compact('categories', 'reservationsArray'));
     }
 
+    public function restaurantEditRanking(Category $category)
+    {
+        $now = Carbon::now();
+
+        $reservations = Reservation::whereHas('restaurant.category', function ($query) use ($category) {
+            $query->where('id', $category->id);
+        })
+        ->where('visit_date', '<', $now)
+        ->orWhere(function ($query) use ($now) {
+            $query->where('visit_date', '=', $now->toDateString())
+                ->where('end_time', '<', $now->toTimeString());
+        })
+        ->with('restaurant.category')
+        ->get()
+        ->unique('restaurant_id');
+
+        $reviews = Review::whereIn('reservation_id', $reservations->pluck('id'))
+        ->orderBy('score', 'desc')
+        ->get();
+
+        return view('reviews.edit_ranking', compact('category', 'reservations', 'reviews'));
+    }
+
     /**
      * Display the specified resource.
      */
@@ -99,9 +123,50 @@ class ReviewController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Review $review)
+    public function update(Request $request)
     {
-        //
+        $rankings = $request->input('rankings');
+
+        // categoryIdを取得
+        $categoryId = $rankings[0]['categoryId'];
+
+        // categoryIdを持つ既存のrestaurantIdsを取得
+        $existingRestaurantIds = Review::where('category_id', $categoryId)->pluck('restaurant_id')->toArray();
+
+        $newRestaurantIds = array_column($rankings, 'restaurantId');
+
+        // 既存のrestaurantIdで新しいrestaurantIdsと一致しないものはscoreをnullにする
+        Review::where('category_id', $categoryId)
+            ->whereNotIn('restaurant_id', $newRestaurantIds)
+            ->update(['score' => 0]);
+
+        foreach ($rankings as $ranking) {
+            if (in_array($ranking['restaurantId'], $existingRestaurantIds)) {
+                // 既存のレビューを更新
+                $existingReview = Review::where('restaurant_id', $ranking['restaurantId'])
+                    ->where('category_id', $categoryId)
+                    ->first();
+                if ($existingReview) {
+                    $existingReview->content = $ranking['review'];
+                    $existingReview->score = $ranking['score'];
+                    $existingReview->save();
+                }
+            } else {
+                // 新しいレビューを登録
+                $newReview = new Review();
+                $newReview->content = $ranking['review'];
+                $newReview->restaurant_id = $ranking['restaurantId'];
+                $newReview->reservation_id = $ranking['reservationId'];
+                $newReview->category_id = $categoryId;
+                $newReview->score = $ranking['score'];
+                $newReview->user_id = Auth::user()->id;
+                $newReview->save();
+            }
+        }
+
+        return response()->json([
+            'redirect_to' => route('mypage.profile', ['user' => Auth::user()->id])
+        ]);
     }
 
     /**

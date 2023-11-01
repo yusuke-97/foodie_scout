@@ -75,6 +75,9 @@ app.component('medal-color', MedalColor);
 import RestaurantRanking from './components/RestaurantRanking.vue';
 app.component('restaurant-ranking', RestaurantRanking);
 
+import RestaurantEditRanking from './components/RestaurantEditRanking.vue';
+app.component('restaurant-edit-ranking', RestaurantEditRanking);
+
 import ImageUpload from './components/ImageUpload.vue';
 app.component('image-upload', ImageUpload);
 
