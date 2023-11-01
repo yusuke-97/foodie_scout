@@ -29,6 +29,7 @@ Route::post('/reviews/store', [ReviewController::class, 'store'])->name('reviews
 Route::get('/reviews/ranking', [ReviewController::class, 'restaurantRanking'])->name('reviews.ranking');
 Route::get('/reviews/edit_ranking/{category}', [ReviewController::class, 'restaurantEditRanking'])->name('reviews.edit_ranking');
 Route::post('/reviews/update', [ReviewController::class, 'update'])->name('reviews.update');
+Route::post('/reviews/delete_ranking', [ReviewController::class, 'deleteRanking'])->name('reviews.delete_ranking');
 
 Route::post('/restaurants/{restaurant}/favorite', [RestaurantController::class, 'addFavorite'])->name('restaurants.favorite');
 Route::delete('/restaurants/{restaurant}/favorite', [RestaurantController::class, 'removeFavorite'])->name('restaurants.unfavorite');

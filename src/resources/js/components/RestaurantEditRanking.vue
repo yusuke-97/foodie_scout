@@ -1,9 +1,11 @@
 <script setup>
+import Modal from './Modal.vue'
 import { ref, computed, onMounted } from 'vue'
 import axios from 'axios'
 
 const props = defineProps({
     categoryName: String,
+    categoryId: Number,
     reservations: Array,
     reviews: Object
 })
@@ -11,6 +13,7 @@ const props = defineProps({
 const selectedRanking1 = ref(null)
 const selectedRanking2 = ref(null)
 const selectedRanking3 = ref(null)
+const showModal = ref(false)
 
 onMounted(() => {
     // 1位のレビュー
@@ -107,6 +110,19 @@ function getCategoryId(reservationId) {
     const reservation = props.reservations.find(r => r.id === reservationId);
     return reservation ? reservation.restaurant.category_id : null;
 }
+
+async function deleteRankingAndReviews() {
+    const category_id = props.categoryId
+
+    try {
+        const response = await axios.post('/reviews/delete_ranking', { category_id })
+        if (response.data.redirect_to) {
+            window.location.href = response.data.redirect_to;
+        }
+    } catch (error) {
+        console.error('An error occurred while deleting rankings!', error);
+    }
+}
 </script>
 
 
@@ -162,9 +178,29 @@ function getCategoryId(reservationId) {
     <div class="row justify-content-center">
         <button :disabled="isButtonDisabled" 
                 @click="saveRankingAndReviews" 
-                class="btn submit-button mt-3 w-25">
+                class="btn submit-button mt-3 me-5 w-25">
             ランキング登録
         </button>
+        <button @click="showModal = true" 
+                class="btn btn-danger mt-3 w-25">
+            ランキング削除
+        </button>
+        <Teleport to="body">
+            <Modal :show="showModal" @close="showModal = false">
+                <template #header>
+                    <h3>ランキング削除の確認</h3>
+                </template>
+                <template #body>
+                    削除してもいいですか？
+                </template>
+                <template #footer>
+                    <div class="d-flex justify-content-between" style="width: 100%;">
+                        <button @click="showModal = false" class="btn submit-button">キャンセル</button>
+                        <button @click="deleteRankingAndReviews" class="btn submit-button" style="background-color: #f16363;">削除する</button>
+                    </div>
+                </template>
+            </Modal>
+        </Teleport>
     </div>
 </template>
 

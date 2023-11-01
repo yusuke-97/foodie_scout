@@ -172,8 +172,18 @@ class ReviewController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Review $review)
+    public function deleteRanking(Request $request)
     {
-        //
+        $category_id = $request->input('category_id');
+
+        $user_id = Auth::user()->id;
+
+        Review::where('user_id', $user_id)
+            ->where('category_id', $category_id)
+            ->update(['score' => 0]);
+
+        return response()->json([
+            'redirect_to' => route('mypage.profile', ['user' => Auth::user()->id])
+        ]);
     }
 }

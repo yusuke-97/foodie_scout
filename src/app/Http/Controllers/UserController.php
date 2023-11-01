@@ -139,6 +139,7 @@ class UserController extends Controller
     public function profile(User $user)
     {
         $reviews = $user->reviews()
+            ->where('score', '>=', 3)
             ->with('category', 'restaurant')
             ->get()
             ->groupBy('category_id')
