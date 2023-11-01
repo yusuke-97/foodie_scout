@@ -179,7 +179,7 @@ $times[] = '24:00';
                                     <p style="color: #1E90FF; font-weight: bold; font-size: 14px;" class="mb-0">{{ $review->restaurant->name }}</p>
                                 </a>
                                 <p style="font-size: 12px;" class="mb-0">
-                                    <span>{{ $review->restaurant->namenearest_station }}駅</span>
+                                    <span>{{ $review->restaurant->nearest_station }}駅</span>
                                     /
                                     <span style="font-weight: bold;">{{ $review->restaurant->category->name }}</span>
                                 </p>

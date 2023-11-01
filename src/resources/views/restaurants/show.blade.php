@@ -156,11 +156,23 @@
                 </div>
                 <div class="card-body">
                     @if($review->score === 5)
-                        <div class="p-0 mb-2 first-ranked" style="text-align: left;">1位</div>
+                    <div class="mb-3">
+                        <strong>{{ $review->category->name }}ジャンル</strong>
+                        <span class="p-0 mb-2 first-ranked">1位</span>
+                        <strong>に評価しました</strong>
+                    </div>
                     @elseif($review->score === 4)
-                        <div class="p-0 mb-2 second-ranked" style="text-align: left;">2位</div>
+                    <div class="mb-3">
+                        <strong>{{ $review->category->name }}ジャンル</strong>
+                        <span class="p-0 mb-2 second-ranked">2位</span>
+                        <strong>に評価しました</strong>
+                    </div>
                     @elseif($review->score === 3)
-                        <div class="p-0 mb-2 third-ranked" style="text-align: left;">3位</div>
+                    <div class="mb-3">
+                        <strong>{{ $review->category->name }}ジャンル</strong>
+                        <span class="p-0 mb-2 third-ranked">3位</span>
+                        <strong>に評価しました</strong>
+                    </div>
                     @endif
                     <p class="card-text">{{ $review->content }}</p>
                 </div>
