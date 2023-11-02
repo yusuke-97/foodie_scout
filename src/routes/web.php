@@ -56,8 +56,6 @@ Route::controller(UserController::class)->group(function () {
     Route::get('users/{user}/mypage/profile', 'profile')->name('mypage.profile');
     Route::post('/follow/{user}', 'follow')->name('follow');
     Route::delete('/unfollow/{user}', 'unfollow')->name('unfollow');
-    Route::get('users/mypage/following', 'following')->name('mypage.following');
-    Route::get('users/mypage/following/{following}', 'follower_show')->name('following.show');
     Route::get('users/mypage/register_card', 'register_card')->name('mypage.register_card');
     Route::post('users/mypage/token', 'token')->name('mypage.token');
 });
