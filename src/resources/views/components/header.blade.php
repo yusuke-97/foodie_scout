@@ -21,20 +21,15 @@
                 </li>
 
                 @else
-                <li class="nav-item mr-5">
-                    <a class="nav-link" href="{{ route('mypage.following') }}">
-                        <i class="far fa-heart"></i>
-                    </a>
-                </li>
-                <li class="nav-item mr-5">
+                <li class="nav-item me-3">
                     <a class="nav-link" href="{{ route('mypage.favorite') }}">
-                        <i class="fas fa-bookmark"></i>
+                        <i class="fas fa-bookmark me-1"></i><label>お気に入り</label>
                     </a>
                 </li>
                 <hr>
-                <li class="nav-item mr-5">
+                <li class="nav-item me-3">
                     <a class="nav-link" href="{{ route('mypage') }}">
-                        <i class="fas fa-user mr-1"></i><label>マイページ</label>
+                        <i class="fas fa-user me-1"></i><label>マイページ</label>
                     </a>
                 </li>
                 @endguest
