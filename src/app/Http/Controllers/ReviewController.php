@@ -8,6 +8,7 @@ use App\Models\Reservation;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class ReviewController extends Controller
 {
@@ -59,12 +60,23 @@ class ReviewController extends Controller
             ->with('restaurant.category')
             ->get()
             ->unique('restaurant_id');
-            
+
         $reservationsArray = array_values($reservations->toArray());
 
         $categoriesCounts = $reservations
-        ->pluck('restaurant.category')
-        ->countBy('id');
+            ->pluck('restaurant.category')
+            ->countBy('id');
+
+        $zeroScoreCategories = Review::where('user_id', $user_id)
+            ->where('score', 0)
+            ->groupBy('category_id')
+            ->havingRaw('COUNT(*) = SUM(score = 0)')
+            ->pluck('category_id');
+        
+        $reviews = Review::where('user_id', $user_id)
+            ->where('score', 0)
+            ->whereIn('category_id', $zeroScoreCategories)
+            ->get();
 
         $reviewedCategoryIds = Review::where('user_id', $user_id)->pluck('category_id');
 
@@ -72,13 +84,15 @@ class ReviewController extends Controller
             return $count >= 3;
         })->keys()->diff($reviewedCategoryIds);
 
-        $categories = $reservations
-        ->pluck('restaurant.category')
-        ->unique('id')
-        ->whereIn('id', $filteredCategoryIds)
-        ->values();
+        $categoryIds = $filteredCategoryIds->merge($zeroScoreCategories)->unique();
 
-        return view('reviews.ranking', compact('categories', 'reservationsArray'));
+        $categories = $reservations
+            ->pluck('restaurant.category')
+            ->unique('id')
+            ->whereIn('id', $categoryIds)
+            ->values();
+
+        return view('reviews.ranking', compact('categories', 'reservationsArray', 'reviews'));
     }
 
     public function restaurantEditRanking(Category $category)
@@ -126,6 +140,8 @@ class ReviewController extends Controller
     public function update(Request $request)
     {
         $rankings = $request->input('rankings');
+
+        $user_id = Auth::user()->id;
 
         // categoryIdを取得
         $categoryId = $rankings[0]['categoryId'];

@@ -40,7 +40,7 @@ onMounted(() => {
     // 4位以降のレビュー
     props.reviews.filter(review => review.score < 3).forEach(review => {
             reviews.value[review.reservation_id] = review.content
-    });
+    })
 })
 
 function updateSelectedRanking(event, rankingNumber, reservationId) {

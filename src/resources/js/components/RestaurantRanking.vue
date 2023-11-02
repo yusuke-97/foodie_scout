@@ -1,13 +1,12 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import axios from 'axios'
 
 const props = defineProps({
     categories: Array,
-    reservations: Array
+    reservations: Array,
+    reviews: Object
 })
-
-console.log(props.categories)
 
 const selectedCategory = ref([])
 
@@ -20,6 +19,12 @@ const filteredReservations = computed(() => {
 const selectedRanking1 = ref(null)
 const selectedRanking2 = ref(null)
 const selectedRanking3 = ref(null)
+
+onMounted(() => {
+    props.reviews.filter(review => review.score < 3).forEach(review => {
+            reviews.value[review.reservation_id] = review.content
+    })
+})
 
 function updateSelectedRanking(event, rankingNumber, reservationId) {
     const isChecked = event.target.checked
