@@ -146,20 +146,25 @@ class ReviewController extends Controller
         // categoryIdを取得
         $categoryId = $rankings[0]['categoryId'];
 
-        // categoryIdを持つ既存のrestaurantIdsを取得
-        $existingRestaurantIds = Review::where('category_id', $categoryId)->pluck('restaurant_id')->toArray();
+        // user_idとcategoryIdを持つ既存のrestaurantIdsを取得
+        $existingRestaurantIds = Review::where('user_id', $user_id)
+            ->where('category_id', $categoryId)
+            ->pluck('restaurant_id')
+            ->toArray();
 
         $newRestaurantIds = array_column($rankings, 'restaurantId');
 
         // 既存のrestaurantIdで新しいrestaurantIdsと一致しないものはscoreをnullにする
-        Review::where('category_id', $categoryId)
+        Review::where('user_id', $user_id)
+            ->where('category_id', $categoryId)
             ->whereNotIn('restaurant_id', $newRestaurantIds)
             ->update(['score' => 0]);
 
         foreach ($rankings as $ranking) {
             if (in_array($ranking['restaurantId'], $existingRestaurantIds)) {
                 // 既存のレビューを更新
-                $existingReview = Review::where('restaurant_id', $ranking['restaurantId'])
+                $existingReview = Review::where('user_id', $user_id)
+                    ->where('restaurant_id', $ranking['restaurantId'])
                     ->where('category_id', $categoryId)
                     ->first();
                 if ($existingReview) {
@@ -175,13 +180,13 @@ class ReviewController extends Controller
                 $newReview->reservation_id = $ranking['reservationId'];
                 $newReview->category_id = $categoryId;
                 $newReview->score = $ranking['score'];
-                $newReview->user_id = Auth::user()->id;
+                $newReview->user_id = $user_id;
                 $newReview->save();
             }
         }
 
         return response()->json([
-            'redirect_to' => route('mypage.profile', ['user' => Auth::user()->id])
+            'redirect_to' => route('mypage.profile', ['user' => $user_id])
         ]);
     }
 
