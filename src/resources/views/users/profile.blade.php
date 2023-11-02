@@ -24,17 +24,23 @@
                         <medal-color :user-followed="{{ $user->followers->count() }}"></medal-color>
                     </div>
                     <div class="d-flex justify-content-between mt-2">
+                        @include('modals.show_followers')
                         <!-- フォロワー数 -->
-                        <div class="text-center">
-                            <div>フォロワー</div>
-                            <div><strong>{{ $user->followers->count() }}</strong></div>
-                        </div>
+                        <a href="#" class="link-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#showFollowersModal">
+                            <div class="text-center">
+                                <div>フォロワー</div>
+                                <div><strong>{{ $user->followers->count() }}</strong></div>
+                            </div>
+                        </a>
 
-                        <!-- 行ったお店 -->
-                        <div class="text-center">
-                            <div>行ったお店</div>
-                            <div><strong>{{ $user->reservations->pluck('restaurant_id')->unique()->count() }}</strong></div>
-                        </div>
+                        @include('modals.show_followings')
+                        <!-- フォロー中 -->
+                        <a href="#" class="link-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#showFollowingsModal">
+                            <div class="text-center">
+                                <div>フォロー中</div>
+                                <div><strong>{{ $user->followings->count() }}</strong></div>
+                            </div>
+                        </a>
 
                         <!-- 口コミ数 -->
                         <div class="text-center">
