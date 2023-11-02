@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\MajorCategory;
 use App\Models\Restaurant;
 use App\Models\User;
-use App\Models\Review;
 
 class WebController extends Controller
 {
@@ -17,7 +15,10 @@ class WebController extends Controller
 
         $major_categories = MajorCategory::all();
 
-        $recently_restaurants = Restaurant::orderBy('created_at', 'desc')->take(4)->get();
+        $recently_restaurants = Restaurant::selectRaw('*, COALESCE(average_rating, 0) as average_rating')
+            ->orderBy('created_at', 'desc')
+            ->take(4)
+            ->get();
 
         $recommend_restaurants = Restaurant::where('recommend_flag', true)->take(3)->get();
 
