@@ -29,19 +29,44 @@ class ReviewController extends Controller
     {
         $rankings = $request->input('rankings');
 
+        $user_id = Auth::user()->id;
+
+        // categoryIdを取得
+        $categoryId = $rankings[0]['categoryId'];
+
+        // user_idとcategoryIdを持つ既存のrestaurantIdsを取得
+        $existingRestaurantIds = Review::where('user_id', $user_id)
+        ->where('category_id', $categoryId)
+        ->pluck('restaurant_id')
+        ->toArray();
+
         foreach ($rankings as $ranking) {
-            $review = new Review();
-            $review->content = $ranking['review'];
-            $review->restaurant_id = $ranking['restaurantId'];
-            $review->reservation_id = $ranking['reservationId'];
-            $review->category_id = $ranking['categoryId'];
-            $review->score = $ranking['score'];
-            $review->user_id = Auth::user()->id;
-            $review->save();
+            if (in_array($ranking['restaurantId'], $existingRestaurantIds)) {
+                // 既存のレビューを更新
+                $existingReview = Review::where('user_id', $user_id)
+                    ->where('restaurant_id', $ranking['restaurantId'])
+                    ->where('category_id', $categoryId)
+                    ->first();
+                if ($existingReview) {
+                    $existingReview->content = $ranking['review'];
+                    $existingReview->score = $ranking['score'];
+                    $existingReview->save();
+                }
+            } else {
+                // 新しいレビューを登録
+                $newReview = new Review();
+                $newReview->content = $ranking['review'];
+                $newReview->restaurant_id = $ranking['restaurantId'];
+                $newReview->reservation_id = $ranking['reservationId'];
+                $newReview->category_id = $categoryId;
+                $newReview->score = $ranking['score'];
+                $newReview->user_id = $user_id;
+                $newReview->save();
+            }
         }
 
         return response()->json([
-            'redirect_to' => route('mypage.profile', ['user' => Auth::user()->id])
+            'redirect_to' => route('mypage.profile', ['user' => $user_id])
         ]);
     }
 
