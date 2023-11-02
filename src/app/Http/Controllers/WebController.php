@@ -22,12 +22,15 @@ class WebController extends Controller
         $recommend_restaurants = Restaurant::where('recommend_flag', true)->take(3)->get();
 
         $popular_users = User::withCount('followers')
-                            ->with(['reviews' => function ($query) {
-                                $query->orderBy('score', 'desc')->take(3)->with('restaurant');
-                            }])
-                            ->orderBy('followers_count', 'desc')
-                            ->take(4)
-                            ->get();
+            ->with(['reviews' => function ($query) {
+                $query->where('score', '>', 0)
+                    ->orderBy('score', 'desc')
+                    ->take(3)
+                    ->with('restaurant');
+            }])
+            ->orderBy('followers_count', 'desc')
+            ->take(4)
+            ->get();    
 
         return view('web.index', compact('major_categories', 'categories', 'recently_restaurants', 'recommend_restaurants', 'popular_users'));
     }
