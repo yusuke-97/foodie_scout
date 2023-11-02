@@ -11,9 +11,9 @@
                     <div class="col-2">
                         <a href="{{ route('mypage.profile', $following->id) }}" id="small-profile-image-container" style="text-decoration: none;">
                             @if(App\Models\User::find($following->followable_id)->image)
-                            <img class="small-profile-image" src="{{ asset('/storage/profile_images/' . App\Models\User::find($following->followable_id)->image) }}" alt="プロフィール画像">
+                                <img class="small-profile-image" src="{{ asset('/storage/profile_images/' . App\Models\User::find($following->followable_id)->image) }}" alt="プロフィール画像">
                             @else
-                            <i class="fas fa-user small-profile-icon" style="color: #000000;"></i>
+                                <i class="fas fa-user small-profile-icon" style="color: #000000;"></i>
                             @endif
                         </a>
                     </div>
