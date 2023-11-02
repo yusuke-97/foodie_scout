@@ -50,6 +50,10 @@
                     <i class="fa-solid fa-ranking-star"></i> ランキング作成
                 </a>
             </div>
+            @else
+            <div class="justify-content-center mb-4">
+                <follow-button :is-following="{{ Auth::user()->isFollowing($user) ? 'true' : 'false' }}" :following-id="{{ $user->id }}"></follow-button>
+            </div>
             @endif
 
             <div class="row mb-2">

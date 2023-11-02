@@ -31,8 +31,13 @@ const toggleFollow = async () => {
 <template>
     <a 
         @click.prevent="toggleFollow"
-        class="btn follow-button text-follow w-100">
+        class="btn submit-button mb-2"
+        :style="{ 
+          'background-color': localIsFollowing ? '#f0f0f0' : '#0fbe9f',
+          'color': localIsFollowing ? '#000000' : '#ffffff'
+        }"
+        style="font-size: 12px;">
         <i class="fa fa-heart"></i>
-        {{ localIsFollowing ? 'フォロー解除' : 'フォロー' }}
+        {{ localIsFollowing ? 'フォロー中' : 'フォローする' }}
     </a>
 </template>
