@@ -9,9 +9,9 @@
                 <div class="col-4">
                     <div id="profile-image-container">
                         @if($user->image)
-                            <img class="profile-image" src="{{ asset('/storage/profile_images/' . $user->image) }}" alt="プロフィール画像">
+                        <img class="profile-image" src="{{ asset('/storage/profile_images/' . $user->image) }}" alt="プロフィール画像">
                         @else
-                            <i class="fas fa-user profile-icon"></i>
+                        <i class="fas fa-user profile-icon"></i>
                         @endif
                     </div>
                     <p class="mt-2" style="font-weight: bold;">{{ "@" . $user->user_name }}</p>
@@ -78,18 +78,18 @@
 
                 <div class="col-11 row">
                     @foreach ($review_group as $review)
-                        @include('modals.show_review')
-                        <div class="col-4" style="padding: 4px;">
-                            <div class="ranking-image-container" style="position: relative;" data-bs-toggle="modal" data-bs-target="#showReviewModal{{ $review->id }}">
-                                <img src="{{ asset($review->restaurant->image) }}">
-                                <div style="position: absolute; top: 20%; left: 0; width: 100%; text-align: center; color: #ffffff; background-color: rgba(0, 0, 0, 0.5); font-size: 18px; font-weight: bold;">
-                                    {{ $review->restaurant->name }}
-                                </div>
-                                <div style="position: absolute; top: 70%; left: 0; width: 100%; text-align: center; color: #ffffff; font-size: 12px; font-weight: bold;">
-                                    {{ $review->restaurant->prefecture }} {{ $review->restaurant->city }}
-                                </div>
+                    @include('modals.show_review')
+                    <div class="col-4" style="padding: 4px;">
+                        <div class="ranking-image-container" style="position: relative;" data-bs-toggle="modal" data-bs-target="#showReviewModal{{ $review->id }}">
+                            <img src="{{ asset($review->restaurant->image) }}">
+                            <div style="position: absolute; top: 20%; left: 0; width: 100%; text-align: center; color: #ffffff; background-color: rgba(0, 0, 0, 0.5); font-size: 16px; font-weight: bold;">
+                                {{ $review->restaurant->name }}
+                            </div>
+                            <div style="position: absolute; top: 70%; left: 0; width: 100%; text-align: center; color: #ffffff; font-size: 12px; font-weight: bold;">
+                                {{ $review->restaurant->prefecture }} {{ $review->restaurant->city }}
                             </div>
                         </div>
+                    </div>
                     @endforeach
                 </div>
             </div>
