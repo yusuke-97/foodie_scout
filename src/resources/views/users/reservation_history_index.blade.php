@@ -56,13 +56,8 @@
                         </div>
                     </div>
                     <div class="col-md-3 mt-2">
-                        @if($reservation->review)
-                        <a href="{{ route('reviews.create', $reservation) }}" class="btn submit-button mb-2" style="font-size: 12px;">口コミを編集</a>
-                        @else
-                        <a href="{{ route('reviews.create', $reservation) }}" class="btn submit-button mb-2" style="font-size: 12px;">口コミを投稿</a>
-                        @endif
                         <a href="{{ route('restaurants.show', $reservation->restaurant) }}" class="btn submit-button mb-2" style="font-size: 12px;">もう一度予約</a>
-                        <a href=" {{ route('mypage.reservation_history_show', $reservation) }}" class="btn submit-button mb-2" style="font-size: 12px;">予約詳細の確認</a>
+                        <a href=" {{ route('mypage.reservation_history_show', $reservation) }}" class="btn submit-button mb-2" style="font-size: 12px;">予約の修正</a>
                     </div>
                 </div>
             </div>
