@@ -79,7 +79,7 @@
                 <div class="col-11 row">
                     @foreach ($review_group as $review)
                     <div class="col-4" style="padding: 4px;">
-                        <div class="image-container" style="position: relative;">
+                        <div class="ranking-image-container" style="position: relative;">
                             <img src="{{ asset($review->restaurant->image) }}">
                             <div style="position: absolute; top: 20%; left: 0; width: 100%; text-align: center; color: #ffffff; background-color: rgba(0, 0, 0, 0.5); font-size: 18px; font-weight: bold;">
                                 {{ $review->restaurant->name }}
