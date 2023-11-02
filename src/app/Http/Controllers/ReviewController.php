@@ -93,9 +93,9 @@ class ReviewController extends Controller
             ->countBy('id');
 
         $zeroScoreCategories = Review::where('user_id', $user_id)
-            ->where('score', 0)
+            ->select('category_id')
             ->groupBy('category_id')
-            ->havingRaw('COUNT(*) = SUM(score = 0)')
+            ->havingRaw('MAX(score) = 0 AND MIN(score) = 0')
             ->pluck('category_id');
         
         $reviews = Review::where('user_id', $user_id)
