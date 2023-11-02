@@ -151,7 +151,7 @@ $times[] = '24:00';
                                     <span style="font-weight: bold; color: #000000;" class="me-3">{{ $user->name }}</span>
                                 </a>
                                 <medal-color :user-followed="{{ $user->followers->count() }}" class="d-inline-block"></medal-color>
-                                <p class="mb-0" style="color: gray;">
+                                <p class="mb-0" style="color: gray; font-size: 12px;">
                                     <span>
                                         口コミ {{ $user->reviews->count() }}件
                                     </span>
