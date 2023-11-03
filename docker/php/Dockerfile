@@ -13,12 +13,20 @@ COPY --from=composer:2.5.8 /usr/bin/composer /usr/bin/composer
 COPY --from=node:20.6.1 /usr/local/bin /usr/local/bin
 COPY --from=node:20.6.1 /usr/local/lib /usr/local/lib
 
+# エントリポイントスクリプトをイメージにコピー
+COPY ./entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
 RUN apt-get update && \
     apt-get -y install \
     git \
     zip \
     unzip \
     vim \
+    cron \
     && docker-php-ext-install pdo_mysql bcmath
 
 WORKDIR /var/www/html
+
+# エントリポイントとしてスクリプトを設定
+ENTRYPOINT ["/entrypoint.sh"]
