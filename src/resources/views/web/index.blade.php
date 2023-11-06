@@ -25,10 +25,10 @@ $times[] = '24:00';
     <div class="col-12 position-relative">
         <form action="{{ route('search') }}" method="get" class="position-absolute search-container">
             <!-- エリア -->
-            <input type="text" name="area" class="search-input" placeholder="エリア・駅 [例:渋谷]">
+            <input type="text" name="area" class="search-input" placeholder="エリア・駅 [例:渋谷]" autocomplete="off">
 
             <!-- ジャンル -->
-            <input type="text" name="category" class="search-input" placeholder="ジャンル [例:寿司]">
+            <input type=" text" name="category" class="search-input" placeholder="ジャンル [例:寿司]" autocomplete="off">
 
             <!-- 日付 -->
             <input type="date" name="visit_date" class="search-input" value="{{ $date }}" min="{{ $date }}" max="{{ $lastDayOfTwoMonthsLater }}" style="width: 250px;">
@@ -82,13 +82,12 @@ $times[] = '24:00';
                     </p>
                     <div class="d-flex mb-2 align-items-center">
                         <div class="me-3">
-                            @for ($i = 1; $i <= 5; $i++)
-                                @if ($i <=round($recommend_restaurant->average_rating))
-                                    <span style="color: #FFA500; font-size: 14px;">★</span>
+                            @for ($i = 1; $i <= 5; $i++) @if ($i <=round($recommend_restaurant->average_rating))
+                                <span style="color: #FFA500; font-size: 14px;">★</span>
                                 @else
-                                    <span style="color: #DDDDDD; font-size: 14px;">★</span>
+                                <span style="color: #DDDDDD; font-size: 14px;">★</span>
                                 @endif
-                            @endfor
+                                @endfor
                         </div>
                         <h3 class="m-0" style="color: red; font-weight: bold; vertical-align: middle; font-size: 14px;">{{ number_format($recommend_restaurant->average_rating, 2) }}</h3>
                     </div>
@@ -115,13 +114,12 @@ $times[] = '24:00';
                     </p>
                     <div class="d-flex mb-2 align-items-center">
                         <div class="me-3">
-                            @for ($i = 1; $i <= 5; $i++)
-                                @if ($i <=round($recently_restaurant->average_rating))
-                                    <span style="color: #FFA500; font-size: 14px;">★</span>
+                            @for ($i = 1; $i <= 5; $i++) @if ($i <=round($recently_restaurant->average_rating))
+                                <span style="color: #FFA500; font-size: 14px;">★</span>
                                 @else
-                                    <span style="color: #DDDDDD; font-size: 14px;">★</span>
+                                <span style="color: #DDDDDD; font-size: 14px;">★</span>
                                 @endif
-                            @endfor
+                                @endfor
                         </div>
                         <h3 class="m-0" style="color: red; font-weight: bold; vertical-align: middle; font-size: 14px;">{{ number_format($recently_restaurant->average_rating, 2) }}</h3>
                     </div>
@@ -140,9 +138,9 @@ $times[] = '24:00';
                             <div class="col-3">
                                 <a href="{{ route('mypage.profile', $user->id) }}" id="small-profile-image-container" style="text-decoration: none;">
                                     @if($user->image)
-                                        <img class="small-profile-image" src="{{ asset('/storage/profile_images/' . $user->image) }}" alt="プロフィール画像">
+                                    <img class="small-profile-image" src="{{ asset('/storage/profile_images/' . $user->image) }}" alt="プロフィール画像">
                                     @else
-                                        <i class="fas fa-user small-profile-icon" style="color: #000000;"></i>
+                                    <i class="fas fa-user small-profile-icon" style="color: #000000;"></i>
                                     @endif
                                 </a>
                             </div>
@@ -187,13 +185,12 @@ $times[] = '24:00';
                                 </p>
                                 <div class="d-flex align-items-center">
                                     <div class="me-3">
-                                        @for ($i = 1; $i <= 5; $i++)
-                                            @if ($i <=round($review->restaurant->average_rating))
-                                                <span style="color: #FFA500; font-size: 14px;">★</span>
+                                        @for ($i = 1; $i <= 5; $i++) @if ($i <=round($review->restaurant->average_rating))
+                                            <span style="color: #FFA500; font-size: 14px;">★</span>
                                             @else
-                                                <span style="color: #DDDDDD; font-size: 14px;">★</span>
+                                            <span style="color: #DDDDDD; font-size: 14px;">★</span>
                                             @endif
-                                        @endfor
+                                            @endfor
                                     </div>
                                     <h3 class="mb-0" style="color: red; font-weight: bold; vertical-align: middle; font-size: 14px;">{{number_format($review->restaurant->average_rating, 2) }}</h3>
                                 </div>
