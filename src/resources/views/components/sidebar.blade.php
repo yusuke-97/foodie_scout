@@ -1,5 +1,5 @@
-<div class="container">
-    <h2 style="font-weight: bold; margin-top: 20px; margin-bottom: 20px;">料理ジャンルから探す</h2>
+<div class="container" style="margin-top: 30px; margin-bottom: 20px;">
+    <h2 style="font-weight: bold;">料理ジャンルから探す</h2>
 </div>
 <div class="container" style="display: flex; flex-direction: row; justify-content: space-between; flex-wrap: wrap;">
     @foreach ($major_categories as $major_category)
