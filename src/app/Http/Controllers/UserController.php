@@ -7,7 +7,6 @@ use App\Models\Restaurant;
 use App\Models\Reservation;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -40,10 +39,8 @@ class UserController extends Controller
             $user->image = null;
         } elseif ($request->hasFile('profileImage')) {
             $file = $request->file('profileImage');
-            Log::info($file);
             $path = Storage::disk('public')->put('profile_images', $file);
             $imagePath = "/storage/" . $path;
-            Log::info($imagePath);
             $user->image = basename($imagePath);
         }
 
@@ -86,7 +83,7 @@ class UserController extends Controller
     {
         $user = Auth::user();
 
-        $favorites = $user->favorites(Restaurant::class)->get();
+        $favorites = $user->favorites(Restaurant::class)->paginate(10);
 
         return view('users.favorite', compact('favorites'));
     }
