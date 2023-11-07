@@ -21,7 +21,7 @@
                         <td class="reservation-label">来店日時</td>
                         <td class="reservation-value">
                             {{ \Carbon\Carbon::parse($reservation->visit_date)->locale('ja')->isoFormat('Y年M月D日 (ddd)') }}
-                            {{ $reservation->visit_time }}
+                            {{ \Carbon\Carbon::parse($reservation->visit_time)->format('H:i') }}
                         </td>
                     </tr>
                     <tr>
@@ -45,6 +45,7 @@
             :restaurant-end-time="'{{ $reservation->restaurant->end_time }}'"
             :restaurant-closed-day="'{{ $reservation->restaurant->closed_day }}'"
             :user-point-balance="{{ Auth::user()->point }}"
+            :reservation-id="{{ $reservation->id }}"
             :reservation-visit-date="'{{ $reservation->visit_date }}'"
             :reservation-visit-time="'{{ $reservation->visit_time }}'"
             :reservation-guests="{{ $reservation->number_of_guests }}">

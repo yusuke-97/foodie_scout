@@ -6,6 +6,7 @@ const props = defineProps({
   visitDate: String,
   visitTime: String,
   numberOfGuests: Number,
+  reservationId: Number,
   reservationFee: Number,
   restaurantId: Number
 })
@@ -16,6 +17,7 @@ async function submitReservationConfirmation() {
     visit_date: props.visitDate,
     visit_time: props.visitTime,
     number_of_guests: props.numberOfGuests,
+    reservation_id: props.reservationId,
     reservation_fee: props.reservationFee,
     restaurant_id: props.restaurantId
   }

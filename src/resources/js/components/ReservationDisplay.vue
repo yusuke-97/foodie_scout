@@ -432,7 +432,7 @@ async function submitReservationDisplay() {
     <div class="d-flex justify-content-center p-3" :style="{ width: selectBoxWidth }">
       <button @click="submitReservationDisplay" class="btn submit-button" style="width: 100%" :disabled="!isReservableTime || isPointBalanceLow">
         <i class="fas fa-utensils me-3"></i>
-        予約する
+        確認画面へ
       </button>
     </div>   
 </template>

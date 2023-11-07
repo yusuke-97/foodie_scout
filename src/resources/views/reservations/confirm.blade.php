@@ -38,7 +38,7 @@
                         <td class="reservation-label">来店日時</td>
                         <td class="reservation-value">
                             {{ \Carbon\Carbon::parse($reservation_data['visit_date'])->locale('ja')->isoFormat('Y年M月D日 (ddd)') }}
-                            {{ $reservation_data['visit_time'] }}
+                            {{ \Carbon\Carbon::parse($reservation_data['visit_time'])->format('H:i') }}
                         </td>
                     </tr>
                     <tr>
@@ -66,7 +66,13 @@
             </table>
         </div>
 
-        <reservation-confirmation :visit-date="'{{ $reservation_data['visit_date'] }}'" :visit-time="'{{ $reservation_data['visit_time'] }}'" :number-of-guests="{{ $reservation_data['number_of_guests'] }}" :reservation-fee="{{ $reservation_data['reservation_fee'] }}" :restaurant-id="{{ $reservation_data['restaurant_id'] }}">
+        <reservation-confirmation
+            :visit-date="'{{ $reservation_data['visit_date'] }}'"
+            :visit-time="'{{ $reservation_data['visit_time'] }}'"
+            :number-of-guests="{{ $reservation_data['number_of_guests'] }}"
+            :reservation-id="{{ $reservation_data['reservation_id'] ?? 'null' }}"
+            :reservation-fee="{{ $reservation_data['reservation_fee'] }}"
+            :restaurant-id="{{ $reservation_data['restaurant_id'] }}">
         </reservation-confirmation>
 
     </div>

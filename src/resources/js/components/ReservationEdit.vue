@@ -16,6 +16,7 @@ const props = defineProps({
   restaurantEndTime: String,
   restaurantClosedDay: String,
   userPointBalance: Number,
+  reservationId: Number,
   reservationVisitDate: String,
   reservationVisitTime: String,
   reservationGuests: Number
@@ -368,6 +369,7 @@ async function submitReservationDisplay() {
     visit_time: visitTime.value,
     number_of_guests: numberOfGuests.value,
     reservation_fee: totalPrice.value * 0.5,
+    reservation_id: props.reservationId,
     restaurant_id: props.restaurantId,
     restaurant_name: props.restaurantName
   }
@@ -380,22 +382,39 @@ async function submitReservationDisplay() {
     console.error("Error:", error)
   }
 }
+
+// 変更ステータス
+const editStatus = computed(() => {
+  const visitDateTime = new Date(props.reservationVisitDate + 'T' + props.reservationVisitTime).getTime()
+  const now = Date.now()
+  return visitDateTime - now <= 5 * 24 * 60 * 60 * 1000
+})
+
+// キャンセル料
+const cancellationFee = computed(() => {
+  const visitDateTime = new Date(props.reservationVisitDate + 'T' + props.reservationVisitTime).getTime()
+  const now = Date.now()
+  return (visitDateTime - now <= 5 * 24 * 60 * 60 * 1000) ? '100%' : '0%'
+})
 </script>
 
 
 
 <template>
-    <div class="p-3">
-        <h4 style="font-weight: bold;">
-            <i class="fas fa-phone me-2"></i>
-            {{ props.restaurantPhoneNumber }}
-        </h4>
-    </div>
-    <div class="d-flex justify-content-center" style="background-color: #0fbe9f;" :style="{ width: selectBoxWidth }">
-        <h5 class="m-2" style="font-weight: bold; color: white;">ネット予約変更</h5>
-    </div>
     <div class="row">
         <div class="col-6">
+            <div class="p-3">
+                <h4 style="font-weight: bold;">
+                    <i class="fas fa-phone me-2"></i>
+                    {{ props.restaurantPhoneNumber }}
+                </h4>
+            </div>
+            <div class="d-flex justify-content-center mb-3" :style="{ width: selectBoxWidth }">
+                <span>ご来店日の5日前を切っている場合、予約変更に関するお問い合わせは電話よりよろしくお願い致します。</span>
+            </div>
+            <div class="d-flex justify-content-center" style="background-color: #0fbe9f;" :style="{ width: selectBoxWidth }">
+                <h5 class="m-2" style="font-weight: bold; color: white;">ネット予約変更</h5>
+            </div>
             <div class="my-calendar">
                 <DatePicker
                     :min-date="tomorrow"
@@ -438,7 +457,7 @@ async function submitReservationDisplay() {
                 </label>
                 <span style="font-size: 20px">{{ new Intl.NumberFormat('ja-JP').format(userPointBalance) }}P</span>
             </div>
-                <div v-if="isPointBalanceLow" class="text-danger p-3" :style="{ width: selectBoxWidth }">
+            <div v-if="isPointBalanceLow" class="text-danger p-3" :style="{ width: selectBoxWidth }">
                 ポイントが足りません
                 <br>
                 <a href="/users/mypage/charge" style="color: #0fbe9f;">ポイントをチャージする</a>
@@ -449,11 +468,31 @@ async function submitReservationDisplay() {
             <div class="p-3" :style="{ width: selectBoxWidth }">
                 ※ 1名様あたり、ご予算の50%を予約料金として頂いております。 
             </div>
+            <div v-if="editStatus" class="text-danger p-3" :style="{ width: selectBoxWidth }">
+                <span>来店日時の5日前を切っているため、予約を変更できません。</span>
+            </div>
 
             <div class="d-flex justify-content-center p-3" :style="{ width: selectBoxWidth }">
-                <button @click="submitReservationDisplay" class="btn submit-button" style="width: 100%" :disabled="!isReservableTime || isPointBalanceLow || isSame">
+                <button @click="submitReservationDisplay" class="btn submit-button" style="width: 100%" :disabled="!isReservableTime || isPointBalanceLow || isSame || editStatus">
                     <i class="fas fa-utensils me-3"></i>
-                    予約する
+                    確認画面へ
+                </button>
+            </div>
+
+            <hr :style="{ width: selectBoxWidth }">
+
+            <div class="p-3" :style="{ width: selectBoxWidth }">
+                ※ ご来店日の5日前までキャンセルが無料です。5日前を切った場合、予約料金の100%をキャンセル料金として頂きます。
+                <strong>無断キャンセルはご遠慮ください。無断キャンセルが発覚した場合、利用規約により予約料金の200%のキャンセル料金を頂きます。</strong>
+            </div>
+
+            <div class="text-danger p-3" :style="{ width: selectBoxWidth }">
+                <span>キャンセル料：{{ cancellationFee }}</span>
+            </div>
+
+            <div class="d-flex justify-content-center p-3" :style="{ width: selectBoxWidth }">
+                <button @click="submitReservationDisplay" class="btn submit-button" style="width: 100%; background-color: #f16363;">
+                    キャンセルする
                 </button>
             </div>
         </div>

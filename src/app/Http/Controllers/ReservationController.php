@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
 
 class ReservationController extends Controller
@@ -37,30 +38,59 @@ class ReservationController extends Controller
 
     public function store(Request $request)
     {
-        // データの保存
-        $reservation = new Reservation();
-        $raw_date = $request->input('visit_date');
-        $correct_format_date = explode('T', $raw_date)[0];
-        $reservation->visit_date = $correct_format_date;
-
-        $visit_time = $request->input('visit_time');
-        $reservation->visit_time = $visit_time;
-
-        $end_time = Carbon::createFromFormat('H:i', $visit_time)->addHour(1)->addMinutes(30)->format('H:i');
-        $reservation->end_time = $end_time;
-
-        $reservation->number_of_guests = $request->input('number_of_guests');
-        $reservation->reservation_fee = $request->input('reservation_fee');
-
         $user = Auth::user();
-        $user->point = $user->point - $reservation->reservation_fee;
-        $user->save();
+        $reservation_id = $request->input('reservation_id');
 
-        // その他のデータ
-        $reservation->user_id = Auth::user()->id;
-        $reservation->restaurant_id = $request->input('restaurant_id');
+        $existing_reservation_ids = Reservation::where('user_id', $user->id)
+            ->pluck('id')
+            ->toArray();
+        
+        if (in_array($reservation_id, $existing_reservation_ids)) {
+            $existing_reservation = Reservation::where('user_id', $user->id)
+                ->where('id', $reservation_id)
+                ->first();
+            if ($existing_reservation) {
+                $existing_reservation->number_of_guests = $request->input('number_of_guests');
+                $existing_reservation->reservation_fee += $request->input('reservation_fee');
+                
+                $raw_date = $request->input('visit_date');
+                $correct_format_date = explode('T', $raw_date)[0];
+                $existing_reservation->visit_date = $correct_format_date;
 
-        $reservation->save();
+                $visit_time = $request->input('visit_time');
+                $existing_reservation->visit_time = $visit_time;
+
+                $end_time = Carbon::createFromFormat('H:i', $visit_time)->addHour(1)->addMinutes(30)->format('H:i');
+                $existing_reservation->end_time = $end_time;
+
+                $user->point = $user->point - $request->input('reservation_fee');
+                $user->save();
+
+                $existing_reservation->save();
+            }
+        } else {
+            $reservation = new Reservation();
+            $raw_date = $request->input('visit_date');
+            $correct_format_date = explode('T', $raw_date)[0];
+            $reservation->visit_date = $correct_format_date;
+
+            $visit_time = $request->input('visit_time');
+            $reservation->visit_time = $visit_time;
+
+            $end_time = Carbon::createFromFormat('H:i', $visit_time)->addHour(1)->addMinutes(30)->format('H:i');
+            $reservation->end_time = $end_time;
+
+            $reservation->number_of_guests = $request->input('number_of_guests');
+            $reservation->reservation_fee = $request->input('reservation_fee');
+
+            $user->point = $user->point - $reservation->reservation_fee;
+            $user->save();
+
+            $reservation->user_id = $user->id;
+            $reservation->restaurant_id = $request->input('restaurant_id');
+
+            $reservation->save();
+        }
 
         return response()->json([
             'message' => 'Reservation successful',
