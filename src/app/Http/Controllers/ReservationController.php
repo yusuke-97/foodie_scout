@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
-
 use Carbon\Carbon;
 
 class ReservationController extends Controller
@@ -29,6 +27,11 @@ class ReservationController extends Controller
         }
 
         return view('reservations.confirm', compact('reservation_data'));
+    }
+
+    public function editReservation(Reservation $reservation)
+    {
+        return view('reservations.edit', compact('reservation'));
     }
 
 
@@ -75,19 +78,39 @@ class ReservationController extends Controller
 
         $end_business_hour = intval(substr($request->input('end_time'), 0, 2));
 
+        $reservation_visit_date = $request->input('reservation_date');
+        $reservation_visit_time = $request->input('reservation_time');
+        $reservation_guests = $request->input('reservation_guests');
+
+        if ($reservation_visit_time) {
+            $reservation_end_time = Carbon::createFromFormat('H:i', $reservation_visit_time)->addMinutes(90)->format('H:i');
+        }
+
+        if ($end_business_hour === 0) {
+            $end_business_hour += 24;
+        }
+        
         $results = [];
 
         for ($hour = $start_business_hour; $hour < $end_business_hour; $hour++) {
             for ($minute = $start_business_minute; $minute < 60; $minute += 30) {
                 $desired_start_time = sprintf('%02d:%02d', $hour, $minute);
                 $desired_end_time = Carbon::createFromFormat('H:i', $desired_start_time)->addHour(1)->addMinutes(30)->format('H:i');
-
+                
                 $already_reserved_seats = Reservation::where('visit_date', $desired_date)
                     ->where('restaurant_id', $request->input('restaurant_id'))
                     ->where(function ($query) use ($desired_start_time, $desired_end_time) {
                         $query->WhereBetween('end_time', [$desired_start_time, $desired_end_time]);
                     })
                     ->sum('number_of_guests');
+
+                if (
+                    ($desired_date === $reservation_visit_date) &&
+                    ($desired_start_time >= $reservation_visit_time) &&
+                    ($desired_start_time <= $reservation_end_time)
+                ) {
+                    $already_reserved_seats -= $reservation_guests;
+                }
 
                 $results[$desired_start_time] = $already_reserved_seats + $request->input('number_of_guests');
             }

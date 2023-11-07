@@ -2,22 +2,19 @@
 
 @section('content')
 
-<div class="row justify-content-center">
+<div class="row justify-content-center" style="margin-top: 30px;">
     <div class="col-md-8">
-        <span>
-            <a href="{{ route('mypage') }}">マイページ</a> > 予約履歴
-        </span>
-
-        <h4 class="mt-3" style="font-weight: bold;">予約一覧</h4>
-
+        <h4 style="font-weight: bold;">予約一覧</h4>
+        
         @foreach($reservations as $reservation)
         <div class="card mb-4">
             <div class="card-header">
-                @if(strtotime($reservation->visit_date . ' ' . $reservation->visit_time) < strtotime(now())) <span style="background-color: #0fbe9f; padding: 4px 24px; color: #ffffff; border-radius: 4px; font-size: 12px;" class="me-4">来店済み</span>
+                @if(strtotime($reservation->visit_date . ' ' . $reservation->visit_time) < strtotime(now()))
+                    <span style="background-color: #0fbe9f; padding: 4px 24px; color: #ffffff; border-radius: 4px; font-size: 12px;" class="me-4">来店済み</span>
                     <span style="font-size: 12px;">ご来店ありがとうございました。</span>
-                    @else
+                @else
                     <span style="background-color: #1E90FF; padding: 4px 24px; color: #ffffff; border-radius: 4px; font-size: 12px;" class="me-4">来店予定</span>
-                    @endif
+                @endif
             </div>
             <div class="card-body">
                 <div class="row">
@@ -56,8 +53,13 @@
                         </div>
                     </div>
                     <div class="col-md-3 mt-2">
-                        <a href="{{ route('restaurants.show', $reservation->restaurant) }}" class="btn submit-button mb-2" style="font-size: 12px;">もう一度予約</a>
-                        <a href=" {{ route('mypage.reservation_history_show', $reservation) }}" class="btn submit-button mb-2" style="font-size: 12px;">予約の修正</a>
+                        <a href="{{ route('restaurants.show', $reservation->restaurant) }}" class="btn submit-button mb-2" style="font-size: 12px; background-color: #1E90FF;">もう一度予約</a>
+                        @if(strtotime($reservation->visit_date . ' ' . $reservation->visit_time) > strtotime(now()))
+                        <a href=" {{ route('reservation.edit', $reservation) }}" class="btn submit-button mb-2" style="font-size: 12px;">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                            予約変更
+                        </a>
+                        @endif
                     </div>
                 </div>
             </div>

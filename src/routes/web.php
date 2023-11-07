@@ -39,6 +39,7 @@ Route::resource('restaurants', RestaurantController::class);
 Route::resource('reservations', ReservationController::class);
 Route::post('/reservation/prepare', [ReservationController::class, 'prepareConfirmation']);
 Route::get('/reservation/{restaurant_id}/confirm', [ReservationController::class, 'confirmReservation'])->name('reservation.confirm');
+Route::get('/reservation/{reservation}/edit', [ReservationController::class, 'editReservation'])->name('reservation.edit');
 Route::get('/available-seats', [ReservationController::class, 'availableSeatsForDay']);
 Route::get('/available-days', [ReservationController::class, 'availableDaysForMonth']);
 
