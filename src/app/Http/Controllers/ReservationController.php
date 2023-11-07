@@ -205,4 +205,20 @@ class ReservationController extends Controller
 
         return response()->json($dates);
     }
+    public function cancelReservation(Reservation $reservation)
+    {
+        $user = Auth::user();
+        if ($user->id !== $reservation->user_id) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $reservation->delete();
+        $user->point += $reservation->reservation_fee;
+        Log::info($reservation->reservation_fee);
+        $user->save();
+
+        return response()->json([
+            'redirect_to' => route('mypage.reservation_history')
+        ]);
+    }
 }

@@ -42,6 +42,7 @@ Route::get('/reservation/{restaurant_id}/confirm', [ReservationController::class
 Route::get('/reservation/{reservation}/edit', [ReservationController::class, 'editReservation'])->name('reservation.edit');
 Route::get('/available-seats', [ReservationController::class, 'availableSeatsForDay']);
 Route::get('/available-days', [ReservationController::class, 'availableDaysForMonth']);
+Route::delete('/reservation/{reservation}/cancel', [ReservationController::class, 'cancelReservation']);
 
 Route::controller(UserController::class)->group(function () {
     Route::get('users/mypage', 'mypage')->name('mypage');

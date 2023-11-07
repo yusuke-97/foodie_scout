@@ -1,4 +1,5 @@
 <script setup>
+import Modal from './Modal.vue'
 import { ref, computed, onMounted, watch } from 'vue'
 import axios from 'axios'
 import { Calendar, DatePicker } from 'v-calendar'
@@ -21,6 +22,8 @@ const props = defineProps({
   reservationVisitTime: String,
   reservationGuests: Number
 })
+
+const showModal = ref(false)
 
 // 今日と明日の日付
 const today = new Date()
@@ -396,6 +399,23 @@ const cancellationFee = computed(() => {
   const now = Date.now()
   return (visitDateTime - now <= 5 * 24 * 60 * 60 * 1000) ? '100%' : '0%'
 })
+
+async function cancelReservation() {
+    const reservation_id = props.reservationId;
+
+    const data = {
+      reservation_fee: totalPrice.value * 0.5
+    }
+
+    try {
+        const response = await axios.delete(`/reservation/${reservation_id}/cancel`, data);
+        if (response.data.redirect_to) {
+            window.location.href = response.data.redirect_to;
+        }
+    } catch (error) {
+        console.error('An error occurred while cancelling the reservation!', error);
+    }
+}
 </script>
 
 
@@ -491,10 +511,30 @@ const cancellationFee = computed(() => {
             </div>
 
             <div class="d-flex justify-content-center p-3" :style="{ width: selectBoxWidth }">
-                <button @click="submitReservationDisplay" class="btn submit-button" style="width: 100%; background-color: #f16363;">
-                    キャンセルする
+                <button 
+                  @click="showModal = true"
+                  class="btn submit-button"
+                  style="width: 100%;
+                  background-color: #f16363;">
+                  キャンセルする
                 </button>
             </div>
+            <Teleport to="body">
+              <Modal :show="showModal" @close="showModal = false">
+                  <template #header>
+                      <h3>予約キャンセルの確認</h3>
+                  </template>
+                  <template #body>
+                      キャンセルしてもいいですか？
+                  </template>
+                  <template #footer>
+                      <div class="d-flex justify-content-between" style="width: 100%;">
+                        <button @click="cancelReservation" class="btn submit-button">はい</button> 
+                        <button @click="showModal = false" class="btn submit-button" style="background-color: #f16363;">いいえ</button>
+                      </div>
+                  </template>
+              </Modal>
+          </Teleport>
         </div>
     </div> 
 </template>

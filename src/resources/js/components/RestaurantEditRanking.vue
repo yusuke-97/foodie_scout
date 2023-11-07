@@ -176,13 +176,15 @@ async function deleteRankingAndReviews() {
         </tbody>
     </table>
     <div class="row justify-content-center">
-        <button :disabled="isButtonDisabled" 
-                @click="saveRankingAndReviews" 
-                class="btn submit-button mt-3 me-5 w-25">
+        <button 
+            :disabled="isButtonDisabled" 
+            @click="saveRankingAndReviews" 
+            class="btn submit-button mt-3 me-5 w-25">
             ランキング登録
         </button>
-        <button @click="showModal = true" 
-                class="btn btn-danger mt-3 w-25">
+        <button 
+            @click="showModal = true" 
+            class="btn btn-danger mt-3 w-25">
             ランキング削除
         </button>
         <Teleport to="body">
