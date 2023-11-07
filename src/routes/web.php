@@ -35,6 +35,7 @@ Route::post('/restaurants/{restaurant}/favorite', [RestaurantController::class, 
 Route::delete('/restaurants/{restaurant}/favorite', [RestaurantController::class, 'removeFavorite'])->name('restaurants.unfavorite');
 Route::get('/restaurants/search', [RestaurantController::class, 'search'])->name('restaurants.search');
 Route::resource('restaurants', RestaurantController::class);
+Route::get('/restaurants/{restaurant}', [RestaurantController::class, 'show'])->name('restaurants.show');
 
 Route::resource('reservations', ReservationController::class);
 Route::post('/reservation/prepare', [ReservationController::class, 'prepareConfirmation']);

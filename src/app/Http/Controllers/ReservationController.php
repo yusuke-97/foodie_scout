@@ -214,7 +214,6 @@ class ReservationController extends Controller
 
         $reservation->delete();
         $user->point += $reservation->reservation_fee;
-        Log::info($reservation->reservation_fee);
         $user->save();
 
         return response()->json([
