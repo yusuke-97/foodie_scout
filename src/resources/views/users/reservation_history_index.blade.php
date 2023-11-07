@@ -5,7 +5,7 @@
 <div class="row justify-content-center" style="margin-top: 30px;">
     <div class="col-md-8">
         <h4 style="font-weight: bold;">予約一覧</h4>
-        
+
         @foreach($reservations as $reservation)
         <div class="card mb-4">
             <div class="card-header">
@@ -53,18 +53,22 @@
                         </div>
                     </div>
                     <div class="col-md-3 mt-2">
-                        <a href="{{ route('restaurants.show', $reservation->restaurant) }}" class="btn submit-button mb-2" style="font-size: 12px; background-color: #1E90FF;">もう一度予約</a>
                         @if(strtotime($reservation->visit_date . ' ' . $reservation->visit_time) > strtotime(now()))
                         <a href=" {{ route('reservation.edit', $reservation) }}" class="btn submit-button mb-2" style="font-size: 12px;">
                             <i class="fa-solid fa-pen-to-square"></i>
                             予約変更
                         </a>
+                        @else
+                            <a href="{{ route('restaurants.show', $reservation->restaurant) }}" class="btn submit-button mb-2" style="font-size: 12px; background-color: #1E90FF;">もう一度予約</a>
                         @endif
                     </div>
                 </div>
             </div>
         </div>
         @endforeach
+        <div class="d-flex justify-content-center">
+            {{ $reservations->links() }}
+        </div>
     </div>
 </div>
 
