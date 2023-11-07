@@ -55,8 +55,8 @@
             <table class="reservation-table">
                 <tbody>
                     <tr>
-                        <td class="reservation-label">予約料金</td>
-                        <td class="reservation-value">{{ number_format($reservation_data['reservation_fee']) }}P</td>
+                        <td class="reservation-label">{{ $reservation_data['reservation_fee'] < 0 ? '返金ポイント' : '予約料金' }}</td>
+                        <td class="reservation-value">{{ number_format(abs($reservation_data['reservation_fee'])) }}P</td>
                     </tr>
                     <tr>
                         <td class="reservation-label">ポイント残高</td>
