@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
+use DB;
 
 class ReviewController extends Controller
 {
@@ -146,9 +147,26 @@ class ReviewController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Review $review)
+    public function timeline()
     {
-        //
+        // 現在認証されているユーザーを取得
+        $user = Auth::user();
+
+        // ユーザーがフォローしているユーザーのIDを取得
+        $followings = DB::table('followables')
+            ->where('user_id', $user->id)
+            ->where('followable_type', 'App\Models\User')
+            ->pluck('followable_id')
+            ->push($user->id);
+
+
+        // フォローしているユーザーのレビューを取得
+        $reviews = Review::whereIn('user_id', $followings)
+            ->orderBy('updated_at', 'desc')
+            ->get()
+            ->groupBy('category_id');
+
+        return view('reviews.index', compact('reviews'));
     }
 
     /**

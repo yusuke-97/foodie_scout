@@ -24,6 +24,7 @@ Route::get('/search', [ElasticsearchController::class, 'search'])->name('search'
 
 Route::get('/',  [WebController::class, 'index']);
 
+Route::get('/timeline', [ReviewController::class, 'timeline'])->name('reviews.timeline');
 Route::get('/reviews/create/{reservation}', [ReviewController::class, 'create'])->name('reviews.create');
 Route::post('/reviews/store', [ReviewController::class, 'store'])->name('reviews.store');
 Route::get('/reviews/ranking', [ReviewController::class, 'restaurantRanking'])->name('reviews.ranking');
