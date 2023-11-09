@@ -176,6 +176,7 @@ label {
     opacity: 0.6;
 }
 
+/* 検索欄 */
 .search-container {
     top: 100px;
     left: 50%;
@@ -203,6 +204,35 @@ label {
     border: 1px solid #e0e0e0;
     cursor: pointer;
 }
+
+/* 料理ジャンルから探す */
+.restaurant-image-link span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-weight: bold;
+    font-size: 12px;
+    white-space: nowrap;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+  .restaurant-image-link span {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  .restaurant-image-link span {
+    font-size: 8px;
+  }
+}
+
+
+
+
 
 /* 人気ユーザー欄 */
 #small-profile-image-container {
