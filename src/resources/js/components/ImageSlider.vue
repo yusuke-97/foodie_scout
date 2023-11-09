@@ -23,20 +23,22 @@ onUnmounted(() => {
 
 <template>
     <div class="image-slider" ref="sliderRef">
-        <Transition name="fade">
-            <div :key="state.currentIndex" class="image-item">
-                <div class="image-container">
-                    <img :src="images[state.currentIndex].src" :alt="images[state.currentIndex].alt" />
+        <div class="ratio ratio-16x9">
+            <Transition name="fade">
+                <div :key="state.currentIndex" class="image-item">
+                    <div class="image-container">
+                        <img :src="images[state.currentIndex].src" :alt="images[state.currentIndex].alt" />
+                    </div>
                 </div>
-            </div>
-        </Transition>
+            </Transition>
+        </div>
     </div>
 </template>
 
 <style>
 .image-slider {
     position: relative;
-    height: 600px;
+    height: auto;
     overflow: hidden;
 }
 

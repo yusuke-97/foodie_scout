@@ -3,7 +3,7 @@
 </div>
 <div class="container" style="display: flex; flex-direction: row; justify-content: space-between; flex-wrap: wrap;">
     @foreach ($major_categories as $major_category)
-    <div class=" col-12 col-md-6 p-4">
+    <div class=" col-12 col-lg-6 p-4">
         <h3 style="font-weight: bold;">{{ $major_category->name }}</h3>
         <div class="row">
             @foreach ($categories as $category)

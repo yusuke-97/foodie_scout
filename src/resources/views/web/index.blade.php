@@ -21,44 +21,53 @@ while ($time <= $endTime) {
 $times[] = '24:00';
 ?>
 
-<div class="row">
-    <div class="col-12 position-relative">
-        <form action="{{ route('search') }}" method="get" class="position-absolute search-container">
-            <!-- エリア -->
-            <input type="text" name="area" class="search-input" placeholder="エリア・駅 [例:渋谷]" autocomplete="off">
 
-            <!-- ジャンル -->
-            <input type=" text" name="category" class="search-input" placeholder="ジャンル [例:寿司]" autocomplete="off">
+<div class="position-relative">
+    <form action="{{ route('search') }}" method="get" class="position-absolute search-container">
+        <!-- エリア -->
+        <input type="text" name="area" class="search-input" placeholder="エリア・駅" autocomplete="off">
 
-            <!-- 日付 -->
-            <input type="date" name="visit_date" class="search-input" value="{{ $date }}" min="{{ $date }}" max="{{ $lastDayOfTwoMonthsLater }}" style="width: 250px;">
+        <!-- ジャンル -->
+        <input type=" text" name="category" class="search-input" placeholder="ジャンル" autocomplete="off">
 
-            <!-- 時間 -->
-            <select name="visit_time" class="search-input">
-                @foreach($times as $t)
-                <option value="{{ $t }}" @if($t=='17:00' ) selected @endif>{{ $t }}</option>
-                @endforeach
-            </select>
+        <!-- 日付 -->
+        <input type="date" name="visit_date" class="search-input" value="{{ $date }}" min="{{ $date }}" max="{{ $lastDayOfTwoMonthsLater }}" style="width: 250px;">
 
-            <!-- 人数 -->
-            <select name="number_of_guests" class="search-select">
-                @for($i = 1; $i <= 50; $i++) <option value="{{ $i }}" @if($i==2) selected @endif>{{ $i }}名</option>
-                    @endfor
-            </select>
+        <!-- 時間 -->
+        <select name="visit_time" class="search-input">
+            @foreach($times as $t)
+            <option value="{{ $t }}" @if($t=='17:00' ) selected @endif>{{ $t }}</option>
+            @endforeach
+        </select>
 
-            <!-- 検索 -->
-            <button type="submit" class="search-button">検索</button>
-        </form>
-    </div>
-    <image-slider :images="[
+        <!-- 人数 -->
+        <select name="number_of_guests" class="search-select">
+            @for($i = 1; $i <= 50; $i++) <option value="{{ $i }}" @if($i==2) selected @endif>{{ $i }}名</option>
+                @endfor
+        </select>
+
+        <!-- 検索 -->
+        <button type="submit" class="search-button">検索</button>
+    </form>
+</div>
+
+<image-slider :images="[
             { id: 1, src: '{{ asset('img/japanese_food2.jpg') }}', alt: 'Image 1' },
             { id: 2, src: '{{ asset('img/japanese_food1.jpg') }}', alt: 'Image 2' },
             { id: 3, src: '{{ asset('img/western_food1.jpg') }}', alt: 'Image 3' },
             { id: 4, src: '{{ asset('img/chinese_food1.jpg') }}', alt: 'Image 4' },
-            { id: 5, src: '{{ asset('img/korean_food1.jpg') }}', alt: 'Image 5' }
-        ]"></image-slider>
+            { id: 5, src: '{{ asset('img/korean_food1.jpg') }}', alt: 'Image 5' }]">
+</image-slider>
+
+<div class="d-flex justify-content-center mt-4 mb-4">
+    @include('modals.search_modal')
+    <a href="#searchModal" class="search-modal-link btn submit-button" data-bs-toggle="modal" data-bs-target="#searchModal">
+        <i class="fa-solid fa-magnifying-glass me-1"></i>
+        条件で検索する
+    </a>
 </div>
-<div class="col-12 mb-5">
+
+<div class="mb-5">
     @component('components.sidebar', ['categories' => $categories, 'major_categories' => $major_categories])
     @endcomponent
 </div>

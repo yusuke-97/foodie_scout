@@ -172,10 +172,6 @@ label {
     object-fit: cover;
 }
 
-.restaurant-image-link:hover {
-    opacity: 0.6;
-}
-
 /* 検索欄 */
 .search-container {
     top: 100px;
@@ -186,26 +182,54 @@ label {
     background-color: #ffffff;
     align-items: center;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    width: fit-content;
+    width: 80%;
     margin-left: auto;
     margin-right: auto;
 }
 
+/* モバイルビュー用のスタイル */
+@media (max-width: 768px) {
+    .search-container {
+        display: none;
+    }
+}
+
+@media (min-width: 769px) {
+    div > .search-modal-link {
+        display: none;
+    }
+}
+
 .search-input, .search-select {
-    flex: 1;
+    margin: 0;
+    flex: 1 1 20%;
     padding: 10px;
     border: 1px solid #e0e0e0;
+}
+
+.search-input, .search-select, .search-button {
+    box-sizing: border-box;
+    width: calc(100% / 5);
+}
+
+input[type="date"].search-input {
+    font-size: 12px;
 }
 
 .search-button {
     background-color: #0fbe9f;
     color: #ffffff;
-    padding: 10px 20px;
+    padding: 10px;
     border: 1px solid #e0e0e0;
     cursor: pointer;
+    writing-mode: horizontal-tb;
 }
 
 /* 料理ジャンルから探す */
+.restaurant-image-link:hover {
+    opacity: 0.6;
+}
+
 .restaurant-image-link span {
     position: absolute;
     top: 50%;
