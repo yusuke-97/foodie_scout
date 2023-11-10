@@ -24,17 +24,17 @@
                 @else
                 <li class="nav-item me-3">
                     <a class="nav-link" href="{{ route('reviews.timeline') }}">
-                        <i class="fa-solid fa-book me-1"></i><label>タイムライン</label>
+                        <i class="fa-solid fa-book me-1"></i><label class="mb-0">タイムライン</label>
                     </a>
                 </li>
                 <li class="nav-item me-3">
                     <a class="nav-link" href="{{ route('mypage.favorite') }}">
-                        <i class="fas fa-bookmark me-1"></i><label>お気に入り</label>
+                        <i class="fas fa-bookmark me-1"></i><label class="mb-0">お気に入り</label>
                     </a>
                 </li>
                 <li class="nav-item me-3">
                     <a class="nav-link" href="{{ route('mypage') }}">
-                        <i class="fas fa-user me-1"></i><label>マイページ</label>
+                        <i class="fas fa-user me-1"></i><label class="mb-0">マイページ</label>
                     </a>
                 </li>
                 @endguest
