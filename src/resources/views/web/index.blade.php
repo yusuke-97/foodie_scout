@@ -80,25 +80,25 @@ $times[] = '24:00';
                 <a href="{{ route('restaurants.show', $recommend_restaurant) }}">
                     <img src="{{ asset($recommend_restaurant->image) }}" class="img-thumbnail">
                 </a>
-                <div class="mt-2">
+                <div>
                     <a href="{{ route('restaurants.show', $recommend_restaurant) }}" style="text-decoration: none;">
-                        <span style="color: #1E90FF; font-weight: bold;">{{ $recommend_restaurant->name }}</span>
+                        <span style="color: #1E90FF; font-weight: bold;" id="recommend-restaurant-name">{{ $recommend_restaurant->name }}</span>
                     </a>
-                    <p style="font-size: 12px; color: gray;" class="mb-0">
+                    <p id="recommend-restaurant-information">
                         <span style="font-weight: bold;">{{ $recommend_restaurant->prefecture }}</span>
                         /
                         <span>{{ $recommend_restaurant->category->name }}</span>
                     </p>
                     <div class="d-flex mb-2 align-items-center">
-                        <div class="me-3">
+                        <div id="recommend-average-rating-star">
                             @for ($i = 1; $i <= 5; $i++) @if ($i <=round($recommend_restaurant->average_rating))
-                                <span style="color: #FFA500; font-size: 14px;">★</span>
+                                <span style="color: #FFA500">★</span>
                                 @else
-                                <span style="color: #DDDDDD; font-size: 14px;">★</span>
+                                <span style="color: #DDDDDD">★</span>
                                 @endif
                                 @endfor
                         </div>
-                        <h3 class="m-0" style="color: red; font-weight: bold; vertical-align: middle; font-size: 14px;">{{ number_format($recommend_restaurant->average_rating, 2) }}</h3>
+                        <h3 id="recommend-average-rating-number">{{number_format($recommend_restaurant->average_rating, 2) }}</h3>
                     </div>
                 </div>
             </div>
@@ -162,7 +162,7 @@ $times[] = '24:00';
                                     </a>
                                     <medal-color :user-followed="{{ $user->followers->count() }}" class="d-inline-flex align-items-center"></medal-color>
                                 </div>
-                                <p class="mb-0 popular-user-information" style="color: gray;">
+                                <p class="popular-user-information">
                                     <span>
                                         口コミ {{ $user->reviews->count() }}件
                                     </span>
