@@ -7,32 +7,33 @@
             </div>
             <div class="modal-body">
                 @foreach($user->followings as $following)
-                {{ App\Models\User::find($following->followable_id)->id }}
                 <div class="row align-items-center mb-3" style="width: 100%;">
-                    <div class="col-2">
-                        <a href="{{ route('mypage.profile', App\Models\User::find($following->followable_id)->id) }}" class="small-profile-image-container" style="text-decoration: none;">
-                            @if(App\Models\User::find($following->followable_id)->image)
-                            <img class="small-profile-image" src="{{ asset('/storage/profile_images/' . App\Models\User::find($following->followable_id)->image) }}" alt="プロフィール画像">
-                            @else
-                            <i class="fas fa-user small-profile-icon" style="color: #000000;"></i>
-                            @endif
-                        </a>
+                    <div class="col-3">
+                        <div class="ratio ratio-1x1">
+                            <a href="{{ route('mypage.profile', App\Models\User::find($following->followable_id)->id) }}" class="small-profile-image-container" style="text-decoration: none;">
+                                @if(App\Models\User::find($following->followable_id)->image)
+                                <img class="profile-image" src="{{ asset('/storage/profile_images/' . App\Models\User::find($following->followable_id)->image) }}" alt="プロフィール画像">
+                                @else
+                                <i class="fas fa-user profile-icon" style="color: #000000;"></i>
+                                @endif
+                            </a>
+                        </div>
                     </div>
                     @if(Auth::user()->id === App\Models\User::find($following->followable_id)->id)
-                    <div class="col-9">
+                    <div class="col-8 p-0">
                         <a href="{{ route('mypage.profile', App\Models\User::find($following->followable_id)->id) }}" class="d-inline-block" style="text-decoration: none;">
-                            <div style="font-weight: bold; color: #000000;">{{ App\Models\User::find($following->followable_id)->name }}</div>
-                            <div style="color: gray; font-size: 12px;">{{ App\Models\User::find($following->followable_id)->user_name }}</div>
+                            <div class="follow-name">{{ App\Models\User::find($following->followable_id)->name }}</div>
+                            <div class="follow-user-name">{{ App\Models\User::find($following->followable_id)->user_name }}</div>
                         </a>
                     </div>
                     @else
-                    <div class="col-5">
+                    <div class="col-5 p-0">
                         <a href="{{ route('mypage.profile', App\Models\User::find($following->followable_id)->id) }}" class="d-inline-block" style="text-decoration: none;">
-                            <div style="font-weight: bold; color: #000000;">{{ App\Models\User::find($following->followable_id)->name }}</div>
-                            <div style="color: gray; font-size: 12px;">{{ App\Models\User::find($following->followable_id)->user_name }}</div>
+                            <div class="follow-name">{{ App\Models\User::find($following->followable_id)->name }}</div>
+                            <div class="follow-user-name">{{ App\Models\User::find($following->followable_id)->user_name }}</div>
                         </a>
                     </div>
-                    <div class="col-4">
+                    <div class="col-3 p-0">
                         <follow-button :is-following="{{ Auth::user()->isFollowing(App\Models\User::find($following->followable_id)) ? 'true' : 'false' }}" :following-id="{{ App\Models\User::find($following->followable_id)->id }}"></follow-button>
                     </div>
                     @endif

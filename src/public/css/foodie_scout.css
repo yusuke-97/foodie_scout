@@ -827,11 +827,11 @@ input[type="date"].search-input {
 
 
 #create-ranking-button {
-    font-size: 8px;
+    font-size: 6px;
 }
 
 #follow-button {
-    font-size: 8px;
+    font-size: 6px;
 }
 
 #category-title {
@@ -878,6 +878,10 @@ input[type="date"].search-input {
         font-size: 24px;
     }
 
+    .profile-icon {
+        font-size: 6vw;
+    }
+
     .medal-size {
         font-size: 3vw;
     }
@@ -916,7 +920,6 @@ input[type="date"].search-input {
         font-size: 1.5vw;
     }
 }
-
 
 /* 口コミの一覧表示 */
 .first-ranked {
@@ -977,4 +980,16 @@ input[type="date"].search-input {
 
 .ranking-image-container:hover img {
     opacity: 0.7;
+}
+
+/* フォローのモーダル */
+.follow-name {
+    font-weight: bold;
+    color: #000000;
+    font-size: 10px;
+}
+
+.follow-user-name {
+    color: gray;
+    font-size: 12px;
 }
