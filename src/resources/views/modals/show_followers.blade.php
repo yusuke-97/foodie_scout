@@ -9,7 +9,7 @@
                 @foreach($user->followers as $follower)
                 <div class="row align-items-center mb-3" style="width: 100%;">
                     <div class="col-2">
-                        <a href="{{ route('mypage.profile', $follower->id) }}" id="small-profile-image-container" style="text-decoration: none;">
+                        <a href="{{ route('mypage.profile', $follower->id) }}" class="small-profile-image-container" style="text-decoration: none;">
                             @if($follower->image)
                                 <img class="small-profile-image" src="{{ asset('/storage/profile_images/' . $follower->image) }}" alt="プロフィール画像">
                             @else

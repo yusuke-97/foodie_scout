@@ -3,31 +3,33 @@
 @section('content')
 <div class="container" style="margin-top: 30px;">
     <div class="row justify-content-center">
-        <div class="col-8">
+        <div class="col-9 col-lg-6">
             <div class="row">
                 <!-- プロフィール画像とユーザー名表示エリア -->
                 <div class="col-4">
-                    <div id="profile-image-container">
-                        @if($user->image)
-                        <img class="profile-image" src="{{ asset('/storage/profile_images/' . $user->image) }}" alt="プロフィール画像">
-                        @else
-                        <i class="fas fa-user profile-icon"></i>
-                        @endif
+                    <div class="ratio ratio-1x1">
+                        <div id="profile-image-container">
+                            @if($user->image)
+                            <img class="profile-image" src="{{ asset('/storage/profile_images/' . $user->image) }}" alt="プロフィール画像">
+                            @else
+                            <i class="fas fa-user profile-icon"></i>
+                            @endif
+                        </div>
                     </div>
-                    <p class="mt-2" style="font-weight: bold;">{{ "@" . $user->user_name }}</p>
+                    <p id="profile-user-nickname" class="text-center">{{ "@" . $user->user_name }}</p>
                 </div>
 
                 <!-- ユーザーの詳細情報表示エリア -->
                 <div class="col-8">
                     <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h4 class="mb-0 mr-2" style="font-weight: bold;">{{ $user->name }}</h4>
+                        <h4 id="profile-user-name">{{ $user->name }}</h4>
                         <medal-color :user-followed="{{ $user->followers->count() }}"></medal-color>
                     </div>
                     <div class="d-flex justify-content-between mt-2">
                         @include('modals.show_followers')
                         <!-- フォロワー数 -->
                         <a href="#" class="link-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#showFollowersModal">
-                            <div class="text-center">
+                            <div class="text-center profile-number-detail">
                                 <div>フォロワー</div>
                                 <div><strong>{{ $user->followers->count() }}</strong></div>
                             </div>
@@ -36,14 +38,14 @@
                         @include('modals.show_followings')
                         <!-- フォロー中 -->
                         <a href="#" class="link-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#showFollowingsModal">
-                            <div class="text-center">
+                            <div class="text-center profile-number-detail">
                                 <div>フォロー中</div>
                                 <div><strong>{{ $user->followings->count() }}</strong></div>
                             </div>
                         </a>
 
                         <!-- 口コミ数 -->
-                        <div class="text-center">
+                        <div class="text-center profile-number-detail">
                             <div>口コミ</div>
                             <div><strong>{{ $user->reviews->count() }}</strong></div>
                         </div>
@@ -51,8 +53,8 @@
                 </div>
             </div>
             @if(Auth::user()->id === $user->id)
-            <div class="justify-content-center mb-4">
-                <a href="{{ route('reviews.ranking') }}" class="btn submit-button mb-2" style="font-size: 12px;">
+            <div class="justify-content-center mb-2">
+                <a href="{{ route('reviews.ranking') }}" class="btn submit-button mb-2" id="create-ranking-button">
                     <i class="fa-solid fa-ranking-star"></i> ランキング作成
                 </a>
             </div>
@@ -79,8 +81,8 @@
             <div class="row">
                 <div class="col-1 p-0 vertical-container">
                     <div class="vertical-text">
-                        <a href="{{ route('reviews.edit_ranking', $review_group->first()->category->id) }}" style="text-decoration: none; color: #000000;">
-                            <span style="font-size: 14px; font-weight: bold;" class="mb-2">{{ $review_group->first()->category->name }}</span>
+                        <a href="{{ route('reviews.edit_ranking', $review_group->first()->category->id) }}" id="category-title">
+                            <span class="mb-2">{{ $review_group->first()->category->name }}</span>
                             <i class="fa-solid fa-pen-to-square"></i>
                         </a>
                     </div>
@@ -92,11 +94,11 @@
                     <div class="col-4" style="padding: 4px;">
                         <div class="ranking-image-container" style="position: relative;" data-bs-toggle="modal" data-bs-target="#showReviewModal{{ $review->id }}">
                             <img src="{{ asset($review->restaurant->image) }}">
-                            <div style="position: absolute; top: 20%; left: 0; width: 100%; text-align: center; color: #ffffff; background-color: rgba(0, 0, 0, 0.5); font-size: 16px; font-weight: bold;">
+                            <div id="review-restaurant-name">
                                 {{ $review->restaurant->name }}
                             </div>
-                            <div style="position: absolute; top: 70%; left: 0; width: 100%; text-align: center; color: #ffffff; font-size: 12px; font-weight: bold;">
-                                {{ $review->restaurant->prefecture }} {{ $review->restaurant->city }}
+                            <div id="review-restaurant-place">
+                                <span>{{ $review->restaurant->prefecture }} {{ $review->restaurant->city }}</span>
                             </div>
                         </div>
                     </div>

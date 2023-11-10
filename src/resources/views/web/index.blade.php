@@ -151,7 +151,7 @@
                                 <div class="row align-items-center">
                                     <div class="col-2 p-0">
                                         <div class="ratio ratio-1x1">
-                                            <a href="{{ route('mypage.profile', $user->id) }}" id="small-profile-image-container" style="text-decoration: none;">
+                                            <a href="{{ route('mypage.profile', $user->id) }}" class="small-profile-image-container" style="text-decoration: none;">
                                                 @if($user->image)
                                                     <img class="small-profile-image" src="{{ asset('/storage/profile_images/' . $user->image) }}" alt="プロフィール画像">
                                                 @else

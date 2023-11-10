@@ -32,11 +32,11 @@ const toggleFollow = async () => {
     <a 
         @click.prevent="toggleFollow"
         class="btn submit-button mb-2"
+        id="follow-button"
         :style="{ 
           'background-color': localIsFollowing ? '#f0f0f0' : '#0fbe9f',
           'color': localIsFollowing ? '#000000' : '#ffffff'
-        }"
-        style="font-size: 12px;">
+        }">
         <i class="fa fa-heart"></i>
         {{ localIsFollowing ? 'フォロー中' : 'フォローする' }}
     </a>

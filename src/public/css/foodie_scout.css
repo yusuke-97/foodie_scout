@@ -322,7 +322,7 @@ input[type="date"].search-input {
 }
 
 /* 人気ユーザー欄 */
-#small-profile-image-container {
+.small-profile-image-container {
     width: 100%;
     height: 100%;
     border: 1px solid #ddd;
@@ -740,8 +740,8 @@ input[type="date"].search-input {
 ---------------------------------*/
 /* プロフィール画像部分 */
 #profile-image-container {
-    width: 100px;
-    height: 100px;
+    width: 100%;
+    height: 100%;
     border: 3px solid #ddd;
     border-radius: 50%;
     display: flex;
@@ -758,7 +758,19 @@ input[type="date"].search-input {
 }
 
 .profile-icon {
-    font-size: 60px;
+    font-size: 8vw;
+}
+
+#profile-user-nickname {
+    margin-top: 4px;
+    font-weight: bold;
+    font-size: 10px;
+}
+
+#profile-user-name {
+    margin-bottom: 0;
+    font-weight: bold;
+    font-size: 16px;
 }
 
 /* メダルカラー部分 */
@@ -803,6 +815,106 @@ input[type="date"].search-input {
 
 .medal-color-green {
     color: green;
+}
+
+.medal-size {
+    font-size: 4vw;
+}
+
+.profile-number-detail {
+    font-size: 10px;
+}
+
+
+#create-ranking-button {
+    font-size: 8px;
+}
+
+#follow-button {
+    font-size: 8px;
+}
+
+#category-title {
+    text-decoration: none;
+    color: #000000;
+    font-size: 8px;
+    font-weight: bold;
+}
+
+#review-restaurant-name {
+    position: absolute;
+    top: 20%;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.5);
+    font-size: 8px;
+    font-weight: bold;
+}
+
+#review-restaurant-place {
+    position: absolute;
+    top: 70%;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    color: #ffffff;
+    font-size: 8px; 
+    font-weight: bold;
+}
+
+#review-restaurant-place > span {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+@media (min-width: 768px) {
+    #profile-user-nickname {
+        margin-top: 8px;
+        font-size: 18px;
+    }
+
+    #profile-user-name {
+        font-size: 24px;
+    }
+
+    .medal-size {
+        font-size: 3vw;
+    }
+
+    .profile-number-detail {
+        font-size: 18px;
+    }
+
+    #profile-follower {
+        font-size: 16px;
+    }
+
+    #create-ranking-button {
+        font-size: 12px;
+    }
+
+    #follow-button {
+        font-size: 12px;
+    }
+
+    #category-title {
+        font-size: 14px;
+    }
+
+    #review-restaurant-name {
+        font-size: 16px;
+    }
+
+    #review-restaurant-place {
+        font-size: 12px; 
+    }
+}
+
+@media (min-width: 992px) {
+    .medal-size {
+        font-size: 1.5vw;
+    }
 }
 
 

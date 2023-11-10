@@ -34,11 +34,13 @@ const isPlatinum = computed(() => {
     <div :class="isPlatinum">
         <i
         v-if="props.isFollowed !== undefined" 
-        :class="['fas', 'fa-medal', medalColor]">
+        :class="['fas', 'fa-medal', medalColor]"
+        class="medal-size">
         </i>
         <i
         v-if="props.userFollowed !== undefined" 
-        :class="['fas', 'fa-medal', medalColorUserFollowed]">
+        :class="['fas', 'fa-medal', medalColorUserFollowed]"
+        class="medal-size">
         </i>
     </div>
 </template>
