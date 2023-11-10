@@ -3,18 +3,20 @@
         <div class="modal-content">
             <div class="modal-header">
                 <div class="row align-items-center" style="width: 100%;">
-                    <div class="col-2">
-                        <a href="{{ route('mypage.profile', $user->id) }}" class="small-profile-image-container" style="text-decoration: none;">
-                            @if($user->image)
-                            <img class="small-profile-image" src="{{ asset('/storage/profile_images/' . $user->image) }}" alt="プロフィール画像">
-                            @else
-                            <i class="fas fa-user small-profile-icon" style="color: #000000;"></i>
-                            @endif
-                        </a>
+                    <div class="col-3">
+                        <div class="ratio ratio-1x1">
+                            <a href="{{ route('mypage.profile', $user->id) }}" class="small-profile-image-container" style="text-decoration: none;">
+                                @if($user->image)
+                                <img class="small-profile-image" src="{{ asset('/storage/profile_images/' . $user->image) }}" alt="プロフィール画像">
+                                @else
+                                <i class="fas fa-user small-profile-icon" style="color: #000000;"></i>
+                                @endif
+                            </a>
+                        </div>
                     </div>
-                    <div class="col-10">
+                    <div class="col-9">
                         <a href="{{ route('mypage.profile', $user->id) }}" class="d-inline-block" style="text-decoration: none;">
-                            <span style="font-weight: bold; color: #000000;" class="me-3">{{ $user->name }}</span>
+                            <span style="font-weight: bold; color: #000000; font-size: 16px;" class="me-3">{{ $user->name }}</span>
                         </a>
                         <medal-color :user-followed="{{ $user->followers->count() }}" class="d-inline-block"></medal-color>
                     </div>
@@ -24,9 +26,11 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-4">
-                        <a href="{{ route('restaurants.show', $review->restaurant) }}" style="text-decoration: none;">
-                            <img src="/{{ $review->restaurant->image }}" style="width: 100px; height: 100px; object-fit: cover;">
-                        </a>
+                        <div class="ratio ratio-1x1">
+                            <a href="{{ route('restaurants.show', $review->restaurant) }}" id="restaurant-image-container" style="text-decoration: none;">
+                                <img src="/{{ $review->restaurant->image }}" class="popular-user-restaurant-image">
+                            </a>
+                        </div>
                     </div>
                     <div class="col-8">
                         <a href="{{ route('restaurants.show', $review->restaurant) }}" style="text-decoration: none;">
