@@ -188,13 +188,13 @@ label {
 }
 
 /* モバイルビュー用のスタイル */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     .search-container {
         display: none;
     }
 }
 
-@media (min-width: 769px) {
+@media (min-width: 768px) {
     div > .search-modal-link {
         display: none;
     }
@@ -242,13 +242,13 @@ input[type="date"].search-input {
     text-align: center;
 }
 
-@media (max-width: 768px) {
+@media (min-width: 576px) and (max-width: 767px) {
   .restaurant-image-link span {
     font-size: 10px;
   }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 575px) {
   .restaurant-image-link span {
     font-size: 8px;
   }
@@ -260,8 +260,8 @@ input[type="date"].search-input {
 
 /* 人気ユーザー欄 */
 #small-profile-image-container {
-    width: 50px;
-    height: 50px;
+    width: 100%;
+    height: 100%;
     border: 1px solid #ddd;
     border-radius: 50%;
     display: flex;
@@ -278,7 +278,139 @@ input[type="date"].search-input {
 }
 
 .small-profile-icon {
-    font-size: 30px;
+    font-size: 4vw;
+}
+
+.popular-user-name {
+    font-size: 10px;
+    margin-inline-start: 6px;
+    margin-inline-end: 4px;
+}
+
+.popular-user-information {
+    font-size: 8px;
+    margin-left: 6px;
+}
+
+.popular-user-ranking {
+    font-size: 8px;
+}
+
+#restaurant-image-container {
+    width: 100%;
+    height: 100%;
+}
+
+.popular-user-restaurant-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.popular-user-restaurant-name {
+    font-size: 10px;
+    color: #1E90FF;
+    font-weight: bold;
+    margin-left: 8px;
+}
+
+.popular-user-restaurant-station {
+    font-size: 8px;
+    margin-left: 8px;
+}
+
+.restaurant-average-rating-star {
+    margin-inline-start: 8px;
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+}
+
+.restaurant-average-rating-star > span {
+    font-size: 8px;
+}
+
+.restaurant-average-rating-number {
+    margin-bottom: 0;
+    margin-left: 8px;
+    color: red;
+    font-weight: bold;
+    vertical-align: middle;
+    font-size: 8px;
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .small-profile-icon {
+        font-size: 4vw;
+    }
+
+    .popular-user-name {
+        font-size: 18px;
+        margin-inline-start: 12px;
+        margin-inline-end: 12px;
+    }
+
+    .popular-user-information {
+        font-size: 15px;
+        margin-left: 12px;
+    }
+
+    .popular-user-ranking {
+        font-size: 15px;
+    }
+
+    .popular-user-restaurant-name {
+        font-size: 18px;
+    }
+
+    .popular-user-restaurant-station {
+        font-size: 15px;
+    }
+
+    .restaurant-average-rating-star > span {
+        font-size: 15px;
+    }
+
+    .restaurant-average-rating-number {
+        font-size: 15px;
+    }
+}
+
+@media (min-width: 992px) {
+    .small-profile-icon {
+        font-size: 2vw;
+    }
+
+    .popular-user-name {
+        font-size: 12px;
+    }
+
+    .popular-user-information {
+        font-size: 10px;
+    }
+
+    .popular-user-ranking {
+        font-size: 10px;
+    }
+
+    .popular-user-restaurant-name {
+        font-size: 14px;
+    }
+
+    .popular-user-restaurant-station {
+        font-size: 12px;
+    }
+
+    .restaurant-average-rating-star > span {
+        font-size: 14px;
+    }
+
+    .restaurant-average-rating-number {
+        font-size: 14px;
+    }
 }
 
 

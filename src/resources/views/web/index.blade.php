@@ -140,25 +140,29 @@ $times[] = '24:00';
         <h2 style="font-weight: bold; margin-bottom: 20px;">人気ユーザー</h2>
         <div class="row mb-5">
             @foreach ($popular_users as $user)
-            <div class="col-3">
-                <div class="card">
+            <div class="col-6 col-lg-3">
+                <div class="card mb-4">
                     <div class="card-header">
-                        <div class="row">
-                            <div class="col-3">
-                                <a href="{{ route('mypage.profile', $user->id) }}" id="small-profile-image-container" style="text-decoration: none;">
-                                    @if($user->image)
-                                    <img class="small-profile-image" src="{{ asset('/storage/profile_images/' . $user->image) }}" alt="プロフィール画像">
-                                    @else
-                                    <i class="fas fa-user small-profile-icon" style="color: #000000;"></i>
-                                    @endif
-                                </a>
+                        <div class="row align-items-center">
+                            <div class="col-2 p-0">
+                                <div class="ratio ratio-1x1">
+                                    <a href="{{ route('mypage.profile', $user->id) }}" id="small-profile-image-container" style="text-decoration: none;">
+                                        @if($user->image)
+                                        <img class="small-profile-image" src="{{ asset('/storage/profile_images/' . $user->image) }}" alt="プロフィール画像">
+                                        @else
+                                        <i class="fas fa-user small-profile-icon" style="color: #000000;"></i>
+                                        @endif
+                                    </a>
+                                </div>
                             </div>
-                            <div class="col-9">
-                                <a href="{{ route('mypage.profile', $user->id) }}" class="d-inline-block " style="text-decoration: none;">
-                                    <span style="font-weight: bold; color: #000000;" class="me-3">{{ $user->name }}</span>
-                                </a>
-                                <medal-color :user-followed="{{ $user->followers->count() }}" class="d-inline-block"></medal-color>
-                                <p class="mb-0" style="color: gray; font-size: 12px;">
+                            <div class="col-10 p-0">
+                                <div style="display: flex; align-items: center;">
+                                    <a href="{{ route('mypage.profile', $user->id) }}" class="d-inline-flex align-items-center" style="text-decoration: none;">
+                                        <span style="font-weight: bold; color: #000000;" class="popular-user-name">{{ $user->name }}</span>
+                                    </a>
+                                    <medal-color :user-followed="{{ $user->followers->count() }}" class="d-inline-flex align-items-center"></medal-color>
+                                </div>
+                                <p class="mb-0 popular-user-information" style="color: gray;">
                                     <span>
                                         口コミ {{ $user->reviews->count() }}件
                                     </span>
@@ -171,37 +175,39 @@ $times[] = '24:00';
                         </div>
                     </div>
                     <div class="card-body">
-                        <p style="font-weight: bold;" class="mb-0">
+                        <p style="font-weight: bold;" class="mb-2 popular-user-ranking">
                             <i class="fa-solid fa-thumbs-up me-3"></i>
                             高評価を付けた店舗
                         </p>
                         @foreach ($user->reviews as $review)
                         <div class="row">
-                            <hr class="mt-3">
-                            <div class="col-4">
-                                <a href="{{ route('restaurants.show', $review->restaurant) }}" style="text-decoration: none;">
-                                    <img src="{{ $review->restaurant->image }}" style="width: 60px; height: 60px; object-fit: cover;">
-                                </a>
+                            <hr class="mt-2 mb-2">
+                            <div class="col-4 p-0">
+                                <div class="ratio ratio-1x1">
+                                    <a href="{{ route('restaurants.show', $review->restaurant) }}" id="restaurant-image-container" style="text-decoration: none;">
+                                        <img src="{{ $review->restaurant->image }}" class="popular-user-restaurant-image">
+                                    </a>
+                                </div>
                             </div>
-                            <div class="col-8">
+                            <div class="col-8 p-0">
                                 <a href="{{ route('restaurants.show', $review->restaurant) }}" style="text-decoration: none;">
-                                    <p style="color: #1E90FF; font-weight: bold; font-size: 14px;" class="mb-0">{{ $review->restaurant->name }}</p>
+                                    <p class="mb-0 popular-user-restaurant-name">{{ $review->restaurant->name }}</p>
                                 </a>
-                                <p style="font-size: 12px;" class="mb-0">
+                                <p class="mb-0 popular-user-restaurant-station">
                                     <span>{{ $review->restaurant->nearest_station }}駅</span>
                                     /
                                     <span style="font-weight: bold;">{{ $review->restaurant->category->name }}</span>
                                 </p>
                                 <div class="d-flex align-items-center">
-                                    <div class="me-3">
+                                    <div class="restaurant-average-rating-star">
                                         @for ($i = 1; $i <= 5; $i++) @if ($i <=round($review->restaurant->average_rating))
-                                            <span style="color: #FFA500; font-size: 14px;">★</span>
+                                            <span style="color: #FFA500">★</span>
                                             @else
-                                            <span style="color: #DDDDDD; font-size: 14px;">★</span>
+                                            <span style="color: #DDDDDD">★</span>
                                             @endif
                                             @endfor
                                     </div>
-                                    <h3 class="mb-0" style="color: red; font-weight: bold; vertical-align: middle; font-size: 14px;">{{number_format($review->restaurant->average_rating, 2) }}</h3>
+                                    <h3 class="restaurant-average-rating-number">{{number_format($review->restaurant->average_rating, 2) }}</h3>
                                 </div>
                             </div>
                         </div>
