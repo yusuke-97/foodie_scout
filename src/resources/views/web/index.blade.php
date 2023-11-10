@@ -62,7 +62,7 @@
 
     <div class="d-flex justify-content-center mt-4 mb-4">
         @include('modals.search_modal')
-        <a href="#searchModal" class="search-modal-link btn submit-button" data-bs-toggle="modal" data-bs-target="#searchModal">
+        <a href="#searchModal" class="search-modal-link btn submit-button" style="font-size: 10px;" data-bs-toggle="modal" data-bs-target="#searchModal">
             <i class="fa-solid fa-magnifying-glass me-1"></i>
             条件で検索する
         </a>
