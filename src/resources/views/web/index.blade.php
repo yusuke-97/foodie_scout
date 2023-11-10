@@ -82,15 +82,15 @@ $times[] = '24:00';
                 </a>
                 <div>
                     <a href="{{ route('restaurants.show', $recommend_restaurant) }}" style="text-decoration: none;">
-                        <span style="color: #1E90FF; font-weight: bold;" id="recommend-restaurant-name">{{ $recommend_restaurant->name }}</span>
+                        <span style="color: #1E90FF; font-weight: bold;" class="recommend-restaurant-name">{{ $recommend_restaurant->name }}</span>
                     </a>
-                    <p id="recommend-restaurant-information">
+                    <p class="recommend-restaurant-information">
                         <span style="font-weight: bold;">{{ $recommend_restaurant->prefecture }}</span>
                         /
                         <span>{{ $recommend_restaurant->category->name }}</span>
                     </p>
                     <div class="d-flex mb-2 align-items-center">
-                        <div id="recommend-average-rating-star">
+                        <div class="recommend-average-rating-star">
                             @for ($i = 1; $i <= 5; $i++) @if ($i <=round($recommend_restaurant->average_rating))
                                 <span style="color: #FFA500">★</span>
                                 @else
@@ -98,7 +98,7 @@ $times[] = '24:00';
                                 @endif
                                 @endfor
                         </div>
-                        <h3 id="recommend-average-rating-number">{{number_format($recommend_restaurant->average_rating, 2) }}</h3>
+                        <h3 class="recommend-average-rating-number">{{number_format($recommend_restaurant->average_rating, 2) }}</h3>
                     </div>
                 </div>
             </div>
@@ -108,29 +108,31 @@ $times[] = '24:00';
         <h2 style="font-weight: bold; margin-bottom: 20px;">注目の店舗</h2>
         <div class="row mb-5">
             @foreach ($recently_restaurants as $recently_restaurant)
-            <div class="col-3">
+            <div class="col-4">
                 <a href="{{ route('restaurants.show', $recently_restaurant) }}" style="text-decoration: none;">
                     <img src=" {{ asset($recently_restaurant->image) }}" class="img-thumbnail">
                 </a>
-                <div class="mt-2">
-                    <a href="{{ route('restaurants.show', $recently_restaurant) }}" style="text-decoration: none;">
-                        <span style="color: #1E90FF; font-weight: bold;">{{ $recently_restaurant->name }}</span>
+                <div>
+                    <a href="{{ route('restaurants.show', $recommend_restaurant) }}" style="text-decoration: none;">
+                        <span style="color: #1E90FF; font-weight: bold;" class="recommend-restaurant-name">{{ $recommend_restaurant->name }}</span>
                     </a>
-                    <p style="font-size: 12px; color: gray;" class="mb-0">
+                    <p class="recommend-restaurant-information">
                         <span style="font-weight: bold;">{{ $recently_restaurant->prefecture }}</span>
                         /
                         <span>{{ $recently_restaurant->category->name }}</span>
                     </p>
                     <div class="d-flex mb-2 align-items-center">
-                        <div class="me-3">
-                            @for ($i = 1; $i <= 5; $i++) @if ($i <=round($recently_restaurant->average_rating))
-                                <span style="color: #FFA500; font-size: 14px;">★</span>
-                                @else
-                                <span style="color: #DDDDDD; font-size: 14px;">★</span>
-                                @endif
-                                @endfor
+                        <div class="d-flex mb-2 align-items-center">
+                            <div class="recommend-average-rating-star">
+                                @for ($i = 1; $i <= 5; $i++) @if ($i <=round($recently_restaurant->average_rating))
+                                    <span style="color: #FFA500">★</span>
+                                    @else
+                                    <span style="color: #DDDDDD">★</span>
+                                    @endif
+                                    @endfor
+                            </div>
+                            <h3 class="recommend-average-rating-number">{{number_format($recently_restaurant->average_rating, 2) }}</h3>
                         </div>
-                        <h3 class="m-0" style="color: red; font-weight: bold; vertical-align: middle; font-size: 14px;">{{ number_format($recently_restaurant->average_rating, 2) }}</h3>
                     </div>
                 </div>
             </div>

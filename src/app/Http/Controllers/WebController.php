@@ -17,7 +17,7 @@ class WebController extends Controller
 
         $recently_restaurants = Restaurant::selectRaw('*, COALESCE(average_rating, 0) as average_rating')
             ->orderBy('created_at', 'desc')
-            ->take(4)
+            ->take(6)
             ->get();
 
         $recommend_restaurants = Restaurant::where('recommend_flag', true)->take(3)->get();

@@ -255,32 +255,33 @@ input[type="date"].search-input {
 }
 
 /* おすすめ店舗欄 */
-#recommend-restaurant-name {
+/* 注目の店舗欄 */
+.recommend-restaurant-name {
     font-size: 10px;
     color: #1E90FF;
     font-weight: bold;
     margin-inline-start: 8px;
 }
 
-#recommend-restaurant-information {
+.recommend-restaurant-information {
     font-size: 8px;
     color: gray;
     margin-bottom: 0;
     margin-left: 8px;
 }
 
-#recommend-average-rating-star {
+.recommend-average-rating-star {
     margin-inline-start: 8px;
     display: inline-flex;
     align-items: center;
     line-height: 1;
 }
 
-#recommend-average-rating-star > span {
+.recommend-average-rating-star > span {
     font-size: 9px;
 }
 
-#recommend-average-rating-number {
+.recommend-average-rating-number {
     margin-bottom: 0;
     margin-left: 8px;
     color: red;
@@ -293,24 +294,22 @@ input[type="date"].search-input {
 }
 
 @media (min-width: 768px) {
-    #recommend-restaurant-name {
+    .recommend-restaurant-name {
         font-size: 16px;
     }
 
-    #recommend-average-rating-star > span {
+    .recommend-average-rating-star > span {
         font-size: 14px;
     }
 
-    #recommend-average-rating-number {
+    .recommend-average-rating-number {
         font-size: 14px;
     }
 
-    #recommend-restaurant-information {
+    .recommend-restaurant-information {
         font-size: 12px;
     }
 }
-
-
 
 /* 人気ユーザー欄 */
 #small-profile-image-container {
