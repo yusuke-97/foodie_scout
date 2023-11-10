@@ -365,6 +365,7 @@ async function submitReservationDisplay() {
 
 
 <template>
+    <hr>
     <div class="p-3">
         <h4 style="font-weight: bold;">
             <i class="fas fa-phone me-2"></i>

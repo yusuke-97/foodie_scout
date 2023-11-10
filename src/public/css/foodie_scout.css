@@ -499,6 +499,33 @@ input[type="date"].search-input {
 /*--------------------------------
  # 店舗詳細画面
 ---------------------------------*/
+/* 店舗情報 */
+#restaurant-name {
+    font-weight: bold;
+    margin-bottom: 6px;
+    font-size: 18px;
+}
+
+.average-rating-star {
+    margin-inline-end: 12px;
+}
+
+.average-rating-star {
+    font-size: 18px;
+}
+
+.avearge-rating-number {
+    margin: 0;
+    color: red;
+    font-weight: bold;
+    vertical-align: middle;
+    font-size: 18px;
+}
+
+.restaurant-information {
+    font-size: 12px;
+}
+
 .btn.favorite-button {
     border-radius: 2px;
     border: solid 1px #0fbe9f;
@@ -507,6 +534,17 @@ input[type="date"].search-input {
 
 .btn.text-favorite {
     color: #0fbe9f;
+}
+
+.restaurant-subtitle {
+    margin-top: 16px;
+    margin-bottom: 8px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.restaurant-content {
+    font-size: 12px;
 }
 
 /* テーブル */
@@ -522,6 +560,7 @@ input[type="date"].search-input {
     border-bottom-style: solid;
     width: 100px;
     background-color: #E5F4F1;
+    font-size: 12px;
 }
 
 .tableheader-first {
@@ -535,6 +574,7 @@ input[type="date"].search-input {
     border-top-style: solid;
     width: 100px;
     background-color: #E5F4F1;
+    font-size: 12px;
 }
 
 .cell {
@@ -542,6 +582,7 @@ input[type="date"].search-input {
     border-bottom-color: #ececec;
     border-bottom-width: 1px;
     border-bottom-style: solid;
+    font-size: 12px;
 }
 .cell-first {
     padding: 30px;
@@ -551,6 +592,92 @@ input[type="date"].search-input {
     border-top-color: #ececec;
     border-top-width: 1px;
     border-top-style: solid;
+    font-size: 12px;
+}
+
+/* 口コミ欄 */
+.review-user-name {
+    font-size: 16px;
+    margin-inline-start: 16px;
+    margin-inline-end: 8px;
+}
+
+.review-user-information {
+    font-size: 12px;
+    margin-left: 16px;
+    color: gray;
+    margin-bottom: 0;
+}
+
+@media (min-width: 776px) {
+    /* 口コミ欄 */
+    .review-user-name {
+        font-size: 20px;
+        margin-inline-start: 20px;
+        margin-inline-end: 16px;
+    }
+
+    .review-user-information {
+        font-size: 16px;
+        margin-left: 20px;
+    }
+}
+
+@media (min-width: 992px) {
+    /* 店舗情報 */
+    #restaurant-name {
+        font-weight: bold;
+        margin-bottom: 8px;
+        font-size: 24px;
+    }
+
+    .average-rating-star {
+        margin-inline-end: 16px;
+    }
+
+    .average-rating-star span {
+        font-size: 24px;
+    }
+
+    .avearge-rating-number {
+        margin: 0;
+        color: red;
+        font-weight: bold;
+        vertical-align: middle;
+        font-size: 24px;
+    }
+
+    .restarant-information {
+        font-size: 16px;
+    }
+
+    .restaurant-subtitle {
+        margin-top: 24px;
+        margin-bottom: 24px;
+        font-weight: bold;
+        font-size: 24px;
+    }
+
+    .restaurant-content {
+        font-size: 16px;
+    }
+       
+    /* テーブル */
+    .tableheader {
+        font-size: 16px;
+    }
+
+    .tableheader-first {
+        font-size: 16px;
+    } 
+
+    .cell {
+        font-size: 16px;
+    }
+
+    .cell-first {
+        font-size: 16px;
+    }
 }
 
 

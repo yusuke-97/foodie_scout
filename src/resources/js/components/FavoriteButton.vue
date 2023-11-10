@@ -32,7 +32,7 @@ const toggleFavorite = async () => {
     <a 
         @click.prevent="toggleFavorite"
         class="btn favorite-button text-favorite"
-        style="width: 160px;">
+        style="width: 130px; font-size: 12px;">
         <i class="fas fa-bookmark"></i>
         {{ localIsFavorited ? 'お気に入り解除' : 'お気に入り' }}
     </a>
