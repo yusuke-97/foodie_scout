@@ -361,12 +361,13 @@ input[type="date"].search-input {
     font-size: 8px;
 }
 
-#restaurant-image-container {
+.restaurant-image-container {
     width: 100%;
     height: 100%;
+    text-decoration:  none;
 }
 
-.popular-user-restaurant-image {
+.restaurant-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -384,18 +385,18 @@ input[type="date"].search-input {
     margin-left: 8px;
 }
 
-.restaurant-average-rating-star {
+#restaurant-average-rating-star {
     margin-inline-start: 8px;
     display: inline-flex;
     align-items: center;
     line-height: 1;
 }
 
-.restaurant-average-rating-star > span {
+#restaurant-average-rating-star > span {
     font-size: 8px;
 }
 
-.restaurant-average-rating-number {
+#restaurant-average-rating-number {
     margin-bottom: 0;
     margin-left: 8px;
     color: red;
@@ -435,11 +436,11 @@ input[type="date"].search-input {
         font-size: 15px;
     }
 
-    .restaurant-average-rating-star > span {
+    #restaurant-average-rating-star > span {
         font-size: 14px;
     }
 
-    .restaurant-average-rating-number {
+    #restaurant-average-rating-number {
         font-size: 14px;
     }
 }
@@ -469,11 +470,11 @@ input[type="date"].search-input {
         font-size: 12px;
     }
 
-    .restaurant-average-rating-star > span {
+    #restaurant-average-rating-star > span {
         font-size: 14px;
     }
 
-    .restaurant-average-rating-number {
+    #restaurant-average-rating-number {
         font-size: 14px;
     }
 }
@@ -493,6 +494,67 @@ input[type="date"].search-input {
     line-height: normal;
     letter-spacing: normal;
     color: #191919;
+}
+
+.restaurant-name {
+    color: #1E90FF;
+    font-weight: bold;
+    font-size: 16px;
+    margin: 0;
+}
+
+.restaurant-info {
+    font-size: 10px;
+    color: gray;
+}
+
+.restaurant-catchphrase {
+    font-size: 10px;
+}
+
+.restaurant-average-rating-star {
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+}
+
+.restaurant-average-rating-star > span {
+    font-size: 10px;
+}
+
+.restaurant-average-rating-number {
+    font-size: 10px;
+    margin-bottom: 0;
+    margin-left: 8px;
+    color: red;
+    font-weight: bold;
+    vertical-align: middle;
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+}
+
+@media (min-width: 768px) {
+    .restaurant-name {
+        font-size: 24px;
+    }
+
+    .restaurant-info {
+        font-size: 16px;
+    }
+
+    .restaurant-catchphrase {
+        font-size: 16px;
+    }
+
+    .restaurant-average-rating-star > span {
+        font-size: 16px;
+    }
+
+    .restaurant-average-rating-number {
+        font-size: 16px;
+        margin-left: 12px;
+    }
 }
 
 

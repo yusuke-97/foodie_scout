@@ -9,27 +9,31 @@
         <hr>
         <div style="margin-bottom: 20px;">
             <div class="row">
-                <div class="col-4">
-                    <img src="{{ $restaurant->image }}" alt="{{ $restaurant->name }}" style="width: 200px; height: 200px; object-fit: cover;">
+                <div class="col-5 col-md-4 col-lg-3">
+                    <div class="ratio ratio-1x1">
+                        <a href="{{ route('restaurants.show', $restaurant) }}" class="restaurant-image-container">
+                            <img src="{{ $restaurant->image }}" class="restaurant-image">
+                        </a>
+                    </div>
                 </div>
-                <div class="col-8">
-                    <p style="color: #1E90FF; font-weight: bold; font-size: 24px;">{{ $restaurant->name }}</p>
-                    <p>
+                <div class="col-7 col-md-8 col-lg-9">
+                    <p class="restaurant-name">{{ $restaurant->name }}</p>
+                    <p class="restaurant-info mb-0">
                         <span>{{ $restaurant->nearest_station }}駅</span>
                         /
                         <span style="font-weight: bold;">{{ $category->name }}</span>
                     </p>
-                    <hr>
-                    <p class="mb-0">{{ $restaurant->catchphrase }}</p>
+                    <hr class="mt-1 mb-1">
+                    <p class="mb-0 restaurant-catchphrase">{{ $restaurant->catchphrase }}</p>
                     <div class="d-flex align-items-center">
-                        <div class="me-3">
-                            @for ($i = 1; $i <= 5; $i++) @if ($i <=round($restaurant->average_rating)) <span style="color: #FFA500; font-size: 24px;">★</span>
+                        <div class="restaurant-average-rating-star">
+                            @for ($i = 1; $i <= 5; $i++) @if ($i <=round($restaurant->average_rating)) <span style="color: #FFA500;">★</span>
                                 @else
-                                <span style="color: #DDDDDD; font-size: 24px;">★</span>
+                                <span style="color: #DDDDDD;">★</span>
                                 @endif
                                 @endfor
                         </div>
-                        <h3 class="mb-0" style="color: red; font-weight: bold; vertical-align: middle;">{{number_format($restaurant->average_rating, 2) }}</h3>
+                        <h3 class="restaurant-average-rating-number">{{number_format($restaurant->average_rating, 2) }}</h3>
                     </div>
                 </div>
             </div>

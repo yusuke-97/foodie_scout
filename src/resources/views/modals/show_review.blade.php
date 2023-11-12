@@ -28,7 +28,7 @@
                     <div class="col-4">
                         <div class="ratio ratio-1x1">
                             <a href="{{ route('restaurants.show', $review->restaurant) }}" id="restaurant-image-container" style="text-decoration: none;">
-                                <img src="/{{ $review->restaurant->image }}" class="popular-user-restaurant-image">
+                                <img src="/{{ $review->restaurant->image }}" class="restaurant-image">
                             </a>
                         </div>
                     </div>

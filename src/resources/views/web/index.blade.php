@@ -189,8 +189,8 @@
                                         <hr class="mt-2 mb-2">
                                         <div class="col-4 p-0">
                                             <div class="ratio ratio-1x1">
-                                                <a href="{{ route('restaurants.show', $review->restaurant) }}" id="restaurant-image-container" style="text-decoration: none;">
-                                                    <img src="{{ $review->restaurant->image }}" class="popular-user-restaurant-image">
+                                                <a href="{{ route('restaurants.show', $review->restaurant) }}" class="restaurant-image-container" style="text-decoration: none;">
+                                                    <img src="{{ $review->restaurant->image }}" class="restaurant-image">
                                                 </a>
                                             </div>
                                         </div>
@@ -204,7 +204,7 @@
                                                 <span style="font-weight: bold;">{{ $review->restaurant->category->name }}</span>
                                             </p>
                                             <div class="d-flex align-items-center">
-                                                <div class="restaurant-average-rating-star">
+                                                <div id="restaurant-average-rating-star">
                                                     @for ($i = 1; $i <= 5; $i++)
                                                         @if ($i <=round($review->restaurant->average_rating))
                                                             <span style="color: #FFA500">★</span>
@@ -213,7 +213,7 @@
                                                         @endif
                                                     @endfor
                                                 </div>
-                                                <h3 class="restaurant-average-rating-number">{{number_format($review->restaurant->average_rating, 2) }}</h3>
+                                                <h3 id="restaurant-average-rating-number">{{number_format($review->restaurant->average_rating, 2) }}</h3>
                                             </div>
                                         </div>
                                     </div>
