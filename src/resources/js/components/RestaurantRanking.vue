@@ -98,7 +98,7 @@ function getCategoryId(reservationId) {
 
 
 <template>
-    <h2 class="mt-3 mb-4" style="font-weight: bold;">ランキングの作成</h2>
+    <h2 class="mt-3 mb-4" style="font-weight: bold; font-size: 16px;">ランキングの作成</h2>
     <div class="categories-container">
         <div v-if="categories.length > 0" class="category" v-for="category in categories" :key="category.id">
             <input type="checkbox" 

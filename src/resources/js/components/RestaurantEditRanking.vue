@@ -128,15 +128,13 @@ async function deleteRankingAndReviews() {
 
 
 <template>
-    <h2 class="mt-3 mb-4" style="font-weight: bold;">{{ props.categoryName }}ジャンルのランキングの修正</h2>
-    <h3 style="font-weight: bold;" class="mt-3">店舗一覧</h3>
+    <h2 class="mt-3 mb-4" style="font-weight: bold; font-size: 16px;">{{ props.categoryName }}ジャンルのランキングの修正</h2>
     <table class="table table-bordered mt-4">
         <thead>
             <tr>
                 <th class="align-middle text-center" scope="col"><span class="first-ranked">1</span></th>
                 <th class="align-middle text-center" scope="col"><span class="second-ranked">2</span></th>
                 <th class="align-middle text-center" scope="col"><span class="third-ranked">3</span></th>
-                <th class="align-middle text-center" scope="col">店舗画像</th>
                 <th class="align-middle text-center" scope="col">店舗名</th>
                 <th class="align-middle text-center" scope="col">口コミ</th>
             </tr>
@@ -161,8 +159,10 @@ async function deleteRankingAndReviews() {
                         :checked="selectedRanking3 === reservation.id"
                         @change="updateSelectedRanking($event, 3, reservation.id)">
                 </td>
-                <td class="align-middle text-center"><img class="square-image" :src="`/${reservation.restaurant.image}`" alt="店舗画像"></td>
-                <td class="align-middle text-center">{{ reservation.restaurant.name }}</td>
+                <td class="align-middle text-center">
+                    <img class="square-image" :src="`/${reservation.restaurant.image}`" alt="店舗画像">
+                    <p class="mb-0">{{ reservation.restaurant.name }}</p>
+                </td>
                 <td class="align-middle text-center">
                     <textarea 
                         v-if="reservation.id === selectedRanking1 || reservation.id === selectedRanking2 || reservation.id === selectedRanking3"
@@ -179,12 +179,14 @@ async function deleteRankingAndReviews() {
         <button 
             :disabled="isButtonDisabled" 
             @click="saveRankingAndReviews" 
-            class="btn submit-button mt-3 me-5 w-25">
+            class="btn submit-button mt-3 me-5 col-4"
+            style="font-size: 10px;">
             ランキング登録
         </button>
         <button 
             @click="showModal = true" 
-            class="btn btn-danger mt-3 w-25">
+            class="btn btn-danger mt-3 col-4"
+            style="font-size: 10px;">
             ランキング削除
         </button>
         <Teleport to="body">
