@@ -119,7 +119,6 @@ function getCategoryId(reservationId) {
                 <th class="align-middle text-center" scope="col"><span class="first-ranked">1</span></th>
                 <th class="align-middle text-center" scope="col"><span class="second-ranked">2</span></th>
                 <th class="align-middle text-center" scope="col"><span class="third-ranked">3</span></th>
-                <th class="align-middle text-center" scope="col">店舗画像</th>
                 <th class="align-middle text-center" scope="col">店舗名</th>
                 <th class="align-middle text-center" scope="col">口コミ</th>
             </tr>
@@ -141,8 +140,10 @@ function getCategoryId(reservationId) {
                         :disabled="selectedRanking3 !== null && selectedRanking3 !== reservation.id || (selectedRanking1 === reservation.id || selectedRanking2 === reservation.id)"
                         @change="updateSelectedRanking($event, 3, reservation.id)">
                 </td>
-                <td class="align-middle text-center"><img class="square-image" :src="`/${reservation.restaurant.image}`" alt="店舗画像"></td>
-                <td class="align-middle text-center">{{ reservation.restaurant.name }}</td>
+                <td class="align-middle text-center">
+                    <img class="square-image" :src="`/${reservation.restaurant.image}`" alt="店舗画像">
+                    <p class="mb-0">{{ reservation.restaurant.name }}</p>
+                </td>
                 <td class="align-middle text-center">
                     <textarea 
                         v-if="reservation.id === selectedRanking1 || reservation.id === selectedRanking2 || reservation.id === selectedRanking3"
@@ -158,7 +159,7 @@ function getCategoryId(reservationId) {
     <div v-if="selectedCategory.length > 0" class="row justify-content-center">
         <button :disabled="isButtonDisabled" 
                 @click="saveRankingAndReviews" 
-                class="btn submit-button mt-3 w-25">
+                class="btn submit-button mt-3 col-4 col-md-3 col-lg-2">
             ランキング登録
         </button>
     </div>
