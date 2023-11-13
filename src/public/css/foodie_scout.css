@@ -744,6 +744,19 @@ input[type="date"].search-input {
 
 
 /*--------------------------------
+予約一覧画面
+---------------------------------*/
+span.reservation-status {
+    margin-inline-end: 24px;
+    padding: 4px 24px;
+    color: #ffffff;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+
+
+/*--------------------------------
  # 予約確認画面
 ---------------------------------*/
 .main-header {
