@@ -788,15 +788,28 @@ span.reservation-status {
 }
 
 .reservation-label {
-    font-size: 16px;
+    font-size: 12px;
     font-weight: bold;
-    padding: 10px 20px;
+    padding: 8px 16px;
     width: 40%
 }
 
 .reservation-value {
-    font-size: 16px;
-    padding: 10px 20px;
+    font-size: 12px;
+    padding: 8px 16px;
+}
+
+
+@media (min-width: 768px) {
+    .reservation-label {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+
+    .reservation-value {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
 }
 
 

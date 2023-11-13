@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container d-flex justify-content-center">
-    <div class="col-9">
+<div class="container d-flex justify-content-center" style="margin-top: 30px;">
+    <div class="col-12 col-md-8">
 
         <div class="main-header">
             {{ $reservation_data['restaurant_name'] }}
