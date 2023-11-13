@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container" style="margin-top: 30px;">
     <form method="post" action="{{route('mypage.update_password')}}">
         {{csrf_field()}}
         <input type="hidden" name="_method" value="PUT">
-        <div class="form-group row mb-3">
+        <div class="form-group row d-flex justify-content-center mb-3">
             <label for="password" class="col-md-3 col-form-label text-md-right">新しいパスワード</label>
 
-            <div class="col-md-7">
+            <div class="col-md-5">
                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
                 @error('password')
@@ -19,16 +19,16 @@
             </div>
         </div>
 
-        <div class="form-group row mb-3">
+        <div class="form-group row d-flex justify-content-center mb-3">
             <label for="password-confirm" class="col-md-3 col-form-label text-md-right">確認用</label>
 
-            <div class="col-md-7">
+            <div class="col-md-5">
                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
             </div>
         </div>
 
         <div class="form-group d-flex justify-content-center">
-            <button type="submit" class="btn btn-danger w-25">
+            <button type="submit" class="btn btn-danger col-6 col-md-3 col-lg-2">
                 パスワード更新
             </button>
         </div>
