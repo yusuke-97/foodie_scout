@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<main class="py-4 mb-5">
+<main class="py-4 mb-5" style="margin-top: 30px;">
     <div class="d-flex justify-content-center">
-        <div class="container w-50">
+        <div class="container">
             @if (!empty($card))
-            <h3>登録済みのクレジットカード</h3>
+            <h3 style="font-size: 24px; font-weight: bold;">登録済みのクレジットカード</h3>
 
             <hr>
 
