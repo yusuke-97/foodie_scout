@@ -1055,3 +1055,26 @@ input[type="date"].search-input {
     color: gray;
     font-size: 12px;
 }
+
+
+/*--------------------------------
+ # マイページ
+---------------------------------*/
+.mypage-label {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.mypage-content {
+    font-size: 12px;
+}
+
+@media (min-width: 768px) {
+    .mypage-label {
+        font-size: 24px;
+    }
+
+    .mypage-content {
+        font-size: 16px;
+    }
+}

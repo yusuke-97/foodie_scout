@@ -1,185 +1,172 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container d-flex justify-content-center mt-3">
-    <div class="w-50">
-        @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('message') }}
-        </div>
-        @endif
+    <div class="row justify-content-center" style="margin-top: 30px;">
+        <div class="col-12 col-md-8">
+            @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('message') }}
+                </div>
+            @endif
 
-        <h1>マイページ</h1>
+            <h3 style="font-weight:bold; font-size: 24px;">マイページ</h3>
 
-        <hr>
+            <hr>
 
-        <div class="container">
-            <div class="d-flex justify-content-between">
+            <div class="container">
                 <div class="row">
-                    <div class="col-2 d-flex align-items-center">
+                    <div class="col-3 d-flex align-items-center">
                         <i class="fas fa-user fa-3x"></i>
                     </div>
-                    <div class="col-9 d-flex align-items-center ms-3 mt-3">
+                    <div class="col-7 d-flex align-items-center">
                         <div class="d-flex flex-column">
-                            <label style="font-weight: bold;">会員情報の編集</label>
-                            <p>アカウント情報の編集</p>
+                            <label class="mypage-label">会員情報</label>
+                            <p class="mypage-content">アカウント情報の編集</p>
                         </div>
                     </div>
-                </div>
-                <div class="d-flex align-items-center">
-                    <a href="{{route('mypage.edit')}}">
-                        <i class="fas fa-chevron-right fa-2x"></i>
-                    </a>
+                    <div class="col-2 d-flex align-items-center">
+                        <a href="{{route('mypage.edit')}}">
+                            <i class="fas fa-chevron-right fa-2x"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <hr>
+            <hr>
 
-        <div class="container">
-            <div class="d-flex justify-content-between">
+            <div class="container">
                 <div class="row">
-                    <div class="col-2 d-flex align-items-center">
+                    <div class="col-3 d-flex align-items-center">
                         <i class="fas fa-credit-card fa-3x"></i>
                     </div>
-                    <div class="col-9 d-flex align-items-center ms-3 mt-3">
+                    <div class="col-7 d-flex align-items-center">
                         <div class="d-flex flex-column">
-                            <label style="font-weight: bold;">クレジットカードの登録</label>
-                            <p>クレジットカードの登録</p>
+                            <label class="mypage-label">クレジットカード</label>
+                            <p class="mypage-content">クレジットカードの登録</p>
                         </div>
                     </div>
-                </div>
-                <div class="d-flex align-items-center">
-                    <a href="{{route('mypage.register_card')}}">
-                        <i class="fas fa-chevron-right fa-2x"></i>
-                    </a>
+                    <div class="col-2 d-flex align-items-center">
+                        <a href="{{route('mypage.register_card')}}">
+                            <i class="fas fa-chevron-right fa-2x"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <hr>
+            <hr>
 
-        <div class="container">
-            <div class="d-flex justify-content-between">
+            <div class="container">
                 <div class="row">
-                    <div class="col-2 d-flex align-items-center">
+                    <div class="col-3 d-flex align-items-center">
                         <i class="fas fa-utensils fa-3x"></i>
                     </div>
-                    <div class="col-9 d-flex align-items-center ms-3 mt-3">
+                    <div class="col-7 d-flex align-items-center">
                         <div class="d-flex flex-column">
-                            <label style="font-weight: bold;">予約履歴</label>
-                            <p>予約履歴を確認できます</p>
+                            <label class="mypage-label">予約履歴</label>
+                            <p class="mypage-content">予約履歴の確認</p>
                         </div>
                     </div>
-                </div>
-                <div class="d-flex align-items-center">
-                    <a href="{{route('mypage.reservation_history')}}">
-                        <i class="fas fa-chevron-right fa-2x"></i>
-                    </a>
+                    <div class="col-2 d-flex align-items-center">
+                        <a href="{{route('mypage.reservation_history')}}">
+                            <i class="fas fa-chevron-right fa-2x"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <hr>
+            <hr>
 
-        <div class="container">
-            <div class="d-flex justify-content-between">
+            <div class="container">
                 <div class="row">
-                    <div class="col-2 d-flex align-items-center">
+                    <div class="col-3 d-flex align-items-center">
                         <i class="fas fa-coins fa-3x"></i>
                     </div>
-                    <div class="col-9 d-flex align-items-center ms-3 mt-3">
+                    <div class="col-7 align-items-center">
                         <div class="d-flex flex-column">
-                            <label style="font-weight: bold;">ポイント</label>
-                            <p>
-                                ポイントをチャージできます<br>
-                                ポイント残高：<span style="font-weight: bold; color: #0fbe9f">{{ number_format(Auth::user()->point) }}</span>P
+                            <label class="mypage-label">ポイント</label>
+                            <p class="mypage-content">
+                                ポイント残高：
+                                <span style="font-weight: bold; color: #0fbe9f">{{ number_format(Auth::user()->point) }}</span>P
                             </p>
                         </div>
                     </div>
-                </div>
-                <div class="d-flex align-items-center">
-                    <a href="{{route('charge.page')}}">
-                        <i class="fas fa-chevron-right fa-2x"></i>
-                    </a>
+                    <div class=" col-2 d-flex align-items-center">
+                        <a href="{{route('charge.page')}}">
+                            <i class="fas fa-chevron-right fa-2x"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <hr>
+            <hr>
 
-        <div class="container">
-            <div class="d-flex justify-content-between">
+            <div class="container">
                 <div class="row">
-                    <div class="col-2 d-flex align-items-center">
+                    <div class="col-3 d-flex align-items-center">
                         <i class="fas fa-blog fa-3x"></i>
                     </div>
-                    <div class="col-9 d-flex align-items-center ms-3 mt-3">
+                    <div class="col-7 d-flex align-items-center">
                         <div class="d-flex flex-column">
-                            <label style="font-weight: bold;">プロフィール</label>
-                            <p>プロフィールを表示します</p>
+                            <label class="mypage-label">プロフィール</label>
+                            <p class="mypage-content">プロフィールの表示</p>
                         </div>
                     </div>
-                </div>
-                <div class="d-flex align-items-center">
-                    <a href="{{route('mypage.profile', Auth::user()->id)}}">
-                        <i class="fas fa-chevron-right fa-2x"></i>
-                    </a>
+                    <div class="col-2 d-flex align-items-center">
+                        <a href="{{route('mypage.profile', Auth::user()->id)}}">
+                            <i class="fas fa-chevron-right fa-2x"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <hr>
+            <hr>
 
-        <div class="container">
-            <div class="d-flex justify-content-between">
+            <div class="container">
                 <div class="row">
-                    <div class="col-2 d-flex align-items-center">
+                    <div class="col-3 d-flex align-items-center">
                         <i class="fas fa-lock fa-3x"></i>
                     </div>
-                    <div class="col-9 d-flex align-items-center ms-3 mt-3">
+                    <div class="col-7 d-flex align-items-center">
                         <div class="d-flex flex-column">
-                            <label style="font-weight: bold;">パスワード変更</label>
-                            <p>パスワードを変更します</p>
+                            <label class="mypage-label">パスワード変更</label>
+                            <p class="mypage-content">パスワードの変更</p>
                         </div>
                     </div>
-                </div>
-                <div class="d-flex align-items-center">
-                    <a href="{{ route('mypage.edit_password') }}">
-                        <i class="fas fa-chevron-right fa-2x"></i>
-                    </a>
+                    <div class="col-2 d-flex align-items-center">
+                        <a href="{{ route('mypage.edit_password') }}">
+                            <i class="fas fa-chevron-right fa-2x"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <hr>
+            <hr>
 
-        <div class="container">
-            <div class="d-flex justify-content-between">
+            <div class="container">
                 <div class="row">
-                    <div class="col-2 d-flex align-items-center">
+                    <div class="col-3 d-flex align-items-center">
                         <i class="fas fa-sign-out-alt fa-3x"></i>
                     </div>
-                    <div class="col-9 d-flex align-items-center ms-3 mt-3">
+                    <div class="col-7 d-flex align-items-center">
                         <div class="d-flex flex-column">
-                            <label style="font-weight: bold;">ログアウト</label>
-                            <p>ログアウトします</p>
+                            <label class="mypage-label">ログアウト</label>
+                            <p class="mypage-content">ログアウトします</p>
                         </div>
                     </div>
-                </div>
-                <div class="d-flex align-items-center">
-                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        <i class="fas fa-chevron-right fa-2x"></i>
-                    </a>
+                    <div class="col-2 d-flex align-items-center">
+                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class="fas fa-chevron-right fa-2x"></i>
+                        </a>
 
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <hr>
+            <hr>
+
+        </div>
     </div>
-</div>
 @endsection
