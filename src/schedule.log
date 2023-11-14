@@ -1222,3 +1222,235 @@ Deprecated: PHP Startup: Use of mbstring.internal_encoding is deprecated in Unkn
   2023-11-14 19:55:04 Running ['artisan' app:index-restaurants] . 1,843ms DONE
   ⇂ '/usr/local/bin/php' 'artisan' app:index-restaurants > '/dev/null' 2>&1  
 
+
+Deprecated: PHP Startup: Use of mbstring.internal_encoding is deprecated in Unknown on line 0
+
+  2023-11-14 19:56:03 Running ['artisan' app:calculate-average-score]  2,433ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:calculate-average-score > '/dev/null' 2>&1  
+  2023-11-14 19:56:06 Running ['artisan' app:index-restaurants] . 1,359ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:index-restaurants > '/dev/null' 2>&1  
+
+
+Deprecated: PHP Startup: Use of mbstring.internal_encoding is deprecated in Unknown on line 0
+
+  2023-11-14 19:57:02 Running ['artisan' app:calculate-average-score]  1,491ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:calculate-average-score > '/dev/null' 2>&1  
+  2023-11-14 19:57:04 Running ['artisan' app:index-restaurants] . 1,519ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:index-restaurants > '/dev/null' 2>&1  
+
+
+Deprecated: PHP Startup: Use of mbstring.internal_encoding is deprecated in Unknown on line 0
+
+  2023-11-14 19:58:02 Running ['artisan' app:calculate-average-score]  1,371ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:calculate-average-score > '/dev/null' 2>&1  
+  2023-11-14 19:58:03 Running ['artisan' app:index-restaurants] . 1,823ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:index-restaurants > '/dev/null' 2>&1  
+
+
+Deprecated: PHP Startup: Use of mbstring.internal_encoding is deprecated in Unknown on line 0
+
+  2023-11-14 19:59:03 Running ['artisan' app:calculate-average-score]  1,950ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:calculate-average-score > '/dev/null' 2>&1  
+  2023-11-14 19:59:05 Running ['artisan' app:index-restaurants] . 2,328ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:index-restaurants > '/dev/null' 2>&1  
+
+
+Deprecated: PHP Startup: Use of mbstring.internal_encoding is deprecated in Unknown on line 0
+
+  2023-11-14 20:00:03 Running ['artisan' app:calculate-average-score]  1,645ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:calculate-average-score > '/dev/null' 2>&1  
+  2023-11-14 20:00:04 Running ['artisan' app:index-restaurants] . 1,452ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:index-restaurants > '/dev/null' 2>&1  
+
+
+Deprecated: PHP Startup: Use of mbstring.internal_encoding is deprecated in Unknown on line 0
+
+  2023-11-14 20:01:02 Running ['artisan' app:calculate-average-score]  1,316ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:calculate-average-score > '/dev/null' 2>&1  
+  2023-11-14 20:01:03 Running ['artisan' app:index-restaurants] . 1,555ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:index-restaurants > '/dev/null' 2>&1  
+
+
+Deprecated: PHP Startup: Use of mbstring.internal_encoding is deprecated in Unknown on line 0
+
+  2023-11-14 20:02:02 Running ['artisan' app:calculate-average-score]  1,323ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:calculate-average-score > '/dev/null' 2>&1  
+  2023-11-14 20:02:03 Running ['artisan' app:index-restaurants] . 1,294ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:index-restaurants > '/dev/null' 2>&1  
+
+
+Deprecated: PHP Startup: Use of mbstring.internal_encoding is deprecated in Unknown on line 0
+
+  2023-11-14 20:03:02 Running ['artisan' app:calculate-average-score]  1,184ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:calculate-average-score > '/dev/null' 2>&1  
+  2023-11-14 20:03:03 Running ['artisan' app:index-restaurants] . 1,268ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:index-restaurants > '/dev/null' 2>&1  
+
+
+Deprecated: PHP Startup: Use of mbstring.internal_encoding is deprecated in Unknown on line 0
+
+  2023-11-14 20:04:02 Running ['artisan' app:calculate-average-score]  1,542ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:calculate-average-score > '/dev/null' 2>&1  
+  2023-11-14 20:04:04 Running ['artisan' app:index-restaurants] . 1,226ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:index-restaurants > '/dev/null' 2>&1  
+
+
+Deprecated: PHP Startup: Use of mbstring.internal_encoding is deprecated in Unknown on line 0
+
+  2023-11-14 20:05:03 Running ['artisan' app:calculate-average-score]  1,326ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:calculate-average-score > '/dev/null' 2>&1  
+  2023-11-14 20:05:05 Running ['artisan' app:index-restaurants] . 1,405ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:index-restaurants > '/dev/null' 2>&1  
+
+
+Deprecated: PHP Startup: Use of mbstring.internal_encoding is deprecated in Unknown on line 0
+
+  2023-11-14 20:06:02 Running ['artisan' app:calculate-average-score]  1,120ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:calculate-average-score > '/dev/null' 2>&1  
+  2023-11-14 20:06:03 Running ['artisan' app:index-restaurants] . 1,226ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:index-restaurants > '/dev/null' 2>&1  
+
+
+Deprecated: PHP Startup: Use of mbstring.internal_encoding is deprecated in Unknown on line 0
+
+  2023-11-14 20:07:03 Running ['artisan' app:calculate-average-score]  1,086ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:calculate-average-score > '/dev/null' 2>&1  
+  2023-11-14 20:07:04 Running ['artisan' app:index-restaurants] . 1,225ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:index-restaurants > '/dev/null' 2>&1  
+
+
+Deprecated: PHP Startup: Use of mbstring.internal_encoding is deprecated in Unknown on line 0
+
+  2023-11-14 20:08:02 Running ['artisan' app:calculate-average-score]  1,628ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:calculate-average-score > '/dev/null' 2>&1  
+  2023-11-14 20:08:04 Running ['artisan' app:index-restaurants] . 1,267ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:index-restaurants > '/dev/null' 2>&1  
+
+
+Deprecated: PHP Startup: Use of mbstring.internal_encoding is deprecated in Unknown on line 0
+
+  2023-11-14 20:09:03 Running ['artisan' app:calculate-average-score]  1,449ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:calculate-average-score > '/dev/null' 2>&1  
+  2023-11-14 20:09:04 Running ['artisan' app:index-restaurants] . 1,150ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:index-restaurants > '/dev/null' 2>&1  
+
+
+Deprecated: PHP Startup: Use of mbstring.internal_encoding is deprecated in Unknown on line 0
+
+  2023-11-14 20:10:02 Running ['artisan' app:calculate-average-score]  1,206ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:calculate-average-score > '/dev/null' 2>&1  
+  2023-11-14 20:10:04 Running ['artisan' app:index-restaurants] . 1,259ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:index-restaurants > '/dev/null' 2>&1  
+
+
+Deprecated: PHP Startup: Use of mbstring.internal_encoding is deprecated in Unknown on line 0
+
+  2023-11-14 20:11:02 Running ['artisan' app:calculate-average-score]  1,234ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:calculate-average-score > '/dev/null' 2>&1  
+  2023-11-14 20:11:03 Running ['artisan' app:index-restaurants] . 1,226ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:index-restaurants > '/dev/null' 2>&1  
+
+
+Deprecated: PHP Startup: Use of mbstring.internal_encoding is deprecated in Unknown on line 0
+
+  2023-11-14 20:12:02 Running ['artisan' app:calculate-average-score]  1,114ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:calculate-average-score > '/dev/null' 2>&1  
+  2023-11-14 20:12:04 Running ['artisan' app:index-restaurants] . 1,251ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:index-restaurants > '/dev/null' 2>&1  
+
+
+Deprecated: PHP Startup: Use of mbstring.internal_encoding is deprecated in Unknown on line 0
+
+  2023-11-14 20:13:02 Running ['artisan' app:calculate-average-score]  1,118ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:calculate-average-score > '/dev/null' 2>&1  
+  2023-11-14 20:13:03 Running ['artisan' app:index-restaurants] . 1,294ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:index-restaurants > '/dev/null' 2>&1  
+
+
+Deprecated: PHP Startup: Use of mbstring.internal_encoding is deprecated in Unknown on line 0
+
+  2023-11-14 20:14:02 Running ['artisan' app:calculate-average-score]  1,406ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:calculate-average-score > '/dev/null' 2>&1  
+  2023-11-14 20:14:04 Running ['artisan' app:index-restaurants] . 1,482ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:index-restaurants > '/dev/null' 2>&1  
+
+
+Deprecated: PHP Startup: Use of mbstring.internal_encoding is deprecated in Unknown on line 0
+
+  2023-11-14 20:15:02 Running ['artisan' app:calculate-average-score]  1,115ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:calculate-average-score > '/dev/null' 2>&1  
+  2023-11-14 20:15:04 Running ['artisan' app:index-restaurants] . 1,181ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:index-restaurants > '/dev/null' 2>&1  
+
+
+Deprecated: PHP Startup: Use of mbstring.internal_encoding is deprecated in Unknown on line 0
+
+  2023-11-14 20:16:02 Running ['artisan' app:calculate-average-score]  1,135ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:calculate-average-score > '/dev/null' 2>&1  
+  2023-11-14 20:16:03 Running ['artisan' app:index-restaurants] . 1,170ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:index-restaurants > '/dev/null' 2>&1  
+
+
+Deprecated: PHP Startup: Use of mbstring.internal_encoding is deprecated in Unknown on line 0
+
+  2023-11-14 20:17:02 Running ['artisan' app:calculate-average-score]  1,127ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:calculate-average-score > '/dev/null' 2>&1  
+  2023-11-14 20:17:03 Running ['artisan' app:index-restaurants] . 1,148ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:index-restaurants > '/dev/null' 2>&1  
+
+
+Deprecated: PHP Startup: Use of mbstring.internal_encoding is deprecated in Unknown on line 0
+
+  2023-11-14 20:18:02 Running ['artisan' app:calculate-average-score]  1,111ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:calculate-average-score > '/dev/null' 2>&1  
+  2023-11-14 20:18:03 Running ['artisan' app:index-restaurants] . 1,212ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:index-restaurants > '/dev/null' 2>&1  
+
+
+Deprecated: PHP Startup: Use of mbstring.internal_encoding is deprecated in Unknown on line 0
+
+  2023-11-14 20:19:03 Running ['artisan' app:calculate-average-score]  1,194ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:calculate-average-score > '/dev/null' 2>&1  
+  2023-11-14 20:19:04 Running ['artisan' app:index-restaurants] . 1,153ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:index-restaurants > '/dev/null' 2>&1  
+
+
+Deprecated: PHP Startup: Use of mbstring.internal_encoding is deprecated in Unknown on line 0
+
+  2023-11-14 21:12:15 Running ['artisan' app:calculate-average-score]  1,391ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:calculate-average-score > '/dev/null' 2>&1  
+  2023-11-14 21:12:16 Running ['artisan' app:index-restaurants] . 1,210ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:index-restaurants > '/dev/null' 2>&1  
+
+
+Deprecated: PHP Startup: Use of mbstring.internal_encoding is deprecated in Unknown on line 0
+
+  2023-11-14 21:22:55 Running ['artisan' app:calculate-average-score]  1,562ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:calculate-average-score > '/dev/null' 2>&1  
+  2023-11-14 21:22:56 Running ['artisan' app:index-restaurants] . 1,741ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:index-restaurants > '/dev/null' 2>&1  
+
+
+Deprecated: PHP Startup: Use of mbstring.internal_encoding is deprecated in Unknown on line 0
+
+  2023-11-14 21:23:02 Running ['artisan' app:calculate-average-score]  1,318ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:calculate-average-score > '/dev/null' 2>&1  
+  2023-11-14 21:23:04 Running ['artisan' app:index-restaurants] . 1,134ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:index-restaurants > '/dev/null' 2>&1  
+
+
+Deprecated: PHP Startup: Use of mbstring.internal_encoding is deprecated in Unknown on line 0
+
+  2023-11-14 21:24:02 Running ['artisan' app:calculate-average-score]  1,300ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:calculate-average-score > '/dev/null' 2>&1  
+  2023-11-14 21:24:03 Running ['artisan' app:index-restaurants] . 1,137ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:index-restaurants > '/dev/null' 2>&1  
+
+
+Deprecated: PHP Startup: Use of mbstring.internal_encoding is deprecated in Unknown on line 0
+
+  2023-11-14 21:25:02 Running ['artisan' app:calculate-average-score]  1,411ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:calculate-average-score > '/dev/null' 2>&1  
+  2023-11-14 21:25:04 Running ['artisan' app:index-restaurants] . 1,371ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:index-restaurants > '/dev/null' 2>&1  
+
