@@ -422,7 +422,7 @@ async function cancelReservation() {
 
 <template>
     <div class="row">
-        <div class="col-6">
+        <div class="col-12 col-md-6" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
             <div class="p-3">
                 <h4 style="font-weight: bold;">
                     <i class="fas fa-phone me-2"></i>
@@ -435,7 +435,7 @@ async function cancelReservation() {
             <div class="d-flex justify-content-center" style="background-color: #0fbe9f;" :style="{ width: selectBoxWidth }">
                 <h5 class="m-2" style="font-weight: bold; color: white;">ネット予約変更</h5>
             </div>
-            <div class="my-calendar">
+            <div class="my-calendar" style="display: flex; justify-content: center; align-items: center;">
                 <DatePicker
                     :min-date="tomorrow"
                     :max-date="maxMonth"
@@ -465,7 +465,7 @@ async function cancelReservation() {
                 </select>
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-12 col-md-6" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
             <div class="d-flex justify-content-between align-items-center p-3" :style="{ width: selectBoxWidth }">
                 <label style="font-size: 18px">{{ totalPrice >= 0 ? '追加料金' : '返金料金' }}</label>
                 <span style="font-size: 24px">{{ formattedTotalPrice }}P</span>
@@ -489,7 +489,7 @@ async function cancelReservation() {
                 ※ 1名様あたり、ご予算の50%を予約料金として頂いております。 
             </div>
             <div v-if="editStatus" class="text-danger p-3" :style="{ width: selectBoxWidth }">
-                <span>来店日時の5日前を切っているため、予約を変更できません。</span>
+                <span>ご来店日の5日前を切っているため、予約を変更できません。</span>
             </div>
 
             <div class="d-flex justify-content-center p-3" :style="{ width: selectBoxWidth }">
