@@ -4,7 +4,7 @@ FROM php:8.2.3-fpm
 EXPOSE 5173
 
 # COPY php.ini
-COPY ./php.ini /usr/local/etc/php/php.ini
+COPY ./docker/php/php.ini /usr/local/etc/php/php.ini
 
 # Composer install
 COPY --from=composer:2.5.8 /usr/bin/composer /usr/bin/composer
@@ -14,7 +14,7 @@ COPY --from=node:20.6.1 /usr/local/bin /usr/local/bin
 COPY --from=node:20.6.1 /usr/local/lib /usr/local/lib
 
 # エントリポイントスクリプトをイメージにコピー
-COPY ./docker/php/entrypoint.sh /entrypoint.sh
+COPY ./entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 # 必要なパッケージのインストール
