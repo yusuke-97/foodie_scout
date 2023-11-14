@@ -155,6 +155,7 @@ label {
     color: #0fbe9f;
 }
 
+
 /*--------------------------------
  # トップページ
 ---------------------------------*/
@@ -185,19 +186,6 @@ label {
     width: 80%;
     margin-left: auto;
     margin-right: auto;
-}
-
-/* モバイルビュー用のスタイル */
-@media (max-width: 767px) {
-    .search-container {
-        display: none;
-    }
-}
-
-@media (min-width: 768px) {
-    div > .search-modal-link {
-        display: none;
-    }
 }
 
 .search-input, .search-select {
@@ -247,23 +235,6 @@ input[type="date"].search-input {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-@media (min-width: 992px) {
-  .restaurant-image-link span {
-    font-size: 14px;
-  }
-
-  #cuisine-major-category {
-    width: 100%;
-    margin: 0;
-  }
-}
-
-@media (min-width: 576px) and (max-width: 991px) {
-  .restaurant-image-link span {
-    font-size: 18px;
-  }
-}
-
 /* おすすめ店舗欄 */
 /* 注目の店舗欄 */
 .recommend-restaurant-name {
@@ -301,24 +272,6 @@ input[type="date"].search-input {
     display: inline-flex;
     align-items: center;
     line-height: 1;
-}
-
-@media (min-width: 768px) {
-    .recommend-restaurant-name {
-        font-size: 16px;
-    }
-
-    .recommend-average-rating-star > span {
-        font-size: 14px;
-    }
-
-    .recommend-average-rating-number {
-        font-size: 14px;
-    }
-
-    .recommend-restaurant-information {
-        font-size: 12px;
-    }
 }
 
 /* 人気ユーザー欄 */
@@ -408,77 +361,6 @@ input[type="date"].search-input {
     line-height: 1;
 }
 
-@media (min-width: 768px) and (max-width: 991px) {
-    .small-profile-icon {
-        font-size: 4vw;
-    }
-
-    .popular-user-name {
-        font-size: 18px;
-        margin-inline-start: 12px;
-        margin-inline-end: 12px;
-    }
-
-    .popular-user-information {
-        font-size: 15px;
-        margin-left: 12px;
-    }
-
-    .popular-user-ranking {
-        font-size: 15px;
-    }
-
-    .popular-user-restaurant-name {
-        font-size: 18px;
-    }
-
-    .popular-user-restaurant-station {
-        font-size: 15px;
-    }
-
-    #restaurant-average-rating-star > span {
-        font-size: 14px;
-    }
-
-    #restaurant-average-rating-number {
-        font-size: 14px;
-    }
-}
-
-@media (min-width: 992px) {
-    .small-profile-icon {
-        font-size: 2vw;
-    }
-
-    .popular-user-name {
-        font-size: 12px;
-    }
-
-    .popular-user-information {
-        font-size: 10px;
-    }
-
-    .popular-user-ranking {
-        font-size: 10px;
-    }
-
-    .popular-user-restaurant-name {
-        font-size: 14px;
-    }
-
-    .popular-user-restaurant-station {
-        font-size: 12px;
-    }
-
-    #restaurant-average-rating-star > span {
-        font-size: 14px;
-    }
-
-    #restaurant-average-rating-number {
-        font-size: 14px;
-    }
-}
-
 
 /*--------------------------------
  # 店舗一覧画面
@@ -532,29 +414,6 @@ input[type="date"].search-input {
     display: inline-flex;
     align-items: center;
     line-height: 1;
-}
-
-@media (min-width: 768px) {
-    .restaurant-name {
-        font-size: 24px;
-    }
-
-    .restaurant-info {
-        font-size: 16px;
-    }
-
-    .restaurant-catchphrase {
-        font-size: 16px;
-    }
-
-    .restaurant-average-rating-star > span {
-        font-size: 16px;
-    }
-
-    .restaurant-average-rating-number {
-        font-size: 16px;
-        margin-left: 12px;
-    }
 }
 
 
@@ -671,77 +530,6 @@ input[type="date"].search-input {
     margin-bottom: 0;
 }
 
-@media (min-width: 776px) {
-    /* 口コミ欄 */
-    .review-user-name {
-        font-size: 20px;
-        margin-inline-start: 20px;
-        margin-inline-end: 16px;
-    }
-
-    .review-user-information {
-        font-size: 16px;
-        margin-left: 20px;
-    }
-}
-
-@media (min-width: 992px) {
-    /* 店舗情報 */
-    #restaurant-name {
-        font-weight: bold;
-        margin-bottom: 8px;
-        font-size: 24px;
-    }
-
-    .average-rating-star {
-        margin-inline-end: 16px;
-    }
-
-    .average-rating-star span {
-        font-size: 24px;
-    }
-
-    .avearge-rating-number {
-        margin: 0;
-        color: red;
-        font-weight: bold;
-        vertical-align: middle;
-        font-size: 24px;
-    }
-
-    .restarant-information {
-        font-size: 16px;
-    }
-
-    .restaurant-subtitle {
-        margin-top: 24px;
-        margin-bottom: 24px;
-        font-weight: bold;
-        font-size: 24px;
-    }
-
-    .restaurant-content {
-        font-size: 16px;
-    }
-       
-    /* テーブル */
-    .tableheader {
-        font-size: 16px;
-    }
-
-    .tableheader-first {
-        font-size: 16px;
-    } 
-
-    .cell {
-        font-size: 16px;
-    }
-
-    .cell-first {
-        font-size: 16px;
-    }
-}
-
 
 /*--------------------------------
 予約一覧画面
@@ -797,19 +585,6 @@ span.reservation-status {
 .reservation-value {
     font-size: 12px;
     padding: 8px 16px;
-}
-
-
-@media (min-width: 768px) {
-    .reservation-label {
-        font-size: 16px;
-        padding: 10px 20px;
-    }
-
-    .reservation-value {
-        font-size: 16px;
-        padding: 10px 20px;
-    }
 }
 
 
@@ -956,59 +731,6 @@ span.reservation-status {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-@media (min-width: 768px) {
-    #profile-user-nickname {
-        margin-top: 8px;
-        font-size: 18px;
-    }
-
-    #profile-user-name {
-        font-size: 24px;
-    }
-
-    .profile-icon {
-        font-size: 6vw;
-    }
-
-    .medal-size {
-        font-size: 3vw;
-    }
-
-    .profile-number-detail {
-        font-size: 18px;
-    }
-
-    #profile-follower {
-        font-size: 16px;
-    }
-
-    #create-ranking-button {
-        font-size: 12px;
-    }
-
-    #follow-button {
-        font-size: 12px;
-    }
-
-    #category-title {
-        font-size: 14px;
-    }
-
-    #review-restaurant-name {
-        font-size: 16px;
-    }
-
-    #review-restaurant-place {
-        font-size: 12px; 
-    }
-}
-
-@media (min-width: 992px) {
-    .medal-size {
-        font-size: 1.5vw;
-    }
-}
-
 /* 口コミの一覧表示 */
 .first-ranked {
     font-size:1.5em;
@@ -1095,12 +817,348 @@ span.reservation-status {
     font-size: 12px;
 }
 
+
+
+
+/*--------------------------------
+*--------------------------------
+　# モバイル表示用
+---------------------------------*
+---------------------------------*/
+@media (max-width: 767px) {
+    /*--------------------------------
+     # トップページ
+    ---------------------------------*/
+    /* 検索欄 */
+    .search-container {
+        display: none;
+    }
+}
+
+
+
+
+/*--------------------------------
+*--------------------------------
+　# 中型画面サイズ表示用
+---------------------------------*
+---------------------------------*/
+@media (min-width: 576px) and (max-width: 991px) {
+    /*--------------------------------
+     # トップページ
+    ---------------------------------*/
+    /* 料理ジャンルから探す */
+    .restaurant-image-link span {
+        font-size: 18px;
+    }
+}
+
+
+@media (min-width: 768px) and (max-width: 991px) {
+    /*--------------------------------
+     # トップページ
+    ---------------------------------*/
+    /* 人気ユーザー欄 */
+    .small-profile-icon {
+        font-size: 4vw;
+    }
+
+    .popular-user-name {
+        font-size: 18px;
+        margin-inline-start: 12px;
+        margin-inline-end: 12px;
+    }
+
+    .popular-user-information {
+        font-size: 15px;
+        margin-left: 12px;
+    }
+
+    .popular-user-ranking {
+        font-size: 15px;
+    }
+
+    .popular-user-restaurant-name {
+        font-size: 18px;
+    }
+
+    .popular-user-restaurant-station {
+        font-size: 15px;
+    }
+
+    #restaurant-average-rating-star > span {
+        font-size: 14px;
+    }
+
+    #restaurant-average-rating-number {
+        font-size: 14px;
+    }
+}
+
+
+
+
+/*--------------------------------
+*--------------------------------
+　# デスクトップ表示用
+---------------------------------*
+---------------------------------*/
 @media (min-width: 768px) {
+    /*--------------------------------
+     # トップページ
+    ---------------------------------*/
+    /* 検索欄 */
+    div > .search-modal-link {
+        display: none;
+    }
+
+    /* おすすめ店舗欄 */
+    /* 注目の店舗欄 */
+    .recommend-restaurant-name {
+        font-size: 16px;
+    }
+
+    .recommend-average-rating-star > span {
+        font-size: 14px;
+    }
+
+    .recommend-average-rating-number {
+        font-size: 14px;
+    }
+
+    .recommend-restaurant-information {
+        font-size: 12px;
+    }
+
+
+    /*--------------------------------
+     # 店舗一覧画面
+    ---------------------------------*/
+    .restaurant-name {
+        font-size: 24px;
+    }
+
+    .restaurant-info {
+        font-size: 16px;
+    }
+
+    .restaurant-catchphrase {
+        font-size: 16px;
+    }
+
+    .restaurant-average-rating-star > span {
+        font-size: 16px;
+    }
+
+    .restaurant-average-rating-number {
+        font-size: 16px;
+        margin-left: 12px;
+    }
+
+
+    /*--------------------------------
+     # 店舗詳細画面
+    ---------------------------------*/
+    /* 口コミ欄 */
+    .review-user-name {
+        font-size: 20px;
+        margin-inline-start: 20px;
+        margin-inline-end: 16px;
+    }
+
+    .review-user-information {
+        font-size: 16px;
+        margin-left: 20px;
+    }
+
+
+    /*--------------------------------
+     # 予約確認画面
+    ---------------------------------*/
+    .reservation-label {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+
+    .reservation-value {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+
+
+    /*--------------------------------
+     # プロフィール画面
+    ---------------------------------*/
+    #profile-user-nickname {
+        margin-top: 8px;
+        font-size: 18px;
+    }
+
+    #profile-user-name {
+        font-size: 24px;
+    }
+
+    .profile-icon {
+        font-size: 6vw;
+    }
+
+    .medal-size {
+        font-size: 3vw;
+    }
+
+    .profile-number-detail {
+        font-size: 18px;
+    }
+
+    #profile-follower {
+        font-size: 16px;
+    }
+
+    #create-ranking-button {
+        font-size: 12px;
+    }
+
+    #follow-button {
+        font-size: 12px;
+    }
+
+    #category-title {
+        font-size: 14px;
+    }
+
+    #review-restaurant-name {
+        font-size: 16px;
+    }
+
+    #review-restaurant-place {
+        font-size: 12px; 
+    }
+
+
+    /*--------------------------------
+     # マイページ
+    ---------------------------------*/
     .mypage-label {
         font-size: 24px;
     }
 
     .mypage-content {
         font-size: 16px;
+    }
+}
+
+
+@media (min-width: 992px) {
+    /*--------------------------------
+     # トップページ
+    ---------------------------------*/
+    /* 料理ジャンルから探す */
+    .restaurant-image-link span {
+        font-size: 14px;
+    }
+
+    #cuisine-major-category {
+        width: 100%;
+        margin: 0;
+    }
+
+    /* 人気ユーザー欄 */
+    .small-profile-icon {
+        font-size: 2vw;
+    }
+
+    .popular-user-name {
+        font-size: 12px;
+    }
+
+    .popular-user-information {
+        font-size: 10px;
+    }
+
+    .popular-user-ranking {
+        font-size: 10px;
+    }
+
+    .popular-user-restaurant-name {
+        font-size: 14px;
+    }
+
+    .popular-user-restaurant-station {
+        font-size: 12px;
+    }
+
+    #restaurant-average-rating-star > span {
+        font-size: 14px;
+    }
+
+    #restaurant-average-rating-number {
+        font-size: 14px;
+    }
+
+
+    /*--------------------------------
+     # 店舗詳細画面
+    ---------------------------------*/
+    /* 店舗情報 */
+    #restaurant-name {
+        font-weight: bold;
+        margin-bottom: 8px;
+        font-size: 24px;
+    }
+
+    .average-rating-star {
+        margin-inline-end: 16px;
+    }
+
+    .average-rating-star span {
+        font-size: 24px;
+    }
+
+    .avearge-rating-number {
+        margin: 0;
+        color: red;
+        font-weight: bold;
+        vertical-align: middle;
+        font-size: 24px;
+    }
+
+    .restarant-information {
+        font-size: 16px;
+    }
+
+    .restaurant-subtitle {
+        margin-top: 24px;
+        margin-bottom: 24px;
+        font-weight: bold;
+        font-size: 24px;
+    }
+
+    .restaurant-content {
+        font-size: 16px;
+    }
+       
+    /* テーブル */
+    .tableheader {
+        font-size: 16px;
+    }
+
+    .tableheader-first {
+        font-size: 16px;
+    } 
+
+    .cell {
+        font-size: 16px;
+    }
+
+    .cell-first {
+        font-size: 16px;
+    }
+
+
+    /*--------------------------------
+     # プロフィール画面
+    ---------------------------------*/
+    .medal-size {
+        font-size: 1.5vw;
     }
 }
