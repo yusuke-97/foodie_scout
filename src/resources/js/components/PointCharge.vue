@@ -4,7 +4,7 @@ import { ref } from 'vue'
 import axios from 'axios'
 
 const props = defineProps({
-  isRegistered: String
+  	isRegistered: String
 })
 
 const selectedPoint = ref(null)
@@ -13,23 +13,23 @@ const message = ref(null)
 const errorMessage = ref(null)
 
 function handleChargeClick() {
-  message.value = `${new Intl.NumberFormat('ja-JP').format(selectedPoint.value)} ポイントをチャージしてもいいですか？ チャージ後の返金は承りません。`
-  showModal.value = true
+	message.value = `${new Intl.NumberFormat('ja-JP').format(selectedPoint.value)} ポイントをチャージしてもいいですか？ チャージ後の返金は承りません。`
+	showModal.value = true
 }
 
 async function chargePoints() {
-  const data = {
-    point: selectedPoint.value
-  }
-  
-  try {
-    const response = await axios.post(`/users/mypage/charge/point`, data)
-    if (response.data.redirect_to) {
-      window.location.href = response.data.redirect_to
-    }
-  } catch (error) {
-    console.error("Error:", error)
-  }
+	const data = {
+		point: selectedPoint.value
+	}
+	
+	try {
+		const response = await axios.post(`/users/mypage/charge/point`, data)
+		if (response.data.redirect_to) {
+			window.location.href = response.data.redirect_to
+		}
+	} catch (error) {
+		console.error("Error:", error)
+	}
 }
 </script>
 
@@ -50,8 +50,8 @@ async function chargePoints() {
     <button id="show-modal" @click="handleChargeClick" class="btn submit-button mt-3" style="width: 50%" :disabled="!isRegistered || !selectedPoint">チャージする</button>
 
     <div v-if="!isRegistered" class="mt-4">
-      <p class="m-0" style="color: red; font-weight: bold;">カードが登録されていません</p>
-      <a href="/users/mypage/register_card" style="color: #0fbe9f; font-weight: bold;">カードを登録する</a>
+		<p class="m-0" style="color: red; font-weight: bold;">カードが登録されていません</p>
+		<a href="/users/mypage/register_card" style="color: #0fbe9f; font-weight: bold;">カードを登録する</a>
     </div>
     
     <p class="mt-2" style="color: red; font-weight: bold;">{{ errorMessage }}</p>
