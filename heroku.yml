@@ -1,3 +1,29 @@
+setup:
+  addons:
+    - plan: jawsdb-maria:kitefin
+      as: DATABASE
+  
+  config:
+    APP_NAME: Fooide Scout
+    APP_ENV: local
+    APP_KEY: base64:VB1bXkT2E+dlH2K4BdYoyy0Xzjqp+n7bDxzKNRqheC8=
+    APP_DEBUG: true
+    APP_URL: https://foodie-scout.herokuapp.com/
+    DB_CONNECTION: mysql
+    DB_HOST: db
+    DB_DATABASE: db_name
+    DB_USERNAME: root
+    DB_PASSWORD: root
+    MAIL_MAILER: smtp
+
 build:
   docker:
     web: docker/php/Dockerfile
+
+release:
+  command:
+    - php artisan migrate --force
+  image: web
+
+run:
+  web: heroku-php-apache2 public/
