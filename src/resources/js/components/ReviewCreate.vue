@@ -4,10 +4,10 @@ import * as yup from 'yup'
 import { ref, computed } from 'vue'
 
 const props = defineProps({
-  csrf: String,
-  restaurantName: String,
-  restaurantId: Number,
-  reservationId: Number,
+    csrf: String,
+    restaurantName: String,
+    restaurantId: Number,
+    reservationId: Number,
 })
 
 const restaurantName = ref(props.restaurantName)
@@ -15,9 +15,9 @@ const restaurantId = ref(props.restaurantId)
 const reservationId = ref(props.reservationId)
 
 const { errors, submitForm, defineInputBinds } = useForm({
-  validationSchema: yup.object({
-    content: yup.string().required('口コミを入力してください'),
-  }),
+    validationSchema: yup.object({
+        content: yup.string().required('口コミを入力してください'),
+    }),
 })
 
 const content = defineInputBinds('content')
