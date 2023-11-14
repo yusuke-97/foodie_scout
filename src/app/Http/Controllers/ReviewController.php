@@ -8,7 +8,6 @@ use App\Models\Reservation;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Log;
 use DB;
 
 class ReviewController extends Controller
@@ -167,14 +166,6 @@ class ReviewController extends Controller
             ->groupBy('category_id');
 
         return view('reviews.index', compact('reviews'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Review $review)
-    {
-        //
     }
 
     /**
