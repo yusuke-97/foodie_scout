@@ -5211,3 +5211,19 @@ Deprecated: PHP Startup: Use of mbstring.internal_encoding is deprecated in Unkn
   2023-11-14 16:38:04 Running ['artisan' app:index-restaurants] . 1,205ms DONE
   ⇂ '/usr/local/bin/php' 'artisan' app:index-restaurants > '/dev/null' 2>&1  
 
+
+Deprecated: PHP Startup: Use of mbstring.internal_encoding is deprecated in Unknown on line 0
+
+  2023-11-14 16:39:02 Running ['artisan' app:calculate-average-score]  1,028ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:calculate-average-score > '/dev/null' 2>&1  
+  2023-11-14 16:39:03 Running ['artisan' app:index-restaurants] . 1,504ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:index-restaurants > '/dev/null' 2>&1  
+
+
+Deprecated: PHP Startup: Use of mbstring.internal_encoding is deprecated in Unknown on line 0
+
+  2023-11-14 16:40:02 Running ['artisan' app:calculate-average-score]  960ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:calculate-average-score > '/dev/null' 2>&1  
+  2023-11-14 16:40:03 Running ['artisan' app:index-restaurants] . 1,072ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' app:index-restaurants > '/dev/null' 2>&1  
+
