@@ -4,60 +4,59 @@ import * as yup from 'yup'
 import { ref, computed } from 'vue'
 
 const props = defineProps({
-  csrf: String,
-  userImage: String,
-  fullName: String,
-  userName: String,
-  userEmail: String,
-  userPhoneNumber: String
+    csrf: String,
+    userImage: String,
+    fullName: String,
+    userName: String,
+    userEmail: String,
+    userPhoneNumber: String
 })
 
 const userImage = ref(props.userImage)
-console.log(props.userImage)
 const fileInput = ref('')
 const imageRemoved = ref(false)
 
 const triggerFileInput = () => {
-  if (fileInput.value) {
-    fileInput.value.click()
-  }
+	if (fileInput.value) {
+		fileInput.value.click()
+	}
 }
 
 const uploadFile = (event) => {
-  const selectedFile = event.target.files[0]
-  if (selectedFile) {
-    userImage.value = URL.createObjectURL(selectedFile)
-    imageRemoved.value = false
-  }
+	const selectedFile = event.target.files[0]
+	if (selectedFile) {
+		userImage.value = URL.createObjectURL(selectedFile)
+		imageRemoved.value = false
+	}
 }
 
 const processedUserImage = computed(() => {
-  if (userImage.value && userImage.value.startsWith('blob:')) {
-    return userImage.value
-  } else if (userImage.value) {
-    return `/storage/profile_images/${userImage.value}`
-  }
-  return ''
+	if (userImage.value && userImage.value.startsWith('blob:')) {
+		return userImage.value
+	} else if (userImage.value) {
+		return `/storage/profile_images/${userImage.value}`
+	}
+	return ''
 })
 
 const removeProfileImage = () => {
-  userImage.value = ''
-  imageRemoved.value = true
+	userImage.value = ''
+	imageRemoved.value = true
 }
 
 const { errors, submitForm, defineInputBinds } = useForm({
-  validationSchema: yup.object({
-    name: yup.string().required('氏名を入力してください'),
-    userName: yup.string().required('ユーザー名を入力してください'),
-    email: yup.string().email('有効なメールアドレスを入力してください').required('メールアドレスを入力してください'),
-    phone: yup.string().matches(/^[0-9]+$/, '数字を入力してください').required('電話番号を入力してください'),
-  }),
-  initialValues: {
-    name: props.fullName,
-    userName: props.userName,
-    email: props.userEmail,
-    phone: props.userPhoneNumber,
-  },
+	validationSchema: yup.object({
+		name: yup.string().required('氏名を入力してください'),
+		userName: yup.string().required('ユーザー名を入力してください'),
+		email: yup.string().email('有効なメールアドレスを入力してください').required('メールアドレスを入力してください'),
+		phone: yup.string().matches(/^[0-9]+$/, '数字を入力してください').required('電話番号を入力してください'),
+	}),
+	initialValues: {
+		name: props.fullName,
+		userName: props.userName,
+		email: props.userEmail,
+		phone: props.userPhoneNumber,
+	},
 })
 
 const name = defineInputBinds('name')
