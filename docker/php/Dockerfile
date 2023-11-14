@@ -4,7 +4,7 @@ FROM php:8.2.3-fpm
 EXPOSE 5173
 
 # COPY php.ini
-COPY ../entrypoint.sh /entrypoint.sh
+COPY entrypoint.sh /entrypoint.sh
 
 # Composer install
 COPY --from=composer:2.5.8 /usr/bin/composer /usr/bin/composer
