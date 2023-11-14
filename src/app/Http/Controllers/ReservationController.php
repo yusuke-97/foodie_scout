@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
 
 class ReservationController extends Controller
@@ -205,6 +204,7 @@ class ReservationController extends Controller
 
         return response()->json($dates);
     }
+    
     public function cancelReservation(Reservation $reservation)
     {
         $user = Auth::user();
