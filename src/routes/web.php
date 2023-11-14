@@ -20,9 +20,9 @@ use App\Http\Controllers\ElasticsearchController;
 |
 */
 
-Route::get('/search', [ElasticsearchController::class, 'search'])->name('search');
+Route::get('/', [WebController::class, 'index'])->middleware('auth');
 
-Route::get('/',  [WebController::class, 'index']);
+Route::get('/search', [ElasticsearchController::class, 'search'])->name('search');
 
 Route::get('/timeline', [ReviewController::class, 'timeline'])->name('reviews.timeline');
 Route::get('/reviews/create/{reservation}', [ReviewController::class, 'create'])->name('reviews.create');

@@ -1,5 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light shadow-sm fixed-top header-container">
-    <!-- style="position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;" -->
+<nav class="navbar navbar-expand-md navbar-light shadow-sm header-container">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
             <img src="{{asset('img/logo.jpg')}}">
