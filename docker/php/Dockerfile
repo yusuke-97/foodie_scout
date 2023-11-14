@@ -14,7 +14,7 @@ COPY --from=node:20.6.1 /usr/local/bin /usr/local/bin
 COPY --from=node:20.6.1 /usr/local/lib /usr/local/lib
 
 # エントリポイントスクリプトをイメージにコピー
-COPY ./entrypoint.sh /entrypoint.sh
+COPY ./docker/php/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 # 必要なパッケージのインストール
