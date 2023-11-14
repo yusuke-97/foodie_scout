@@ -3,33 +3,33 @@ import Modal from './Modal.vue'
 import { ref } from 'vue'
 
 const props = defineProps({
-  visitDate: String,
-  visitTime: String,
-  numberOfGuests: Number,
-  reservationId: Number,
-  reservationFee: Number,
-  restaurantId: Number
+	visitDate: String,
+	visitTime: String,
+	numberOfGuests: Number,
+	reservationId: Number,
+	reservationFee: Number,
+	restaurantId: Number
 })
 
 // 予約確定処理
 async function submitReservationConfirmation() {
-  const data = {
-    visit_date: props.visitDate,
-    visit_time: props.visitTime,
-    number_of_guests: props.numberOfGuests,
-    reservation_id: props.reservationId,
-    reservation_fee: props.reservationFee,
-    restaurant_id: props.restaurantId
-  }
-  
-  try {
-    const response = await axios.post(`/reservations`, data)
-    if (response.data.redirect_to) {
-      window.location.href = response.data.redirect_to
-    }
-  } catch (error) {
-    console.error("Error:", error)
-  }
+	const data = {
+		visit_date: props.visitDate,
+		visit_time: props.visitTime,
+		number_of_guests: props.numberOfGuests,
+		reservation_id: props.reservationId,
+		reservation_fee: props.reservationFee,
+		restaurant_id: props.restaurantId
+	}
+	
+	try {
+		const response = await axios.post(`/reservations`, data)
+		if (response.data.redirect_to) {
+			window.location.href = response.data.redirect_to
+		}
+	} catch (error) {
+		console.error("Error:", error)
+	}
 }
 
 const showModal = ref(false)
