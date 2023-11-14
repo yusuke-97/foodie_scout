@@ -4,7 +4,7 @@ FROM php:8.2.3-fpm
 EXPOSE 5173
 
 # COPY php.ini
-COPY ./docker/php/php.ini /usr/local/etc/php/php.ini
+COPY php.ini /usr/local/etc/php/php.ini
 
 # Composer install
 COPY --from=composer:2.5.8 /usr/bin/composer /usr/bin/composer
