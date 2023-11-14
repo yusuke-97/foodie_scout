@@ -17,6 +17,7 @@ COPY --from=node:20.6.1 /usr/local/lib /usr/local/lib
 COPY ./entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
+# 必要なパッケージのインストール
 RUN apt-get update && \
     apt-get -y install \
     git \
@@ -26,6 +27,12 @@ RUN apt-get update && \
     cron \
     && docker-php-ext-install pdo_mysql bcmath
 
+# Crontabファイルのコピーと設定
+COPY ./my-crontab /etc/cron.d/my-crontab
+RUN chmod 0644 /etc/cron.d/my-crontab
+RUN crontab /etc/cron.d/my-crontab
+
+# ワークディレクトリの設定
 WORKDIR /var/www/html
 
 # エントリポイントとしてスクリプトを設定
