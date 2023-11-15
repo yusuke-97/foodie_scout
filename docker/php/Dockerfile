@@ -1,5 +1,8 @@
 FROM php:8.2.3-fpm
 
+# Laravelアプリケーションのファイルをコピー
+COPY . /var/www/html
+
 # COPY php.ini と entrypoint.sh
 COPY php.ini /usr/local/etc/php/php.ini
 COPY entrypoint.sh /entrypoint.sh
@@ -29,6 +32,9 @@ RUN crontab /etc/cron.d/my-crontab
 
 # ワークディレクトリの設定
 WORKDIR /var/www/html
+
+# 依存関係のインストール
+RUN composer install --no-dev --optimize-autoloader
 
 # エントリポイントとしてスクリプトを設定
 CMD ["/entrypoint.sh"]
