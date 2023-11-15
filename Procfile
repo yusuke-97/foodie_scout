@@ -1,1 +1,1 @@
-web: docker run -p $PORT:$PORT foodie-scout
+web: vendor/bin/heroku-php-apache2 public/
