@@ -4,8 +4,8 @@ FROM php:8.2.3-fpm
 COPY . /var/www/html
 
 # COPY php.ini と entrypoint.sh
-COPY php.ini /usr/local/etc/php/php.ini
-COPY entrypoint.sh /entrypoint.sh
+COPY docker/php/php.ini /usr/local/etc/php/php.ini
+COPY docker/php/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 # Composer install
@@ -26,7 +26,7 @@ RUN apt-get update && \
     && docker-php-ext-install pdo_mysql bcmath
 
 # Crontabファイルのコピーと設定
-COPY my-crontab /etc/cron.d/my-crontab
+COPY docker/php/my-crontab /etc/cron.d/my-crontab
 RUN chmod 0644 /etc/cron.d/my-crontab
 RUN crontab /etc/cron.d/my-crontab
 
