@@ -14,10 +14,5 @@ build:
   docker:
     web: docker/php/Dockerfile
 
-release:
-  command:
-    - php artisan migrate --force
-  image: web
-
 run:
   web: heroku-php-apache2 public/
