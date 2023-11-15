@@ -15,4 +15,4 @@ build:
     web: docker/php/Dockerfile
 
 run:
-  web: docker/nginx/Dockerfile
+  web: heroku-php-apache2 public/
