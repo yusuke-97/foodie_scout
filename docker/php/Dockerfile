@@ -1,8 +1,5 @@
 FROM php:8.2.3-fpm
 
-# Viteのサーバーにローカルからアクセスするために開ける
-EXPOSE 5173
-
 # COPY php.ini と entrypoint.sh
 COPY php.ini /usr/local/etc/php/php.ini
 COPY entrypoint.sh /entrypoint.sh
@@ -34,4 +31,4 @@ RUN crontab /etc/cron.d/my-crontab
 WORKDIR /var/www/html
 
 # エントリポイントとしてスクリプトを設定
-ENTRYPOINT ["/entrypoint.sh"]
+CMD ["/entrypoint.sh"]
