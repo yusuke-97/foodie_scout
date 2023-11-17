@@ -49,7 +49,7 @@ class RestaurantController extends AdminController
         $grid->column('start_time', __('Start Time'));
         $grid->column('end_time', __('End Time'));
         $grid->column('closed_day', __('Closed Day'));
-        $grid->column('category.name', __('Category Name'));
+        $grid->column('category_id', __('Category Id'));
         $grid->column('image', __('Image'))->image();
         $grid->column('recommend_flag', __('Recommend Flag'));
         $grid->column('created_at', __('Created At'))->sortable();
@@ -96,7 +96,7 @@ class RestaurantController extends AdminController
         $show->field('start_time', __('Start Time'));
         $show->field('end_time', __('End Time'));
         $show->field('closed_day', __('Closed Day'));
-        $show->field('category.name', __('Category Name'));
+        $show->field('category_id', __('Category Id'));
         $show->field('image', __('Image'))->image();
         $show->field('recommend_flag', __('Recommend Flag'));
         $show->field('created_at', __('Created At'));
@@ -126,7 +126,7 @@ class RestaurantController extends AdminController
         $form->time('start_time', __('Start Time'));
         $form->time('end_time', __('End Time'));
         $form->text('closed_day', __('Closed Day'));
-        $form->select('category_id', __('Category Name'))->options(Category::all()->pluck('name', 'id'));
+        $form->number('category_id', __('Category Id'));
         $form->text('prefecture', __('Prefecture'));
         $form->text('city', __('City'));
         $form->text('street_address', __('Street Address'));
