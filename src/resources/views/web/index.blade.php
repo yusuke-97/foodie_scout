@@ -116,7 +116,7 @@
                         </a>
                         <div>
                             <a href="{{ route('restaurants.show', $recommend_restaurant) }}" style="text-decoration: none;">
-                                <span style="color: #1E90FF; font-weight: bold;" class="recommend-restaurant-name">{{ $recommend_restaurant->name }}</span>
+                                <span style="color: #1E90FF; font-weight: bold;" class="recommend-restaurant-name">{{ $recently_restaurant->name }}</span>
                             </a>
                             <p class="recommend-restaurant-information">
                                 <span style="font-weight: bold;">{{ $recently_restaurant->prefecture }}</span>
