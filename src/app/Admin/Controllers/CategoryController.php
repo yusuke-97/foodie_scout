@@ -30,6 +30,7 @@ class CategoryController extends AdminController
         $grid->column('id', __('Id'))->sortable();
         $grid->column('name', __('Name'));
         $grid->column('description', __('Description'));
+        $grid->column('major_category_id', __('Major Category Id'));
         $grid->column('major_category_name', __('Major Category Name'));
         $grid->column('created_at', __('Created at'))->sortable();
         $grid->column('updated_at', __('Updated at'))->sortable();
